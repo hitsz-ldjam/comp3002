@@ -1,0 +1,33 @@
+<input type="file" name="" id="filesel">
+<p id="status-display"></p>
+<pre id="content-display"></pre>
+<button id="click-download">download modified</button>
+
+<script>
+const fileSelector = document.getElementById('filesel');
+const statusDisplay = document.getElementById('status-display');
+const contentDisplay = document.getElementById('content-display');
+const clickDownload = document.getElementById('click-download');
+var fileText = null
+
+fileSelector.addEventListener('change', (event) => {
+    const file = event.target.files[0];
+    statusDisplay.textContent = file.name + ' ' + file.type + ' '  + file.size;
+    file.text().then((text) => {
+        fileText = text;
+        contentDisplay.innerHTML = fileText;
+    });
+});
+
+clickDownload.addEventListener('click', function (_) {
+    if(!fileText)
+        return;
+    var newText = new Date().toString() + '\n' + fileText;
+    var newFileBlob = new Blob([newText], {type : 'text/plain'});
+    const downloadURL = URL.createObjectURL(newFileBlob);
+    let dummyA = document.createElement('a');
+    dummyA.href = downloadURL;
+    dummyA.download = 'temp file name.txt'
+    dummyA.click();
+});
+</script>
