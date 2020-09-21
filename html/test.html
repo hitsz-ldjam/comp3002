@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <script src="https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js"></script>
+  <script src="../js/my_jquery_func.js"></script>
+  <script src="../js/stl.js"></script>
+  <title>You are pig</title>
+</head>
+
+<body>
+  <h2>Head in javascript</h2>
+
+  <a href="https://lincyaw.github.io" target="_blank"><button id="star">Welcome to star me.</button></a>
+
+  <button id="button_1">print number</button>
+
+  <button id="button_2">print date</button></br>
+
+  <button id="button_3">hide</button>
+
+  <button id="button_4">show</button></br>
+
+  <button id="button_5">show use js file</button>
+
+  <button id="button_6">hide show in the same button</button></br>
+
+  <p id="demo">TEST <br /></p>
+
+  <script>
+    $(document).ready(function () {
+      $("#button_3").click(function () {
+        $("p").hide();
+      });
+    });
+
+    // this kind of code has the same effect.
+    // which is more simple
+    ///
+    $(function () {
+      $("#button_4").click(function () {
+        $("p").show();
+      })
+    });
+
+    // $(function () {
+    //   $("#button_1").click(function () {
+    //     $("#demo").append("追加文本");
+    //   })
+    // });
+    println("It's not very good.")
+    deal_click();
+    deal_hide_show();
+    printlna();
+    printDate();
+  </script>
+</body>
+
+</html>
