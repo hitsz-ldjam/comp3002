@@ -45,9 +45,9 @@ $(function () {
         }
         catch (error) {
             if (error instanceof SyntaxError)
-                LogError('Syntax error in file');
+                logError('Syntax error in file');
             else
-                LogError('Unexpected error: ' + error);
+                logError('Unexpected error: ' + error);
         }
     });
 
@@ -56,12 +56,12 @@ $(function () {
 
     $('#button-decrypt').click(_ => {
         if (authParamsInstance === null || authParamsInstance.cipherjson === null) {
-            ShowMessage('Please select file');
+            showMessage('Please select file');
             return;
         }
         var password = $('#input-password').val();
         if (password.length === 0) {
-            ShowMessage('Please input password');
+            showMessage('Please input password');
             return;
         }
         var salt = authParamsInstance.salt;
@@ -79,11 +79,11 @@ $(function () {
         }
         catch (error) {
             if (error instanceof sjcl.exception.corrupt)
-                ShowMessage('Wrong password');
+                showMessage('Wrong password');
             else if (error instanceof sjcl.exception.invalid)
-                LogError('SJCL invalid error: ' + error.message);
+                logError('SJCL invalid error: ' + error.message);
             else
-                LogError('Unexpected error: ' + error);
+                logError('Unexpected error: ' + error);
         }
         $('#textarea-maindata').val(plaintext);
     });
@@ -92,12 +92,12 @@ $(function () {
     $('#button-saveencrypted').click(_ => {
         var password = $('#input-password').val();
         if (password.length === 0) {
-            ShowMessage('Please input password');
+            showMessage('Please input password');
             return;
         }
         var plaintext = $('#textarea-maindata').val();
         if (plaintext.length === 0) {
-            ShowMessage('Please input plaintext');
+            showMessage('Please input plaintext');
             return;
         }
         // $('#input-password').val('');
@@ -129,24 +129,9 @@ $(function () {
         }
         catch (error) {
             if (error instanceof sjcl.exception.invalid)
-                LogError('SJCL invalid error: ' + error.message);
+                logError('SJCL invalid error: ' + error.message);
             else
-                LogError('Unexpected error: ' + error);
+                logError('Unexpected error: ' + error);
         }
     });
 });
-
-
-
-// todo: use custom UI
-function ShowMessage(message) {
-    alert(message);
-}
-
-function LogMessage(message) {
-    console.log(message);
-}
-
-function LogError(error) {
-    console.error(error);
-}
