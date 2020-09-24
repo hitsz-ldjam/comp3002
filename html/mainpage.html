@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>main</title>
+    <link rel="stylesheet" type="text/css" href="../css/style.css">
+    <script type="text/javascript" src="../js/libs/jquery-3.5.1.min.js"></script>
+</head>
+
+<body>
+    <div class="main">
+        <div class="content">
+
+            <div class="div_show">
+                <ul>
+                    <a href="today.html">
+                        <button id="today">今天</button>
+                        <br> 今天还没有记账
+                    </a>
+                </ul>
+                <ul>
+                    <a href="thisweek.html">
+                        <button id="this_week">这周</button>
+                        <br> 本周还没有记账
+                    </a>
+                </ul>
+                <ul>
+                    <a href="thismonth.html">
+                        <button id="this_month">本月</button>
+                        <br> 本月还没有记账
+                    </a>
+                </ul>
+                <ul>
+                    <a href="thisyear.html">
+                        <button id="this_year">过去一年</button>
+                        <br> 过去一年还没有记账
+                    </a>
+                </ul>
+                <ul>打个广告</ul>
+                <ul>自定义首页</ul>
+            </div>
+            <div>
+                "流水"
+            </div>
+            <div>
+                "记一笔"
+            </div>
+            <div>
+                "图表"
+            </div>
+            <div>
+                "设置"
+            </div>
+        </div>
+
+        <nav>
+            <ul>
+                <li class="tab">账户</li>
+                <li>流水</li>
+                <li><a href="take_notes.html">记一笔</a></li>
+                <li>图表</li>
+                <li>设置</li>
+            </ul>
+        </nav>
+    </div>
+
+    <script>
+        $('ul li').click(function(event) {
+            $(this).addClass('tab');
+            $(this).siblings().removeClass('tab');
+
+            $('.content div').eq($(this).index()).addClass('div_show');
+            $('.content div').eq($(this).index()).siblings().removeClass('div_show');
+        })
+    </script>
+</body>
+
+</html>
