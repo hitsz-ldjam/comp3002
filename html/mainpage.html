@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>tab pages</title>
+    <link rel="stylesheet" type="text/css" href="../css/style.css">
+    <script type="text/javascript" src="../js/jquery-3.5.1.js"></script>
+</head>
+
+<body>
+    <div class="main">
+        <div class="content">
+
+            <div class="div_show">
+                <ul>今天</ul>
+                <ul>本周</ul>
+                <ul>本月</ul>
+                <ul>本年</ul>
+                <ul>打个广告</ul>
+                <ul>自定义首页</ul>
+            </div>
+            <div>
+                "todo"
+            </div>
+            <div>
+                "todo"
+            </div>
+            <div>
+                "todo"
+            </div>
+        </div>
+
+        <nav>
+            <ul>
+                <li class="tab">账户</li>
+                <li>流水</li>
+                <li>图表</li>
+                <li>设置</li>
+            </ul>
+        </nav>
+    </div>
+
+    <script>
+        $('ul li').click(function (event) {
+            $(this).addClass('tab');
+            $(this).siblings().removeClass('tab');
+
+            $('.content div').eq($(this).index()).addClass('div_show');
+            $('.content div').eq($(this).index()).siblings().removeClass('div_show');
+        })
+    </script>
+</body>
+
+</html>
