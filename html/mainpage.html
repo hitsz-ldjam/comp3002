@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <title>main</title>
     <link rel="stylesheet" type="text/css" href="../css/style.css">
-    <script type="text/javascript" src="../js/jquery-3.5.1.js"></script>
+    <script type="text/javascript" src="../js/libs/jquery-3.5.1.js"></script>
 </head>
 
 <body>
@@ -16,29 +16,25 @@
                 <ul>
                     <a href="today.html">
                         <button id="today">今天</button>
-                        <br>
-                        今天还没有记账
+                        <br> 今天还没有记账
                     </a>
                 </ul>
                 <ul>
                     <a href="thisweek.html">
                         <button id="this_week">这周</button>
-                        <br>
-                        本周还没有记账
+                        <br> 本周还没有记账
                     </a>
                 </ul>
                 <ul>
                     <a href="thismonth.html">
                         <button id="this_month">本月</button>
-                        <br>
-                        本月还没有记账
+                        <br> 本月还没有记账
                     </a>
                 </ul>
                 <ul>
                     <a href="thisyear.html">
                         <button id="this_year">过去一年</button>
-                        <br>
-                        过去一年还没有记账
+                        <br> 过去一年还没有记账
                     </a>
                 </ul>
                 <ul>打个广告</ul>
@@ -70,7 +66,7 @@
     </div>
 
     <script>
-        $('ul li').click(function (event) {
+        $('ul li').click(function(event) {
             $(this).addClass('tab');
             $(this).siblings().removeClass('tab');
 
