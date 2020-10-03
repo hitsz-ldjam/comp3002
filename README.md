@@ -1,10 +1,6 @@
-<<<<<<< HEAD
-# Happy Zebra Note Book
-Happy Zebra Note Book (HZNB) is a course project for [COMP3002](http://liaoqing.me/comp3002.html) at HITSZ.
-=======
 # Zebra Note Book
 Zebra Note Book (ZNB) is a course project for [COMP3002](http://liaoqing.me/comp3002.html) at HITSZ.
->>>>>>> 9bec66a828cc2845bdd9954d708dfd6c5fee4350
+
 
 
 ## Third-party Libs
