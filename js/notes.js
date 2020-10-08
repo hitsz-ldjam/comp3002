@@ -4,9 +4,9 @@ let data = []
 
 $(function() {
     Get_bill_input();
-    $("button#rm-item").click((event) => {
-        divideDataByMainCat(data);
-    })
+    // $("button#rm-item").click((event) => {  // 此处为了测试方便, 直接把rmitem键用于测试函数
+    //     divideDataByMainCat(data);
+    // })
 });
 
 function Get_bill_input() {
