@@ -1,0 +1,59 @@
+{
+    "setting": "settings",
+    "accounts": [{
+            "name": "",
+            "perMonthCached": "",
+            "perYearCached": "",
+            "data": [{
+                    "main-category": "main-category",
+                    "sub-category": "sub-category",
+                    "time": "time",
+                    "amount": "amount",
+                    "type-of-accounting": "type-of-accounting",
+                    "member": "member",
+                    "item": "item",
+                    "merchants": "merchants",
+                    "note": "Remember to buy juice."
+                },
+                {
+
+                    "main-category": "main-category",
+                    "sub-category": "sub-category",
+                    "time": "time",
+                    "type-of-accounting": "type-of-accounting",
+                    "member": "member",
+                    "item": "item",
+                    "merchants": "merchants",
+                    "note": "Remember to buy juice."
+                }
+            ]
+        },
+        {
+            "name": "",
+            "perMonthCached": "",
+            "perYearCached": "",
+            "data": [{
+                    "main-category": "main-category",
+                    "sub-category": "sub-category",
+                    "time": "time",
+                    "type-of-accounting": "type-of-accounting",
+                    "member": "member",
+                    "item": "item",
+                    "merchants": "merchants",
+                    "note": "Remember to buy juice."
+                },
+                {
+
+                    "main-category": "main-category",
+                    "sub-category": "sub-category",
+                    "time": "time",
+                    "type-of-accounting": "type-of-accounting",
+                    "member": "member",
+                    "item": "item",
+                    "merchants": "merchants",
+                    "note": "Remember to buy juice."
+                }
+            ]
+        }
+    ]
+}
