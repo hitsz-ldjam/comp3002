@@ -4,6 +4,9 @@ let data = []
 
 $(function() {
     Get_bill_input();
+    $("button#rm-item").click((event) => {
+        divideDataByMainCat(data);
+    })
 });
 
 function Get_bill_input() {
@@ -18,10 +21,10 @@ function Get_bill_input() {
         let membersStr = $.trim($("input#members").val());
         let tradersStr = $.trim($("input#traders").val());
         let itemStr = $.trim($("input#item").val());
-        if (!mainCat || !subCat || !amountStr || !timeStr) {
-            showMessage(`Please input data`);
-            return;
-        }
+        // if (!mainCat || !subCat || !amountStr || !timeStr) {
+        //     showMessage(`Please input data`);
+        //     return;
+        // }
         let amount = +amountStr;
         // Make sure amount is correct.
         if (typeof amount !== "number" || !isFinite(amount)) {
@@ -129,4 +132,73 @@ function divideDataByYear() {
     }
     console.log(ans);
     return ans;
+}
+
+function divideDataByMainCat(dt) {
+    let temp = $.extend(true, [], dt); // 深拷贝, 不改变data
+    let res = [];
+    while (temp.length !== 0) {
+        let list = temp.shift();
+        let arr = [list];
+        for (let i = 0; i < temp.length; i++) {
+            if (temp[i].mainCategory == list.mainCategory) {
+                arr = arr.concat(temp.splice(i, 1));
+                i--;
+            }
+        }
+        res.push(arr);
+    }
+    console.log(res);
+}
+/// 按道理不同maincat里的subcat应该是不一样的, 所以不考虑maincat了
+/// 
+function divideDataBySubCat(dt) {
+    let temp = $.extend(true, [], dt); // 深拷贝, 不改变data
+    let res = [];
+    while (temp.length !== 0) {
+        let list = temp.shift();
+        let arr = [list];
+        for (let i = 0; i < temp.length; i++) {
+            if (temp[i].subCategory == list.subCategory) {
+                arr = arr.concat(temp.splice(i, 1));
+                i--;
+            }
+        }
+        res.push(arr);
+    }
+    console.log(res);
+}
+
+function divideDataByMember(dt) {
+    let temp = $.extend(true, [], dt); // 深拷贝, 不改变data
+    let res = [];
+    while (temp.length !== 0) {
+        let list = temp.shift();
+        let arr = [list];
+        for (let i = 0; i < temp.length; i++) {
+            if (temp[i].member == list.member) {
+                arr = arr.concat(temp.splice(i, 1));
+                i--;
+            }
+        }
+        res.push(arr);
+    }
+    console.log(res);
+}
+
+function divideDataByTrader(dt) {
+    let temp = $.extend(true, [], dt); // 深拷贝, 不改变data
+    let res = [];
+    while (temp.length !== 0) {
+        let list = temp.shift();
+        let arr = [list];
+        for (let i = 0; i < temp.length; i++) {
+            if (temp[i].trader == list.trader) {
+                arr = arr.concat(temp.splice(i, 1));
+                i--;
+            }
+        }
+        res.push(arr);
+    }
+    console.log(res);
 }
