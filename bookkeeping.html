@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="bookkeeping">
+    <meta name="author" content="maotouyingxia">
+    <link rel="icon" href="images/favicon.ico">
+
+    <title>Bookkeeping</title>
+
+    <link href="css/libs/bootstrap.min.css" rel="stylesheet">
+
+    <link href="css/index.css" rel="stylesheet">
+
+    <link href="css/bookkeeping.css" rel="stylesheet">
+
+</head>
+
+<body>
+
+    <div class="container">
+        <form action="/my-handling-form-page" method="post">
+            <h2>Keep track of your money</h2>
+            <section>
+                <h3>Must</h3>
+                <p>
+                    <label for="amount">
+                        <span>Amount: </span>
+                    </label>
+                    <input type="number" min="0" id="amount" name="amount">
+                </p>
+                <p>
+                    <label for="type">
+                        <span>Type: </span>
+                    </label>
+                    <select id="type" name="type">
+                        <optgroup label="food">
+                            <option>breakfast</option>
+                            <option>lunch</option>
+                            <option>dinner</option>
+                        </optgroup>
+                        <optgroup label="clothing">
+                            <option>coat&jacket</option>
+                            <option>pants&skirt</option>
+                            <option>T-shirt&shirt</option>
+                            <option>shoes&boots</option>
+                        </optgroup>
+                        <optgroup label="housing">
+                            <option>rent</option>
+                            <option>utilities</option>
+                            <option>property cost</option>
+                            <option>purchase</option>
+                        </optgroup>
+                        <optgroup label="transport">
+                            <option>public transportation</option>
+                            <option>purchase</option>
+                            <option>gasoline</option>
+                            <option>maintenance</option>
+                        </optgroup>
+                    </select>
+                </p>
+                <p>
+                    <label for="account">
+                        <span>Account: </span>
+                    </label>
+                    <select id="account" name="account">
+                        <option value="account1">account1</option>
+                        <option value="account2">account2</option>
+                        <option value="account3">account3</option>
+                    </select>
+                </p>
+                <p>
+                    <label for="date">
+                        <span>Date:</span>
+                    </label>
+                    <input type="date" id="date" name="date">
+                </p>
+            </section>
+            <section>
+                <h3>Optional</h3>
+                <p>
+                    <label for="member">
+                        <span>Member: </span>
+                    </label>
+                    <input type="text" id="member" name="member" list="suggestion">
+                    <datalist id="suggestion">
+                        <option>Parent</option>
+                        <option>Spouse</option>
+                        <option>Children</option>
+                        <option>Friend</option>
+                    </datalist>
+                </p>
+                <p>
+                    <label for="note">
+                        <span>Note: </span>
+                    </label>
+                    <textarea id="note">Write some note here</textarea>
+                </p>
+            </section>
+            <p> <button type="submit">OK</button> </p>
+        </form>
+
+
+    </div> <!-- /container -->
+
+</body>
+
+</html>

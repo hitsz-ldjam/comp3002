@@ -31,7 +31,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         38: true, // up
         39: true, // right
         40: true, // down
-        32: true }, _defineProperty(_scrollKeys, '38', true), _defineProperty(_scrollKeys, 34, true), _defineProperty(_scrollKeys, 35, true), _defineProperty(_scrollKeys, 36, true), _scrollKeys);
+        32: true
+    }, _defineProperty(_scrollKeys, '38', true), _defineProperty(_scrollKeys, 34, true), _defineProperty(_scrollKeys, 35, true), _defineProperty(_scrollKeys, 36, true), _scrollKeys);
 
     function vibrate() {
         navigator.vibrate = navigator.vibrate || navigator.webkitVibrate || navigator.mozVibrate || navigator.msVibrate;
@@ -246,13 +247,13 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
                 x = _getMousePos2.x,
                 y = _getMousePos2.y;
 
-            pt.x = x;pt.y = y;
+            pt.x = x; pt.y = y;
             return pt.matrixTransform(element.getScreenCTM().inverse());
         }
     }
 
     PatternLock.defaults = {
-        onPattern: function onPattern() {},
+        onPattern: function onPattern() { },
         vibrate: true
     };
 
