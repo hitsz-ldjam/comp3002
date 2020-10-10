@@ -1,5 +1,6 @@
 'use strict';
 
+
 class CryptoInfo {
     constructor() {
         this.salt = null;

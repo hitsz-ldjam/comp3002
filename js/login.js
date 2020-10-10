@@ -3,23 +3,26 @@
 
 $(function () {
     $('button#new').click(_ => {
-        g_CryptoInfo = new CryptoInfo();
-        g_DataJson = { 
+        global.cryptoInfo = { salt: null, iv: null, ct: null };
+        global.dataJson = {
             accounts: [],
-            mainCategories: []
+            mainCategories: [],
+            bills: []
         };
+        window.location.href = 'bill_list.html';
     });
 
 
     $('input#jsonfile').change(async event => {
         const file = event.target.files[0];
         let result = await file.text();
-        g_CryptoInfo = CryptoUtils.validateJsonFile(result);
+        let cryptoInfo = CryptoUtils.validateJsonFile(result);
+        global.cryptoInfo = { salt: cryptoInfo.salt, iv: cryptoInfo.iv, ct: cryptoInfo.ct };
     });
 
 
     $('button#decrypt').click(_ => {
-        if (!(g_CryptoInfo instanceof CryptoInfo)) {
+        if (!(global.cryptoInfo.salt)) {
             platform.showMessage('Please select file');
             return;
         }
@@ -28,15 +31,18 @@ $(function () {
             platform.showMessage('Please input password');
             return;
         }
-        let plaintext = CryptoUtils.decrypt(password, g_CryptoInfo);
+        let cryptoInfo = new CryptoInfo();
+        cryptoInfo.salt = global.cryptoInfo.salt;
+        cryptoInfo.iv = global.cryptoInfo.iv;
+        cryptoInfo.ct = global.cryptoInfo.ct;
+        let plaintext = CryptoUtils.decrypt(password, cryptoInfo);
         // empty string cannot be encrypted
-        if (plaintext === '') {
+        if (!plaintext) {
             return;
         }
         // todo: handle possible errors
-        g_DataJson = JSON.parse(plaintext);
-        // todo
-        window.location.href = 'EditBills.html';
+        global.dataJson = JSON.parse(plaintext);
+        window.location.href = 'bill_list.html';
     });
 
 
@@ -46,14 +52,11 @@ $(function () {
             platform.showMessage('Please input password');
             return;
         }
-        let plaintext = JSON.stringify(g_DataJson);
-        if (!encrypt(password, plaintext, g_CryptoInfo))
+        let plaintext = JSON.stringify(global.dataJson);
+        let cryptoInfo = new CryptoInfo();
+        if (!CryptoUtils.encrypt(password, plaintext, cryptoInfo))
             return;
-        let exportJson = {
-            salt: g_CryptoInfo.salt,
-            iv: g_CryptoInfo.iv,
-            ct: g_CryptoInfo.ct
-        };
-        platform.exportJsonFile(JSON.stringify(exportJson));
+        global.cryptoInfo = { salt: cryptoInfo.salt, iv: cryptoInfo.iv, ct: cryptoInfo.ct };
+        platform.exportJsonFile(JSON.stringify(global.cryptoInfo));
     });
 });
