@@ -128,7 +128,18 @@ $(function () {
         data: data,
         options: {
             responsive: true,
-            maintainAspectRatio: false
+            maintainAspectRatio: false,
+            // todo: comment the following options on PC
+            // ----------------------
+            legend: {
+                labels: {
+                    fontSize: 40
+                }
+            },
+            tooltips: {
+                bodyFontSize: 30
+            }
+            // -----------------------
         }
     });
 
