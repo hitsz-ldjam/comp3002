@@ -3,6 +3,10 @@
 
 <head>
     <meta charset='utf-8'>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link href='./css/libs/mdb.min.css' rel='stylesheet'>
+    <link href='./css/bill_add.css' rel='stylesheet'>
+
     <script src='./js/libs/jquery-3.5.1.min.js'></script>
     <script src='./js/platform.js'></script>
     <script src='./js/globals.js'></script>
@@ -12,9 +16,75 @@
 </head>
 
 <body>
-    <p>Use addBill() in console</p>
-    <br>
-    <button id='submit'>Submit</button>
+    <div class="container">
+        <h2 class="hint">记账</h2>
+
+        <label class = "tag" for="account">
+            <span>账户：</span>
+        </label>
+        <input class="onecolumn" list='account-list' id='account' />
+        <datalist id='account-list'>
+        </datalist>
+        <br />
+        
+        <label class = "tag" for="amount">
+            <span>金额：</span>
+        </label>
+        <input class="onecolumn" id='amount'>
+        <br />
+
+        <label class = "tag" for="category">
+            <span>类别：</span>
+        </label>
+        <input class="twocolumn" list='maincat-list' id='maincat' />
+        <datalist id='maincat-list'>
+        </datalist>
+        <input class="twocolumn" list='subcat-list' id='subcat' />
+        <datalist id='subcat-list'>
+        </datalist>
+        <br />
+
+        <label class = "tag" for="type">
+            <span>类型：</span>
+        </label>
+        <select class="sel" id='type'>
+            <option value='income'>收入</option>
+            <option value='expense'>支出</option>
+            <option value='transfer'>转账</option>
+        </select>
+        <select class="sel" id='flag'>
+        </select>
+        <br />
+
+        <label class = "tag" for="time">
+            <span>时间：</span>
+        </label>
+        <input class="onecolumn" type='datetime-local' id='time'>
+        <br />
+
+        <label class = "tag" for="member">
+            <span>成员：</span>
+        </label>
+        <input class="onecolumn" id='member'>
+        <br />
+
+        <label class = "tag" for="merchant">
+            <span>商家：</span>
+        </label>
+        <input class="onecolumn" id='merchant'>
+        <br />
+
+        <label class = "tag" for="item">
+            <span>项目：</span>
+        </label>
+        <input class="onecolumn" id='item'>
+        <br />
+        
+        <button class="btn btn-primary" id='submit'>确定</button>
+
+    </div>
+    
+    <script src='js/libs/mdb.min.js'></script>
 </body>
 
 </html>
