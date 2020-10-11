@@ -36,7 +36,7 @@ $(function () {
         window.location.href = 'bill_list.html';
     });
 
-    $('button#import').click(async event => {
+    $('button#import').click(_ => {
         platform.onFileImporterResult = function (data) {
             let cryptoInfo = CryptoUtils.validateJsonFile(data);
             global.cryptoInfo = { salt: cryptoInfo.salt, iv: cryptoInfo.iv, ct: cryptoInfo.ct };
