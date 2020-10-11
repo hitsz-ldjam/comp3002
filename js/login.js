@@ -12,15 +12,6 @@ $(function () {
         window.location.href = 'bill_list.html';
     });
 
-
-    $('input#jsonfile').change(async event => {
-        const file = event.target.files[0];
-        let result = await file.text();
-        let cryptoInfo = CryptoUtils.validateJsonFile(result);
-        global.cryptoInfo = { salt: cryptoInfo.salt, iv: cryptoInfo.iv, ct: cryptoInfo.ct };
-    });
-
-
     $('button#decrypt').click(_ => {
         if (!(global.cryptoInfo.salt)) {
             platform.showMessage('Please select file');
@@ -45,6 +36,14 @@ $(function () {
         window.location.href = 'bill_list.html';
     });
 
+    $('button#import').click(async event => {
+        platform.onFileImporterResult = function (data) {
+            let cryptoInfo = CryptoUtils.validateJsonFile(data);
+            global.cryptoInfo = { salt: cryptoInfo.salt, iv: cryptoInfo.iv, ct: cryptoInfo.ct };
+        }
+
+        platform.showFileImporter("application/json");
+    });
 
     $('button#export').click(_ => {
         let password = $('input#password').val();
@@ -57,6 +56,10 @@ $(function () {
         if (!CryptoUtils.encrypt(password, plaintext, cryptoInfo))
             return;
         global.cryptoInfo = { salt: cryptoInfo.salt, iv: cryptoInfo.iv, ct: cryptoInfo.ct };
-        platform.exportJsonFile(JSON.stringify(global.cryptoInfo));
+
+        platform.storeAssetFile("encrypted.json", JSON.stringify(global.cryptoInfo))
+        platform.onFileExporterResult = function (success) {
+        }
+        platform.showFileExporter("encrypted.json", "text/json");
     });
 });
