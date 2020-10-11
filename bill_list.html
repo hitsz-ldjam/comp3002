@@ -2,18 +2,228 @@
 <html>
 
 <head>
-    <meta charset='utf-8'>
-    <script src='./js/libs/jquery-3.5.1.min.js'></script>
+    <meta charset="utf-8">
+
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <link   rel="stylesheet" href="./css/libs/mdb.min.css">
+    <link rel="stylesheet" href="./css/libs/jquery.mCustomScrollbar.min.css">
+    <link rel="stylesheet" href="./css/bill_list.css">
+    <script type="application/javascript" src="./js/libs/jquery-3.5.1.min.js"></script>
+    <script type="application/javascript" src="./js/libs/bootstrap.bundle.min.js"></script>
+    <script type="application/javascript" src="./js/libs/mdb.min.js"></script>
+    <script src="./js/libs/jquery.mCustomScrollbar.concat.min.js"></script>
+    <script src="./js/mainpage.js"></script>
     <script src='./js/platform.js'></script>
     <script src='./js/globals.js'></script>
     <script src='./js/bill_list.js'></script>
+    <script src="./js/utils.js"></script>
+
+    <title>
+        content
+    </title>
+    <style>
+        .page {
+            margin: 0em;
+        }
+
+        .page.cur-page {
+            display: block;
+        }
+
+        .page.ncur-page {
+            display: none;
+        }
+
+        .card-container {
+            width: 100%;
+        }
+
+        .container-fluid {
+            padding: 0em;
+        }
+
+        .card-container .card {
+            border-radius: 10px;
+        }
+
+        .fixed-button {
+            position: fixed;
+            bottom: 2em;
+            right: 2em;
+            width: 2em;
+            height: 2em;
+            width: 4em;
+            height: 4em;
+            padding: 0em;
+            margin: 0em;
+            border: none;
+            outline: none;
+            background-color: dodgerblue;
+            z-index: 997;
+            box-shadow: 2px 5px 8px rgb(126, 126, 126);
+        }
+
+        html,
+        body {
+            width: 100%;
+            height: 100%;
+            overflow: scroll;
+        }
+
+        *::-webkit-scrollbar {
+            width: 0px;
+            height: 0px;
+            display: none;
+        }
+
+        .card {
+            margin: 1em;
+        }
+
+        .card-text {
+            height: 5em;
+            justify-content: space-between;
+        }
+
+        .card-body {
+            padding: 0px;
+        }
+
+
+        .bill-time {
+            padding: 2.5em 0em 0em 3em;
+        }
+
+        .bill-catandtime {
+            text-align: left;
+            padding: 0.5em;
+        }
+
+        .bill-amount {
+            padding: 1em;
+            font-size: 22px;
+            font-family:sans-serif;
+            color: black;
+        }
+    </style>
+    <script>
+        $(document).ready(function () {
+	$('a.nav-link').click(function () {
+		var page_index = $(this).parent().index()-1;
+		switch (page_index) {
+			case 0:
+				$('#page1').addClass('cur-page').removeClass('ncur-page');
+				$('#page1').siblings().removeClass('cur-page').addClass('ncur-page');
+				break;
+			case 1:
+				$('#page2').addClass('cur-page').removeClass('ncur-page');
+				$('#page2').siblings().removeClass('cur-page').addClass('ncur-page');
+
+				break;
+			case 2:
+				$('#page3').addClass('cur-page').removeClass('ncur-page');
+				$('#page3').siblings().removeClass('cur-page').addClass('ncur-page');
+
+				break;
+			case 3:
+				$('#page4').addClass('cur-page').removeClass('ncur-page');
+				$('#page4').siblings().removeClass('cur-page').addClass('ncur-page');
+
+				break;
+		};
+		$(this).addClass("active").siblings().removeClass('active');
+	})
+});
+    </script>
 </head>
 
 <body>
-    <button id='add-bill'>Add bill</button>
-    <button id='show-chart'>Show chart</button>
-    <br>
-    <textarea cols='70' rows='10' id='cards'></textarea>
+    <!-- Wrapper -->
+    <div class="wrapper">
+        <!--S Sidebar -->
+        <nav class="sidebar">
+            <div class="ml-4" style="width: 8em;height: 8em;text-align: center;line-height: 8em;"><span style="font-size: 50px;font-family:Arial, Helvetica, sans-serif ;">Zebra</span></div>
+            <div class="row"></div>
+            <!-- S close sidebar menu -->
+            <div class="dismiss">
+                <svg class="bi bi-arrow-left" width="2em" height="2em" viewBox="0 0 16 16" fill="currentColor">
+                    <path fill-rule="evenodd"
+                        d="M5.854 4.646a.5.5 0 0 1 0 .708L3.207 8l2.647 2.646a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 0 1 .708 0z" />
+                    <path fill-rule="evenodd" d="M2.5 8a.5.5 0 0 1 .5-.5h10.5a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z" />
+                </svg>
+            </div>
+            <!-- E close sidebar menu -->
+
+            <ul class="list-unstyled menu-elements">
+                <li>
+                    <a id= 'show-chart'>图表</a>
+                </li>
+                <li>
+                    <a id="export">导出</a>
+                </li>
+            </ul>
+
+            <!-- <div class="dark-light-buttons">
+                <a class="btn btn-primary btn-customized-4 btn-customized-dark" href="#" role="button">Dark</a>
+                <a class="btn btn-primary btn-customized-4 btn-customized-light" href="#" role="button">Light</a>
+            </div> -->
+
+        </nav>
+        <!-- E sidebar -->
+        <div class="overlay"></div>
+        <div class="fixed-top" style="z-index: 997;width: 100%;">
+            <nav class="navbar navbar-expand-lg navbar-light bg-light">
+                <!--S open sidebar menu -->
+                <button class="open-menu btn-lg" type="button" data-toggle="collapse"
+                    data-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                    <svg class="bi bi-list" width="2em" height="2em" viewBox="0 0 16 16" fill="currentColor"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd"
+                            d="M2.5 11.5A.5.5 0 0 1 3 11h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4A.5.5 0 0 1 3 7h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4A.5.5 0 0 1 3 3h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z" />
+                    </svg>
+                </button>
+                <!--E open sidebar menu -->
+
+                    <div class="nav-item">
+                        
+                        <a class="nav-link active" href="#"><svg class="bi bi-calendar3" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd" d="M14 0H2a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2zM1 3.857C1 3.384 1.448 3 2 3h12c.552 0 1 .384 1 .857v10.286c0 .473-.448.857-1 .857H2c-.552 0-1-.384-1-.857V3.857z"/>
+                            <path fill-rule="evenodd" d="M6.5 7a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm-9 3a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm-9 3a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2z"/>
+                          </svg>Today <span class="sr-only">(current)</span></a>
+                    </div>
+                    <!-- <div class="nav-item">
+                        <a class="nav-link" href="#">page2</a>
+                    </div>
+                    <div class="nav-item">
+                        <a class="nav-link" href="#">page3</a>
+                    </div> -->
+            </nav>
+        </div>
+        <!-- S NewRecordButton -->
+        <button id="add-bill" class="fixed-button rounded-circle " href="#">
+            <svg class="bi bi-plus-circle" width="4em" height="4em" viewBox="0 0 16 16" fill="#ffffff"
+                xmlns="http://www.w3.org/2000/svg">
+                <path fill-rule="evenodd"
+                    d="M8 3.5a.5.5 0 0 1 .5.5v4a.5.5 0 0 1-.5.5H4a.5.5 0 0 1 0-1h3.5V4a.5.5 0 0 1 .5-.5z" />
+                <path fill-rule="evenodd" d="M7.5 8a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1H8.5V12a.5.5 0 0 1-1 0V8z" />
+            </svg>
+        </button>
+        <!-- S main content -->
+        <div class="container-fluid" style="margin-top:4em;">
+            <div id="page1" class="page cur-page">
+                <div class="card-container" id="CardContainer">
+                </div>
+            </div>
+            <div id="page2" class="page ncur-page"></div>
+            <div id="page3" class="page ncur-page">page3</div>
+            <div id="page4" class="page ncur-page">page4</div>
+        </div>
+        <!-- E main content -->
+    </div>
+
+
+
 </body>
 
 </html>
