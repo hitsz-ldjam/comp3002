@@ -3,27 +3,29 @@ body {
     padding-bottom: 40px;
     background-color: whitesmoke;
 }
-h1 {
-    font-size: 45px;
+
+div {
     text-align: center;
-    margin: 0;
-    padding: 20px 0;
-    color: white;
-    text-shadow: -1px 0px 1px black, 1px 0px 1px black, 0px -1px 1px black, 0px 1px 1px black;
+}
+
+.btn-upper, .btn-left, .btn-right {
+    margin: 20px auto 20px;
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    /* border: 2px solid black; */
+    /* outline: 0; */
 }
 
 .form-signin {
-    max-width: 330px;
-    padding: 15px;
-    margin: 0 auto;
+    max-width: 300px;
+    padding: 20px;
+    margin: 20px auto 20px;
 }
 
 .form-signin .form-signin-heading{
     margin-bottom: 10px;
     text-align: center;
-}
-.form-signin .checkbox {
-    font-weight: normal;
 }
 .form-signin .form-control {
     position: relative;
@@ -41,4 +43,12 @@ h1 {
     margin-bottom: 10px;
     border-top-left-radius: 0;
     border-top-right-radius: 0;
+}
+
+.btn.btn-lg.btn-primary.btn-block {
+    width: 120px;
+    margin: 20px auto 20px;
+    /* color: black; */
+    /* background-color: whitesmoke; */
+    /* border: 1px solid black; */
 }

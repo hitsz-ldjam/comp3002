@@ -10,7 +10,7 @@
 
     <title>Bookkeeping</title>
 
-    <link href="css/libs/bootstrap.min.css" rel="stylesheet">
+    <link href="css/libs/mdb.min.css" rel="stylesheet">
 
     <link href="css/index.css" rel="stylesheet">
 
@@ -22,9 +22,15 @@
 
     <div class="container">
         <form action="/my-handling-form-page" method="post">
-            <h2>Keep track of your money</h2>
             <section>
-                <h3>Must</h3>
+                <h2>Must</h2>
+                <p>
+                    <label for="account">
+                        <span>Account: </span>
+                    </label>
+                    <select id="account" name="account">
+                    </select>
+                </p>
                 <p>
                     <label for="amount">
                         <span>Amount: </span>
@@ -32,78 +38,111 @@
                     <input type="number" min="0" id="amount" name="amount">
                 </p>
                 <p>
+                    <label for="category">
+                        <span>Category: </span>
+                    </label>
+                    <select class="sel" id="category1">
+                    </select>
+                    <select class="sel" id="category2">
+                    </select>
+                </p>
+                <p>
                     <label for="type">
                         <span>Type: </span>
                     </label>
-                    <select id="type" name="type">
-                        <optgroup label="food">
-                            <option>breakfast</option>
-                            <option>lunch</option>
-                            <option>dinner</option>
-                        </optgroup>
-                        <optgroup label="clothing">
-                            <option>coat&jacket</option>
-                            <option>pants&skirt</option>
-                            <option>T-shirt&shirt</option>
-                            <option>shoes&boots</option>
-                        </optgroup>
-                        <optgroup label="housing">
-                            <option>rent</option>
-                            <option>utilities</option>
-                            <option>property cost</option>
-                            <option>purchase</option>
-                        </optgroup>
-                        <optgroup label="transport">
-                            <option>public transportation</option>
-                            <option>purchase</option>
-                            <option>gasoline</option>
-                            <option>maintenance</option>
-                        </optgroup>
+                    <select class="sel" id="type1">
                     </select>
-                </p>
-                <p>
-                    <label for="account">
-                        <span>Account: </span>
-                    </label>
-                    <select id="account" name="account">
-                        <option value="account1">account1</option>
-                        <option value="account2">account2</option>
-                        <option value="account3">account3</option>
+                    <select class="sel" id="type2">
                     </select>
-                </p>
-                <p>
-                    <label for="date">
-                        <span>Date:</span>
-                    </label>
-                    <input type="date" id="date" name="date">
                 </p>
             </section>
             <section>
-                <h3>Optional</h3>
+                <h2>Optional</h2>
+                <p>
+                    <label for="time">
+                        <span>Time: </span>
+                    </label>
+                    <input type="date" id="time" name="time">
+                </p>
                 <p>
                     <label for="member">
                         <span>Member: </span>
                     </label>
-                    <input type="text" id="member" name="member" list="suggestion">
-                    <datalist id="suggestion">
-                        <option>Parent</option>
-                        <option>Spouse</option>
-                        <option>Children</option>
-                        <option>Friend</option>
-                    </datalist>
+                    <input type="text" id="member" name="member">
                 </p>
                 <p>
-                    <label for="note">
-                        <span>Note: </span>
+                    <label for="merchant">
+                        <span>Merchant: </span>
                     </label>
-                    <textarea id="note">Write some note here</textarea>
+                    <input type="text" id="merchant" name="merchant">
+                </p>
+                <p>
+                    <label for="item">
+                        <span>Item: </span>
+                    </label>
+                    <input type="text" id="item" name="item">
                 </p>
             </section>
-            <p> <button type="submit">OK</button> </p>
+            <p> <button class= "btn" type="submit">OK</button> </p>
         </form>
 
-
     </div> <!-- /container -->
+
+    <script>
+        account = ['a', 'b', 'c'];
+        var accountsel = document.getElementById("account");
+        fill(account, accountsel);
+
+        category1 = ['a', 'b', 'c'];
+        var categorysel1 = document.getElementById("category1");
+        fill(category1,categorysel1);
+
+        category2 = [['a', 'b', 'c'], ['d', 'e', 'f'], ['g', 'h', 'i']];
+        var categorysel2 = document.getElementById("category2");
+        fill(category2[0],categorysel2);
+
+        type1 = ['a', 'b', 'c'];
+        var typesel1 = document.getElementById("type1");
+        fill(type1,typesel1);
+
+        type2 = [['a', 'b', 'c'], ['d', 'e', 'f'], ['g', 'h', 'i']];
+        var typesel2 = document.getElementById("type2");
+        fill(type2[0],typesel2);
+
+        setdate();
+
+        categorysel1.onchange = function () {
+            categorysel2.options.length = 0;
+            choice = categorysel1.options[categorysel1.selectedIndex].value;
+            fill(category2[choice],categorysel2);
+        }
+
+        typesel1.onchange = function () {
+            typesel2.options.length = 0;
+            choice = typesel1.options[typesel1.selectedIndex].value;
+            fill(type2[choice],typesel2);
+        }
+
+        function fill(dict, sel) {
+            for (index in dict) {
+            sel.options[sel.options.length] = new Option(dict[index], index);
+            }
+        }
+
+        function setdate(){
+            var date = new Date();
+            var day = date.getDate();
+            var month = date.getMonth() + 1;
+            var year = date.getFullYear();
+
+            if (month < 10) month = "0" + month;
+            if (day < 10) day = "0" + day;
+            
+            var today = year + "-" + month + "-" + day
+            document.getElementById('time').value = today;
+        }
+
+    </script>
 
 </body>
 

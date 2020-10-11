@@ -8,9 +8,9 @@
     <meta name="author" content="maotouyingxia">
     <link rel="icon" href="images/favicon.ico">
 
-    <title>Login with password</title>
+    <title>Sign In</title>
 
-    <link href="css/libs/bootstrap.min.css" rel="stylesheet">
+    <link href="css/libs/mdb.min.css" rel="stylesheet">
 
     <link href="css/index.css" rel="stylesheet">
 
@@ -20,20 +20,27 @@
 
     <div class="container">
 
-        <div class="navbar-collapse collapse" style="text-align: center;">
-            <u1 class="nav navbar-nav" style="display: inline-block; float:none">
-                <li class="active"><a href="index.html">Password</a></li>
-                <li><a href="pattern.html">Pattern</a></li>
-                <li><a href="fingerprint.html">Fingerprint</a></li>
-            </u1>
-        </div>
-
+        <h2>Sign In</h2>
         <form class="form-signin">
-            <h1>ZEBRA NOTE BOOK</h1>
             <label for="inputPassword" class="sr-only">Password</label>
-            <input type="password" id="inputPassword" class="form-control" placeholder="Password" required>
-            <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+            <input type="password" id="pwd" name="pwd" class="form-control" placeholder="Password" required>
         </form>
+        <button class="btn btn-lg btn-primary btn-block" type="submit">Sign In</button>
+        <div>
+            <button type="button" class="btn-upper" aria-label="Text">
+                <img src="images/keyboard.svg"/>
+            </button>
+        </div>
+        <button type="button" class="btn-left" aria-label="Finger" disabled>
+            <img src="images/finger-print.svg"/>
+        </button>
+        <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+        <button type="button" class="btn-right" aria-label="Pattern" disabled>
+            <img src="images/pattern.svg">
+        </button>
+        <div>
+            <a href="#dataimport">Import your data</a>
+        </div>
 
     </div> <!-- /container -->
 
