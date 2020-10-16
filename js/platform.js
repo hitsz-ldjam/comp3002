@@ -1,35 +1,168 @@
+// "use strict"
+
+// /**
+//  * General platform backend.
+//  */
+// class Platform {
+//     constructor() { }
+
+//     showMessage(message) {
+//         alert(message);
+//     }
+
+//     logMessage(message) {
+//         console.log(message);
+//     }
+
+//     logError(error) {
+//         console.error(error);
+//     }
+
+//     /** WTF stands for What a Terrible Failure */
+//     logWTF(wtf) {
+//         console.error('> WTF: ' + wtf);
+//     }
+
+//     exportJsonFile(content) {
+//         let blob = new Blob([content], { type: 'application/json' });
+//         const downloadURL = URL.createObjectURL(blob);
+//         let dummyA = document.createElement('a');
+//         dummyA.href = downloadURL;
+//         dummyA.download = 'encrypted.json'
+//         dummyA.click();
+//     }
+// }
+
+// var platform = new Platform();
+
+
 "use strict"
+
+/**
+ * Platform backend for web
+ * Only for development.
+ */
+class PlatformWeb {
+    constructor(platform) {
+        this._platform = platform;
+        this._assets = new Map();
+        this._file = null;
+    }
+
+    showMessage(message) {
+        alert(message);
+    }
+
+    loadAssetFile(name) {
+        if (this._assets.has(name)) {
+            return this._assets.get(name);
+        } else {
+            return null;
+        }
+    }
+
+    storeAssetFile(name, data) {
+        this._assets.set(name, data)
+        return true;
+    }
+
+    deleteAssetFile(name) {
+        if (this._assets.has(name)) {
+            this._assets.delete(name);
+        }
+        return true;
+    }
+
+    listAssetFiles() {
+        let files = new Array()
+        for (let key of this._assets.keys()) {
+            files.push(key);
+        }
+        return files;
+    }
+
+    getRequestedData() {
+        return this._file;
+    }
+
+    showFileImporter(type) {
+        let input = document.createElement("input");
+        input.style.display = "none";
+        input.type = "file";
+
+        input.onchange = e => {
+            let file = e.target.files[0];
+            let reader = new FileReader();
+            reader.readAsText(file, "UTF-8");
+
+            reader.onload = readerEvent => {
+                this._file = readerEvent.target.result;
+                this._platform._onFileImporterResult();
+            }
+        }
+
+        input.click();
+    }
+
+    showFileExporter(name, type) {
+        if (this._assets.has(name)) {
+            let blob = new Blob([this._assets.get(name)], {
+                type: type
+            });
+            let url = window.URL.createObjectURL(blob);
+
+            let link = document.createElement("a");
+            link.style.display = "none";
+            link.href = url;
+            link.setAttribute("download", name);
+            link.click();
+            this._platform._onFileExporterResult(true);
+        } else {
+            this._platform._onFileExporterResult(false);
+        }
+
+    }
+}
 
 /**
  * General platform backend.
  */
 class Platform {
     constructor() {
-        let ua = navigator.userAgent;
-        let pairs = ua.split(";");
         this.settings = {};
+        let pattern = /zebra-settings *{(.*)}/;
+        let ary = pattern.exec(navigator.userAgent);
+        if (ary) {
+            let str = ary[1];
 
-        pairs.forEach(element => {
-            let str = element.trim();
-            if (str.length == 0)
-                return;
+            let pairs = str.split(";");
 
-            let pair = str.split(":");
-            let key = pair[0].trim();
-            let value = pair[1].trim();
+            pairs.forEach(element => {
+                let str = element.trim();
+                if (str.length == 0)
+                    return;
 
-            if (key.length == 0)
-                return;
+                let pair = str.split(":");
+                let key = pair[0].trim();
+                let value = pair[1].trim();
 
-            this.settings[key] = value;
-        });
+                if (key.length == 0)
+                    return;
+
+                this.settings[key] = value;
+            });
+        } else {
+            this.settings["platform"] = "web";
+        }
+
 
         switch (this.settings["platform"].toLowerCase()) {
             case "android":
-                this._backend = PlatformAndroid;
+                this._backend = platformAndroid;
                 break;
 
             default:
+                this._backend = new PlatformWeb(this);
                 break;
         }
     }
@@ -40,6 +173,19 @@ class Platform {
      */
     showMessage(message) {
         return this._backend.showMessage(message);
+    }
+
+    logMessage(message) {
+        console.log(message);
+    }
+
+    logError(error) {
+        console.error(error);
+    }
+
+    /** WTF stands for What a Terrible Failure */
+    logWTF(wtf) {
+        console.error('> WTF: ' + wtf);
     }
 
     /**
@@ -156,4 +302,4 @@ class Platform {
     }
 }
 
-var platform = new Platform();
+let platform = new Platform();
