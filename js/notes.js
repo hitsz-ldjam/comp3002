@@ -1,204 +1,275 @@
-'use strict';
-
-let data = []
-
-$(function() {
-    Get_bill_input();
-    // $("button#rm-item").click((event) => {  // 此处为了测试方便, 直接把rmitem键用于测试函数
-    //     divideDataByMainCat(data);
-    // })
-});
-
-function Get_bill_input() {
-    // If you want to change button, just change '#add-item' to the button's id. 
-    $("button#add-item").click((event) => {
-        let mainCat = $.trim($("input#main-category").val());
-        let subCat = $.trim($("input#sub-category").val());
-        let amountStr = $("input#amount").val();
-        let timeStr = $.trim($("input#time").val());
-        let toc = $.trim($("input#toc").val()); // 支付方式
-        let noteStr = $.trim($("input#note").val());
-        let membersStr = $.trim($("input#members").val());
-        let tradersStr = $.trim($("input#traders").val());
-        let itemStr = $.trim($("input#item").val());
-        // if (!mainCat || !subCat || !amountStr || !timeStr) {
-        //     showMessage(`Please input data`);
-        //     return;
-        // }
-        let amount = +amountStr;
-        // Make sure amount is correct.
-        if (typeof amount !== "number" || !isFinite(amount)) {
-            showMessage(`amount ${amountStr} is invalid`);
-            return;
+/**
+ * READ HERE FIRST!!
+ * 
+ * If a key in bills is not defined, for example:
+ *"bills": [
+        {
+            "account": "现金",
+            "amount": 20,
+            "type": 0, // 收入/支出
+            "flag": "", // 另一个账户的名字
+            "mainCategory": "食物",
+            "subCategory": "早餐",
+            "time": "2020-xx-yy",
+            "member": "我",
+            "merchant": "",
+            "item": ""
         }
+    ]
+    member, merchant,item   are not defined, those function for them will return as following:
 
-        // todo: Make sure all the data were input correctly.
-        let reg1 = new RegExp("-", "g"); //g,表示全部替换。
-        timeStr = timeStr.replace(reg1, "");
-        let reg2 = new RegExp("T", "g"); //g,表示全部替换。
-        timeStr = timeStr.replace(reg2, "");
-        let reg3 = new RegExp(":", "g"); //g,表示全部替换。
-        timeStr = timeStr.replace(reg3, "");
-        timeStr = +timeStr;
+    undefined: [
+    {
+      account: '现金',
+      amount: 20,
+      type: 0,
+      flag: '',
+      ...
+    }]
 
-        // Test for input
-        console.log(mainCat);
-        console.log(subCat);
-        console.log(amount);
-        console.log(timeStr);
-        console.log(noteStr);
-        console.log(toc);
-        console.log(membersStr);
-        console.log(tradersStr);
-        console.log(itemStr);
+ */
 
-        addData(mainCat, subCat, timeStr, toc, amountStr, noteStr, membersStr, tradersStr, itemStr);
 
-    });
-}
+var choices = {
+    day: 0,
+    month: 1,
+    year: 2,
+    quarter: 3
+};
 
-function addData(mainCat, subCat, timeStr, toc, amountStr, noteStr, membersStr, tradersStr, itemStr) {
-    let tempSingleData = {}
-    tempSingleData.mainCategory = mainCat;
-    tempSingleData.subCategory = subCat;
-    tempSingleData.time = timeStr;
-    tempSingleData.typeOfCounting = toc;
-    tempSingleData.amount = amountStr;
-    tempSingleData.note = noteStr;
-    tempSingleData.member = membersStr;
-    tempSingleData.trader = tradersStr;
-    tempSingleData.item = itemStr;
-
-    data.push(tempSingleData);
-    // test for pushing tempdata to data.
-    console.log(data);
-}
-
-function rmData() {
-    // 用户选中某条数据后,点击删除按钮即可删除;
-    // 参数需要与其他人员沟通
-    // 目前想法: 搞个id? 或者传个时间,时间应该是唯一的
-
-}
-
-function sortDataByTime(data) {
-    return data.sort(function(obj1, obj2) {
-        var val1 = obj1.time;
-        var val2 = obj2.time;
-        if (val1 < val2) {
-            return -1;
-        } else if (val1 > val2) {
-            return 1;
-        } else {
-            return 0;
-        }
-    })
-}
-
-/// 返回一个对象, Key是每一天, value为这一天记的账(数组)
-/// 注意: 一天内的数据可能无序, 要先执行sortDataByTime才能有序
-function divideDataByDay() {
-    let ans = {};
-    for (let i of data) {
-        if (ans[Math.floor(i.time / 10000).toString()] === undefined)
-            ans[Math.floor(i.time / 10000).toString()] = [];
-        ans[Math.floor(i.time / 10000).toString()].push(i);
+function getDate(date, choice) {
+    var curYear = date.getFullYear();
+    var curMonth = date.getMonth() + 1;
+    var curDate = date.getDate();
+    if (curMonth < 10) {
+        curMonth = '0' + curMonth;
     }
-    console.log(ans);
+    if (curDate < 10) {
+        curDate = "0" + curDate;
+    }
+    if (choice == choices.day) {
+        return (curYear + "-" + curMonth + "-" + curDate);
+    } else if (choice == choices.month) {
+        return (curYear + "-" + curMonth);
+    } else if (choice == choices.year) {
+        return (curYear);
+    } else if (choice == choices.quarter) {
+        return (curYear + "-" + Math.floor(curMonth / 3));
+    } else {
+        // alert('Input not allowed.');
+    }
+}
+/**
+ * use this function as following:
+ * var ans = viewByHour(bills);
+ * 
+ * ans[8] contains a array of all the bills in 8'clock.
+ * @param {array} bills 
+ */
+function viewByHour(bills) {
+    var ans = new Array(24);
+    for (var i = 0; i < ans.length; i++) {
+        ans[i] = new Array();
+    }
+    for (var i = 0; i < bills.length; i++) {
+        ans[bills[i].time.getHours()].push(bills[i])
+    }
+    return ans;
+}
+/**
+ *  Return a Dictionary/Object including arrays
+ * @param {array} bills 
+ */
+function viewByDay(bills) {
+    var ans = new Object();
+    for (var i = 0; i < bills.length; i++) {
+        if (ans[getDate(bills[i].time, choices.day)] == undefined) {
+            ans[getDate(bills[i].time, choices.day)] = [];
+        }
+        ans[getDate(bills[i].time, choices.day)].push(bills[i]);
+    }
     return ans;
 }
 
-function divideDataByWeek() {
-    // todo: 怎么确定星期
-}
+/**
+ * todo;
+ * Viewing by week is tricky. 
+ * @param {array} bills 
+ */
+function viewByWeek(bills) {
 
-function divideDataByMonth() {
-    let ans = {};
-    for (let i of data) {
-        if (ans[Math.floor(i.time / 1000000).toString()] === undefined)
-            ans[Math.floor(i.time / 1000000).toString()] = [];
-        ans[Math.floor(i.time / 1000000).toString()].push(i);
+}
+/**
+ *  Return a Dictionary/Object including arrays
+ * @param {array} bills 
+ */
+function viewByMonth(bills) {
+    var ans = new Object();
+    for (var i = 0; i < bills.length; i++) {
+        if (ans[getDate(bills[i].time, choices.month)] == undefined) {
+            ans[getDate(bills[i].time, choices.month)] = [];
+        }
+        ans[getDate(bills[i].time, choices.month)].push(bills[i]);
     }
-    console.log(ans);
+    return ans;
+}
+/**
+ *  Return a Dictionary/Object including arrays
+ * @param {array} bills 
+ */
+function viewByQuarter(bills) {
+    var ans = new Object();
+    for (var i = 0; i < bills.length; i++) {
+        if (ans[getDate(bills[i].time, choices.quarter)] == undefined) {
+            ans[getDate(bills[i].time, choices.quarter)] = [];
+        }
+        ans[getDate(bills[i].time, choices.quarter)].push(bills[i]);
+    }
+    return ans;
+}
+/**
+ *  Return a Dictionary/Object including arrays
+ * @param {array} bills 
+ */
+function viewByYear(bills) {
+    var ans = new Object();
+    for (var i = 0; i < bills.length; i++) {
+        if (ans[getDate(bills[i].time, choices.year)] == undefined) {
+            ans[getDate(bills[i].time, choices.year)] = [];
+        }
+        ans[getDate(bills[i].time, choices.year)].push(bills[i]);
+    }
+    return ans;
+}
+/**
+ *  Return a Dictionary/Object including arrays
+ * @param {array} bills 
+ */
+function viewByMainCat(bills) {
+    var ans = new Object();
+    for (var i = 0; i < bills.length; i++) {
+        if (ans[bills.mainCategory] == undefined) {
+            ans[bills.mainCategory] = [];
+        }
+        ans[bills.mainCategory].push(bills[i]);
+    }
+    return ans;
+}
+/**
+ *  Return a Dictionary/Object including arrays
+ * @param {array} bills 
+ */
+function viewBySubCat(bills) {
+    var ans = new Object();
+    for (var i = 0; i < bills.length; i++) {
+        if (ans[bills.subCategory] == undefined) {
+            ans[bills.subCategory] = [];
+        }
+        ans[bills.subCategory].push(bills[i]);
+    }
+    return ans;
+}
+/**
+ *  Return a Dictionary/Object including arrays
+ * @param {array} bills 
+ */
+function viewByAccount(bills) {
+    var ans = new Object();
+    for (var i = 0; i < bills.length; i++) {
+        if (ans[bills.account] == undefined) {
+            ans[bills.account] = [];
+        }
+        ans[bills.account].push(bills[i]);
+    }
+    return ans;
+}
+/**
+ *  Return a Dictionary/Object including arrays
+ * @param {array} bills 
+ */
+function viewByItem(bills) {
+    var ans = new Object();
+    for (var i = 0; i < bills.length; i++) {
+        if (ans[bills.item] == undefined) {
+            ans[bills.item] = [];
+        }
+        ans[bills.item].push(bills[i]);
+    }
+    return ans;
+}
+/**
+ *  Return a Dictionary/Object including arrays
+ * @param {array} bills 
+ */
+function viewByMember(bills) {
+    var ans = new Object();
+    for (var i = 0; i < bills.length; i++) {
+        if (ans[bills.member] == undefined) {
+            ans[bills.member] = [];
+        }
+        ans[bills.member].push(bills[i]);
+    }
+    return ans;
+}
+/**
+ *  Return a Dictionary/Object including arrays
+ * @param {array} bills 
+ */
+function viewByMerchant(bills) {
+    var ans = new Object();
+    for (var i = 0; i < bills.length; i++) {
+        if (ans[bills.merchant] == undefined) {
+            ans[bills.merchant] = [];
+        }
+        ans[bills.merchant].push(bills[i]);
+    }
     return ans;
 }
 
-function divideDataByYear() {
-    let ans = {};
-    for (let i of data) {
-        if (ans[Math.floor(i.time / 100000000).toString()] === undefined)
-            ans[Math.floor(i.time / 100000000).toString()] = [];
-        ans[Math.floor(i.time / 100000000).toString()].push(i);
-    }
-    console.log(ans);
-    return ans;
-}
 
-function divideDataByMainCat(dt) {
-    let temp = $.extend(true, [], dt); // 深拷贝, 不改变data
-    let res = [];
-    while (temp.length !== 0) {
-        let list = temp.shift();
-        let arr = [list];
-        for (let i = 0; i < temp.length; i++) {
-            if (temp[i].mainCategory == list.mainCategory) {
-                arr = arr.concat(temp.splice(i, 1));
-                i--;
-            }
+function testModule() {
+    var date0 = new Date();
+    var date1 = new Date();
+    var bill = Array();
+    bill = [{
+            "account": "现金",
+            "amount": 20,
+            "type": 0,
+            "flag": "",
+            "mainCategory": "食物",
+            "subCategory": "早餐",
+            "time": date0,
+            "member": "我",
+            "merchant": "",
+            "item": ""
+        },
+        {
+            "account": "现金",
+            "amount": 20,
+            "type": 0,
+            "flag": "",
+            "mainCategory": "食物",
+            "subCategory": "早餐",
+            "time": date1,
+            "member": "你",
+            "merchant": "",
+            "item": ""
         }
-        res.push(arr);
-    }
-    console.log(res);
-}
-/// 按道理不同maincat里的subcat应该是不一样的, 所以不考虑maincat了
-/// 
-function divideDataBySubCat(dt) {
-    let temp = $.extend(true, [], dt); // 深拷贝, 不改变data
-    let res = [];
-    while (temp.length !== 0) {
-        let list = temp.shift();
-        let arr = [list];
-        for (let i = 0; i < temp.length; i++) {
-            if (temp[i].subCategory == list.subCategory) {
-                arr = arr.concat(temp.splice(i, 1));
-                i--;
-            }
-        }
-        res.push(arr);
-    }
-    console.log(res);
-}
+    ];
+    var ans = viewByHour(bill);
+    // console.log(ans.length);
 
-function divideDataByMember(dt) {
-    let temp = $.extend(true, [], dt); // 深拷贝, 不改变data
-    let res = [];
-    while (temp.length !== 0) {
-        let list = temp.shift();
-        let arr = [list];
-        for (let i = 0; i < temp.length; i++) {
-            if (temp[i].member == list.member) {
-                arr = arr.concat(temp.splice(i, 1));
-                i--;
-            }
-        }
-        res.push(arr);
-    }
-    console.log(res);
-}
-
-function divideDataByTrader(dt) {
-    let temp = $.extend(true, [], dt); // 深拷贝, 不改变data
-    let res = [];
-    while (temp.length !== 0) {
-        let list = temp.shift();
-        let arr = [list];
-        for (let i = 0; i < temp.length; i++) {
-            if (temp[i].trader == list.trader) {
-                arr = arr.concat(temp.splice(i, 1));
-                i--;
-            }
-        }
-        res.push(arr);
-    }
-    console.log(res);
+    // for (var i = 0; i < ans.length; i++) {
+    //     console.log(ans[i]);
+    // }
+    //console.log(viewByDay(bill));
+    //console.log(viewByMonth(bill));
+    //console.log(viewByQuarter(bill));
+    //console.log(viewByYear(bill));
+    //console.log(viewByMainCat(bill));
+    // console.log(viewBySubCat(bill));
+    // console.log(viewByMerchant(bill));
+    // console.log(viewByItem(bill));
+    // console.log(viewByMember(bill));
+    // console.log(viewByAccount(bill));
 }
