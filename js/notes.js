@@ -36,7 +36,11 @@ var choices = {
     year: 2,
     quarter: 3
 };
-
+/**
+ * You will not use this function.
+ * @param {*} date 
+ * @param {*} choice 
+ */
 function getDate(date, choice) {
     var curYear = date.getFullYear();
     var curMonth = date.getMonth() + 1;
