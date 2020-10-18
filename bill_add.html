@@ -6,13 +6,6 @@
     <meta name='viewport' content='width=device-width, initial-scale=1'>
     <link href='./css/libs/mdb.min.css' rel='stylesheet'>
     <link href='./css/bill_add.css' rel='stylesheet'>
-
-    <script src='./js/libs/jquery-3.5.1.min.js'></script>
-    <script src='./js/platform.js'></script>
-    <script src='./js/globals.js'></script>
-    <script src='./js/utils.js'></script>
-    <script src='./js/datajson_write.js'></script>
-    <script src='./js/bill_add.js'></script>
 </head>
 
 <body>
@@ -43,17 +36,16 @@
         <datalist id='subcat-list'>
         </datalist>
         <br />
-
         <label class = "tag" for="type">
             <span>类型：</span>
         </label>
-        <select class="sel" id='type'>
-            <option value='income'>收入</option>
-            <option value='expense'>支出</option>
-            <option value='transfer'>转账</option>
-        </select>
-        <select class="sel" id='flag'>
-        </select>
+            <select class="sel" id='type'>
+                <option value='income'>收入</option>
+                <option value='expense'>支出</option>
+                <option value='transfer'>转账</option>
+            </select>
+            <select class="sel" id='flag' >
+            </select>
         <br />
 
         <label class = "tag" for="time">
@@ -83,8 +75,15 @@
         <button class="btn btn-primary" id='submit'>确定</button>
 
     </div>
-    
+
+    <script src='./js/libs/jquery-3.5.1.min.js'></script>
+    <script src='./js/platform.js'></script>
+    <script src='./js/globals.js'></script>
+    <script src='./js/utils.js'></script>
+    <script src='./js/datajson_write.js'></script>
+    <script src='./js/bill_add.js'></script>
     <script src='js/libs/mdb.min.js'></script>
+
 </body>
 
 </html>
