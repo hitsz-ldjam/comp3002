@@ -1,11 +1,7 @@
-body {
-    padding-top: 40px;
-    padding-bottom: 40px;
-}
-
 .hint {
-    margin: 20px auto 20px;
-    text-align: center;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    margin-left: 150px;
 }
 
 .tag {
@@ -14,25 +10,25 @@ body {
     margin-left: 30px;
 }
 
-.onecolumn {
+.main {
     width: 200px;
     margin: 10px auto 10px;
-    border: 1px solid black;
+    /* border: 1px solid black; */
 }
 
-.twocolumn {
+.sub {
     width: 100px;
     margin: 10px auto 10px;
-    border: 1px solid black;
+    /* border: 1px solid black; */
 }
 
 .sel {
     width: 100px;
     margin: 10px auto 10px;
-    border: 1px solid black;
+    /* border: 1px solid black; */
 }
 
-.btn {
+.btn-primary {
     margin-left: 100px;
     width: 150px;
 }

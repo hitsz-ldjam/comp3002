@@ -4,14 +4,16 @@
 <head>
     <meta charset='utf-8'>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link href="css/libs/mdb.min.css" rel="stylesheet">
-    <link href="css/login.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/libs/bootstrap.min.css">
+    <link rel="stylesheet" href="css/libs/mdb.min.css">
+    <link rel="stylesheet" href="css/login.css">
 </head>
 
 <body>
-    <div class="container">
+    <div class="text-center">
 
         <h2 class="hint">验证</h2>
+        
         <div class="form-outline">
             <input type="password" id="password" autocomplete="off" class="form-control" />
             <label class="form-label" for="Password">密码</label>
@@ -19,21 +21,28 @@
 
         <button class="btn btn-primary" id="decrypt">解密</button>
         <button class="btn btn-primary" id='new'>新建</button>
+        <br />
 
-        <div>
-            <button class="btn btn-link" id='import'>导入</button>
-            <button class="btn btn-link" id='export'>导出</button>
-        </div>
+        <button class="btn-floating btn-default upper"><img src="images/keyboard.svg"/></button>
+        <br />
+        <button class="btn-floating btn-default left" disabled><img src="images/pattern.svg"/></button>
+        <button class="btn-floating btn-default right" disabled><img src="images/finger-print.svg"/></button>        
+        <br />
 
-    </div> <!-- /container -->
+        <button class="btn btn-link" id='import'>导入</button>
+        <button class="btn btn-link" id='export'>导出</button>
 
-    <script src='./js/libs/jquery-3.5.1.min.js'></script>
-    <script src='./js/libs/sjcl.js'></script>
-    <script src='./js/platform.js'></script>
-    <script src='./js/globals.js'></script>
-    <script src='./js/crypto.js'></script>
-    <script src='./js/login.js'></script>
-    <script src='js/libs/mdb.min.js'></script>
+    </div> 
+
+    <script type="text/javascript" src="js/libs/jquery-3.5.1.min.js"></script>
+    <script type="text/javascript" src="js/libs/sjcl.js"></script>
+    <script type="text/javascript" src="js/libs/bootstrap.min.js"></script>
+    <script type="text/javascript" src="js/libs/mdb.min.js"></script>
+    
+    <script type="text/javascript" src="js/platform.js"></script>
+    <script type="text/javascript" src="js/globals.js"></script>
+    <script type="text/javascript" src="js/crypto.js"></script>
+    <script type="text/javascript" src="js/login.js"></script>
 
 </body>
 
