@@ -14,66 +14,67 @@
 
         <h2 class="hint">记账</h2>
         
-        <label class = "tag" for="account">
-            <span>账户：</span>
-        </label>
-        <input class="form-outline main" list='account-list' id='account' />
-        <datalist id='account-list'>
-        </datalist>
-        <br />
-        
-        <label class = "tag" for="amount">
-            <span>金额：</span>
-        </label>
-        <input class="form-outline main" type="number" id='amount'>
+        <div class="form-outline">
+            <input type="text" id="account" class="form-control" list="account-list"/>
+            <label class="form-label" for="account">账户</label>
+            <datalist id='account-list'>
+            </datalist>
+        </div>
+
+        <div class="form-outline">
+            <input type="number" id="amount" class="form-control">
+            <label class="form-label" for="amount" type="number">金额</label>
+        </div>
+
+        <div class="form-outline left">
+            <input type="text" id="maincat" class="form-control" list="maincat-list"/>
+            <label class="form-label" for="category">类别</label>
+            <datalist id='maincat-list'>
+            </datalist>
+        </div>
+
+        <div class="form-outline right">
+            <input type="text" id="subcat" class="form-control" list="subcat-list"/>
+            <datalist id='subcat-list'>
+            </datalist>
+        </div>
+
         <br />
 
-        <label class = "tag" for="category">
-            <span>类别：</span>
-        </label>
-        <input class="form-outline sub" list='maincat-list' id='maincat' />
-        <datalist id='maincat-list'>
-        </datalist>
-        <input class="form-outline sub" list='subcat-list' id='subcat' />
-        <datalist id='subcat-list'>
-        </datalist>
-        <br />
-
-        <label class = "tag" for="type">
-            <span>类型：</span>
-        </label>
-            <select class="sel" id='type'>
+        <div class="form-outline left">
+            <!-- <label for="type"></label> -->
+            <select class="browser-default custom-select" id='type'>
+                <option selected>类型</option>
                 <option value='income'>收入</option>
                 <option value='expense'>支出</option>
                 <option value='transfer'>转账</option>
             </select>
-            <select class="sel" id='flag' >
+        </div>  
+
+        <div class="form-outline right">
+            <select class="browser-default custom-select" id='flag' >
             </select>
-        <br />
+        </div>
+        
+        <div class="form-outline">
+            <input id="time" class="form-control" type="datetime-local">
+            <label class="form-label" for="time"></label>
+        </div>
 
-        <label class = "tag" for="time">
-            <span>时间：</span>
-        </label>
-        <input class="form-outline main" type='datetime-local' id='time'>
-        <br />
+        <div class="form-outline">
+            <input id="member" class="form-control" type="text">
+            <label class="form-label" for="member">成员</label>
+        </div>
 
-        <label class = "tag" for="member">
-            <span>成员：</span>
-        </label>
-        <input class="form-outline main" id='member'>
-        <br />
-
-        <label class = "tag" for="merchant">
-            <span>商家：</span>
-        </label>
-        <input class="form-outline main" id='merchant'>
-        <br />
-
-        <label class = "tag" for="item">
-            <span>项目：</span>
-        </label>
-        <input class="form-outline main" id='item'>
-        <br />
+        <div class="form-outline">
+            <input id="merchant" class="form-control" type="text">
+            <label class="form-label" for="merchant">商家</label>
+        </div>
+        
+        <div class="form-outline">
+            <input id="item" class="form-control" type="text">
+            <label class="form-label" for="item">项目</label>
+        </div>
         
         <button class="btn btn-primary" id='submit'>确定</button>
 

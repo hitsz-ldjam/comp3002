@@ -2,33 +2,32 @@
     margin-top: 20px;
     margin-bottom: 20px;
     margin-left: 150px;
-}
-
-.tag {
-    width: 50px;
-    text-align: right;
-    margin-left: 30px;
-}
-
-.main {
-    width: 200px;
-    margin: 10px auto 10px;
-    /* border: 1px solid black; */
-}
-
-.sub {
-    width: 100px;
-    margin: 10px auto 10px;
-    /* border: 1px solid black; */
-}
-
-.sel {
-    width: 100px;
-    margin: 10px auto 10px;
-    /* border: 1px solid black; */
-}
+}   
 
 .btn-primary {
     margin-left: 100px;
     width: 150px;
+}
+
+.form-outline {
+    width: 235px;
+    margin-left: 70px;
+    margin-bottom: 10px;
+}
+
+.left {
+    display: inline-block;
+    width: 116px;
+}
+
+.right {
+    margin-left: 0px;
+    display: inline-block;
+    width: 115px;
+}
+
+.custom-select {
+    width: 115px;
+    height: 34px;
+    border: 1px solid lightgray;
 }
