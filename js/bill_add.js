@@ -24,12 +24,16 @@ function initDropdowns() {
     flagSelect.hide();
 }
 
+function InitTime() {
+    let date = new Date();
+    $('input#datetime').val(date.toISOString().slice(0,10)+'T'+date.toTimeString().slice(0,8));
+}
 
 $(function () {
     initDropdowns();
 
-    // todo: init date picker. datetime-local is buggy
-
+    InitTime();
+    
     $('input#maincat').change(function () {
         let mainCatVal = $(this).val();
         let subCatList = $('datalist#subcat-list');

@@ -1,33 +1,44 @@
-.hint {
-    margin-top: 20px;
-    margin-bottom: 20px;
-    margin-left: 150px;
-}   
+.body {
+    background-color: whitesmoke;
+}
+
+.shell {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+}
+
+.card {
+    margin: auto;
+    width: 300px;
+    background-color: white;
+}
+
+.card-body {
+    text-align: center;
+}
 
 .btn-primary {
-    margin-left: 100px;
     width: 150px;
 }
 
 .form-outline {
-    width: 235px;
-    margin-left: 70px;
+    width: 250px;
     margin-bottom: 10px;
+    display: inline-block;
 }
 
 .left {
-    display: inline-block;
-    width: 116px;
+    width: 123px;
 }
 
 .right {
-    margin-left: 0px;
-    display: inline-block;
-    width: 115px;
+    width: 123px;
 }
 
 .custom-select {
-    width: 115px;
+    width: 123px;
     height: 34px;
     border: 1px solid lightgray;
 }

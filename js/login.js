@@ -51,7 +51,7 @@ $(function () {
             platform.showMessage('Please input password');
             return;
         }
-        let plaintext = JSON.stringify(global.dataJson);
+         let plaintext = JSON.stringify(global.dataJson);
         let cryptoInfo = new CryptoInfo();
         if (!CryptoUtils.encrypt(password, plaintext, cryptoInfo))
             return;
@@ -62,4 +62,17 @@ $(function () {
         }
         platform.showFileExporter("encrypted.json", "text/json");
     });
+
+    $('button#login-method-pwd').click(_ => {
+        $('.carousel').carousel(0);
+    });
+
+    $('button#login-method-pattern').click(_ => {
+        $('.carousel').carousel(1);
+    });
+
+    $('button#login-method-finger').click(_ => {
+        $('.carousel').carousel(2);
+    });
+    
 });
