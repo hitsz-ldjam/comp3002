@@ -29,6 +29,124 @@
 
  */
 
+class singleList {
+    constructor(token) {
+        this.token = token;
+        this.income = 0;
+        this.expense = 0;
+        this.remain = 0;
+        this.list = [];
+    }
+}
+
+function viewByTimeLine(bills) {
+    let viewByTime = new singleList("year-month-day");
+    for (var bill of bills) {
+        var year = viewByTime.list.findIndex(function (t) {  // 找有没有xx年的记录
+            return t.token == getDate(bill.time, choices.year);
+        });
+        if (year == -1) {  // 没有xx年的记录
+            var viewByYear = new singleList(getDate(bill.time, choices.year));
+            var viewByMonth = new singleList(getDate(bill.time, choices.month));
+            var viewByDay = new singleList(getDate(bill.time, choices.day));
+
+            if (bill.type == BillType.income) {
+                viewByDay.income += bill.amount;
+                viewByMonth.income += bill.amount;
+                viewByYear.income += bill.amount;
+                viewByTime.income += bill.amount;
+            } else if (bill.type == BillType.expense) {
+                viewByDay.expense += bill.amount;
+                viewByMonth.expense += bill.amount;
+                viewByYear.expense += bill.amount;
+                viewByTime.expense += bill.amount;
+            }
+            viewByDay.remain = viewByDay.income - viewByDay.expense;
+            viewByMonth.remain = viewByMonth.income - viewByMonth.expense;
+            viewByYear.remain = viewByYear.income - viewByYear.expense;
+            viewByTime.remain = viewByTime.income - viewByTime.expense;
+
+            viewByDay.list.push(bill);
+            viewByMonth.list.push(viewByDay);
+            viewByYear.list.push(viewByMonth);
+            viewByTime.list.push(viewByYear);
+        } else {
+            var month = viewByTime.list[year].list.findIndex(function (t) {  // 找有没有xx月的记录
+                return t.token == getDate(bill.time, choices.month);
+            });
+            if (month == -1) {// 没有xx月的记录
+                var viewByMonth = new singleList(getDate(bill.time, choices.month));
+                var viewByDay = new singleList(getDate(bill.time, choices.day));
+
+                if (bill.type == BillType.income) {
+                    viewByDay.income += bill.amount;
+                    viewByMonth.income += bill.amount;
+                    viewByTime.list[year].income += bill.amount;
+                    viewByTime.income += bill.amount;
+                } else if (bill.type == BillType.expense) {
+                    viewByDay.expense += bill.amount;
+                    viewByMonth.expense += bill.amount;
+                    viewByTime.list[year].expense += bill.amount;
+                    viewByTime.expense += bill.amount;
+                }
+                viewByDay.remain = viewByDay.income - viewByDay.expense;
+                viewByMonth.remain = viewByMonth.income - viewByMonth.expense;
+                viewByTime.list[year].remain = viewByTime.list[year].income - viewByTime.list[year].expense;
+                viewByTime.remain = viewByTime.income - viewByTime.expense;
+
+                viewByDay.list.push(bill);
+                viewByMonth.list.push(viewByDay);
+                viewByTime.list[year].list.push(viewByMonth);
+            } else {
+                var day = viewByTime.list[year].list[month].list.findIndex(function (t) {  // 找有没有xx日的记录
+                    return t.token == getDate(bill.time, choices.day);
+                });
+                if (day == -1) {// 没有xx日的记录
+                    var viewByDay = new singleList(getDate(bill.time, choices.day));
+                    if (bill.type == BillType.income) {
+                        viewByDay.income += bill.amount;
+                        viewByTime.list[year].list[month].income += bill.amount;
+                        viewByTime.list[year].income += bill.amount;
+                        viewByTime.income += bill.amount;
+                    } else if (bill.type == BillType.expense) {
+                        viewByDay.expense += bill.amount;
+                        viewByTime.list[year].list[month].expense += bill.amount;
+                        viewByTime.list[year].expense += bill.amount;
+                        viewByTime.expense += bill.amount;
+                    }
+                    viewByDay.remain = viewByDay.income - viewByDay.expense;
+                    viewByTime.list[year].list[month].remain = viewByTime.list[year].list[month].income - viewByTime.list[year].list[month].expense;
+                    viewByTime.list[year].remain = viewByTime.list[year].income - viewByTime.list[year].expense;
+                    viewByTime.remain = viewByTime.income - viewByTime.expense;
+
+                    viewByDay.list.push(bill);
+                    viewByTime.list[year].list[month].list.push(viewByDay);
+                } else { // 全部找到了
+                    if (bill.type == BillType.income) {
+                        viewByTime.list[year].list[month].list[day].income += bill.amount;
+                        viewByTime.list[year].list[month].income += bill.amount;
+                        viewByTime.list[year].income += bill.amount;
+                        viewByTime.income += bill.amount;
+                    } else if (bill.type == BillType.expense) {
+                        viewByTime.list[year].list[month].list[day].expense += bill.amount;
+                        viewByTime.list[year].list[month].expense += bill.amount;
+                        viewByTime.list[year].expense += bill.amount;
+                        viewByTime.expense += bill.amount;
+                    }
+                    viewByTime.list[year].list[month].list[day].remain = viewByTime.list[year].list[month].list[day].income - viewByTime.list[year].list[month].list[day].expense;
+                    viewByTime.list[year].list[month].remain = viewByTime.list[year].list[month].income - viewByTime.list[year].list[month].expense;
+                    viewByTime.list[year].remain = viewByTime.list[year].income - viewByTime.list[year].expense;
+                    viewByTime.remain = viewByTime.income - viewByTime.expense;
+
+                    viewByTime.list[year].list[month].list[day].list.push(bill);
+                }
+            }
+        }
+    }
+    return viewByTime;
+}
+
+
 
 var choices = {
     day: 0,
@@ -226,6 +344,72 @@ function viewByMerchant(bills) {
             ans[bills.merchant] = [];
         }
         ans[bills.merchant].push(bills[i]);
+    }
+    return ans;
+}
+
+
+/**
+ * Please make sure input is correct. Call this function as following:
+ * 
+ * filter(bills=bills, Object = ob)
+ * 
+ * Object has these attributes.
+ * @param {array} bills 
+ * @param {string} account : [acc1,acc2,acc3, ...]   $
+ * @param {numberRange} amount : [start, end]        *
+ * @param {int} type , true: income; flase: cost    %
+ * @param {string} flag , defined: name of account   %
+ * @param {string} mainCat , [cat1, cat2,...,catn]   $
+ * @param {string} subCat , [cat1, cat2,...,catn]    $ 
+ * @param {dateRange} time : [startDate, endDate]    *
+ * @param {string} member : [mem1, mem2, mem3,...]   $
+ * @param {string} merchant : [mer1, mer2,...]       $
+ * @param {string} item : [it1, it2, ...]            $
+ */
+function billFilter(bills, object) {
+    var tempOb = new Object();
+    for (var key of Object.keys(object)) {
+        if (object[key] == null) {
+            continue;
+        } else {
+            tempOb[key] = object[key]; // Get all the defined attributes 
+        }
+    }
+    var ans = [];
+    for (var bill of bills) {
+        var f = false;
+        for (var key of Object.keys(tempOb)) {
+            // 如果是flag(单个字符串) 或者 type
+
+            if ((key == 'flag' || key == 'type')) {
+                if (bill[key] === tempOb[key]) {
+                    f = true;
+                } else {
+                    f = false;
+                    break;
+                }
+            } else if (key == 'time' || key == 'amount') { // 如果是日期或者金额范围
+                if (bill[key] >= tempOb[key][0] && bill[key] <= tempOb[key][1]) {
+                    f = true;
+                } else {
+                    f = false;
+                    break;
+                }
+            } else { // 其余的数组类型
+                f = function (tempOb, bill, key) {
+                    for (var i of tempOb[key]) {
+                        if (bill[key] == i) {
+                            return true;
+                        }
+                    }
+                    return false;
+                }
+            }
+        }
+        if (f) {
+            ans.push(bill);
+        }
     }
     return ans;
 }

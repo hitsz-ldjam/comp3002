@@ -36,6 +36,9 @@ class singleList {
     }
 }
 let viewByTime = new singleList("year-month-day");
+let viewByYear = new singleList("year-month-day");
+let viewByMonth = new singleList("year-month-day");
+let viewByDay = new singleList("year-month-day");
 viewByTime.income = 100;
 viewByTime.expense = 200;
 viewByTime.remain = -100;
