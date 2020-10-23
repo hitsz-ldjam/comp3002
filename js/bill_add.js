@@ -26,7 +26,7 @@ function initDropdowns() {
 
 function InitTime() {
     let date = new Date();
-    $('input#datetime').val(date.toISOString().slice(0,10)+'T'+date.toTimeString().slice(0,8));
+    $('input#time').val(date.toISOString().slice(0,10)+'T'+date.toTimeString().slice(0,5));
 }
 
 $(function () {

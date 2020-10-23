@@ -42,3 +42,7 @@
     height: 34px;
     border: 1px solid lightgray;
 }
+
+.time {
+    display: -webkit-inline-box;
+}

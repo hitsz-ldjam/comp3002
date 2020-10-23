@@ -20,7 +20,7 @@
             </div>
             <div class="text-center card-body">
                 <!-- Login method begin -->
-                <div id="login-method-slide" class="carousel slide" data-touch=false>
+                <div id="login-method-slide" class="carousel slide" data-touch=false data-interval="0">
                     <div class="carousel-inner">
                         <div class="carousel-item active">
                             <!-- Method 1 -->
@@ -86,16 +86,6 @@
     <script type="text/javascript" src="js/globals.js"></script>
     <script type="text/javascript" src="js/crypto.js"></script>
     <script type="text/javascript" src="js/login.js"></script>
-
-    <script>
-        // pattern password to do 
-        var lock = new PatternLock("#lock", {
-            onPattern: function(pattern) {
-            // Context is the pattern lock instance
-            console.log(pattern)
-            }
-        });
-    </script>
 
 </body>
 

@@ -69,6 +69,12 @@ $(function () {
 
     $('button#login-method-pattern').click(_ => {
         $('.carousel').carousel(1);
+        //create a pattern instance
+        let lock = new PatternLock("#lock", {
+            onPattern: function(pattern) {
+            console.log(pattern)
+            }
+        });
     });
 
     $('button#login-method-finger').click(_ => {
