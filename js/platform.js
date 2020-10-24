@@ -1,41 +1,3 @@
-// "use strict"
-
-// /**
-//  * General platform backend.
-//  */
-// class Platform {
-//     constructor() { }
-
-//     showMessage(message) {
-//         alert(message);
-//     }
-
-//     logMessage(message) {
-//         console.log(message);
-//     }
-
-//     logError(error) {
-//         console.error(error);
-//     }
-
-//     /** WTF stands for What a Terrible Failure */
-//     logWTF(wtf) {
-//         console.error('> WTF: ' + wtf);
-//     }
-
-//     exportJsonFile(content) {
-//         let blob = new Blob([content], { type: 'application/json' });
-//         const downloadURL = URL.createObjectURL(blob);
-//         let dummyA = document.createElement('a');
-//         dummyA.href = downloadURL;
-//         dummyA.download = 'encrypted.json'
-//         dummyA.click();
-//     }
-// }
-
-// var platform = new Platform();
-
-
 "use strict"
 
 /**
@@ -125,6 +87,81 @@ class PlatformWeb {
 }
 
 /**
+ * Platform backend for Desktop
+ */
+class PlatformDesktop {
+    constructor(platform) {
+        this._platform = platform;
+        this._file = null;
+        this._backend = window.platformDesktop;
+    }
+
+    showMessage(message) {
+        alert(message);
+    }
+
+    loadAssetFile(name) {
+        return this._backend.loadAssetFile(name);
+    }
+
+    storeAssetFile(name, data) {
+        return this._backend.storeAssetFile(name, data);
+    }
+
+    deleteAssetFile(name) {
+        return this._backend.deleteAssetFile(name);
+    }
+
+    listAssetFiles() {
+        return this._backend.listAssetFiles();
+    }
+
+    getRequestedData() {
+        return this._file;
+    }
+
+    showFileImporter(type) {
+        let input = document.createElement("input");
+        input.style.display = "none";
+        input.type = "file";
+
+        input.onchange = e => {
+            let file = e.target.files[0];
+            let reader = new FileReader();
+            reader.readAsText(file, "UTF-8");
+
+            reader.onload = readerEvent => {
+                this._file = readerEvent.target.result;
+                this._platform._onFileImporterResult();
+            }
+        }
+
+        input.click();
+    }
+
+    showFileExporter(name, type) {
+        let files = this.listAssetFiles();
+        if (files.includes(name)) {
+            let blob = new Blob([this.loadAssetFile(name)], {
+                type: type
+            });
+
+            let url = window.URL.createObjectURL(blob);
+
+            let link = document.createElement("a");
+            link.style.display = "none";
+            link.href = url;
+            link.setAttribute("download", name);
+            link.click();
+            this._platform._onFileExporterResult(true);
+        } else {
+            this._platform._onFileExporterResult(false);
+        }
+
+    }
+}
+
+/**
  * General platform backend.
  */
 class Platform {
@@ -160,7 +197,9 @@ class Platform {
             case "android":
                 this._backend = platformAndroid;
                 break;
-
+            case "desktop":
+                this._backend = new PlatformDesktop(this);
+                break;
             default:
                 this._backend = new PlatformWeb(this);
                 break;
@@ -221,7 +260,7 @@ class Platform {
      * @returns Array of filenames.
      */
     listAssetFiles() {
-        return JSON.parse(this._backend.listAssetFiles());
+        return this._backend.listAssetFiles();
     }
 
     /**
