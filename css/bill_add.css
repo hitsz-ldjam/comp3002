@@ -1,41 +1,48 @@
-body {
-    padding-top: 40px;
-    padding-bottom: 40px;
+.body {
+    background-color: whitesmoke;
 }
 
-div {
+.shell {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+}
+
+.card {
+    margin: auto;
+    width: 300px;
+    background-color: white;
+}
+
+.card-body {
     text-align: center;
 }
 
-.hint {
-    margin: 20px auto 20px;
-}
-
-.tag {
-    width: 50px;
-    text-align: right;
-    margin: 10px auto 10px;
-}
-
-.onecolumn {
-    width: 200px;
-    margin: 10px auto 10px;
-    border: 1px solid black;
-}
-
-.twocolumn {
-    width: 100px;
-    margin: 10px auto 10px;
-    border: 1px solid black;
-}
-
-.sel {
-    width: 100px;
-    margin: 10px auto 10px;
-    border: 1px solid black;
-}
-
-.btn {
-    margin: 10px auto 10px;
+.btn-primary {
     width: 150px;
+}
+
+.form-outline {
+    width: 250px;
+    margin-bottom: 10px;
+    display: inline-block;
+}
+
+.left {
+    width: 123px;
+}
+
+.right {
+    width: 123px;
+}
+
+.custom-select {
+    width: 123px;
+    height: 34px;
+    border: 1px solid lightgray;
+}
+
+.time {
+    display: -webkit-inline-box;
 }
