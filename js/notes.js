@@ -35,14 +35,6 @@
     |顺序（注意：这些函数是平面的，并没有像时间那样可以有三级的目录表示）
     |===========================================================================================
  */
-class BillType {
-    static get income() {
-        return 1;
-    }
-    static get expense() {
-        return 2;
-    }
-}
 class singleList {
     constructor(token) {
         this.token = token;
@@ -253,33 +245,44 @@ function getDate(date, choice) {
     }
 }
 /**
- * use this function as following:
- * var ans = viewByHour(bills);
  *
- * ans[8] contains a array of all the bills in 8'clock.
- * @param {array} bills
+ * @param {list} bills
+ * @param {list} mainCategory
+ * @param {BillType} option
  */
-function viewByHour(bills) {
-    var ans = new Array(24);
-    for (var i = 0; i < ans.length; i++) {
-        ans[i] = new Array();
+function viewByMainCat(bills, mainCategories, option) {
+    var ans = {};
+    for (var i of mainCategories) {
+        if (ans[i.name] === undefined) {
+            ans[i.name] = 0;
+        }
     }
-    for (var i = 0; i < bills.length; i++) {
-        ans[bills[i].time.getHours()].push(bills[i]);
+    for (var i of bills) {
+        if (i.BillType === option) {
+            ans[i.mainCategory] += i.amount;
+        }
     }
     return ans;
 }
 /**
- *  Return a Dictionary/Object including arrays
- * @param {array} bills
+ *
+ * @param {list} bills
+ * @param {list} mainCategory
+ * @param {BillType} option
  */
-function viewByDay(bills) {
-    var ans = new Object();
-    for (var i = 0; i < bills.length; i++) {
-        if (ans[getDate(bills[i].time, choices.day)] == undefined) {
-            ans[getDate(bills[i].time, choices.day)] = [];
+function viewBySubCat(bills, mainCategories, option) {
+    var ans = {};
+    for (var i of mainCategories) {
+        for (var j of subCategories) {
+            if (ans[j] === undefined) {
+                ans[j] = 0;
+            }
         }
-        ans[getDate(bills[i].time, choices.day)].push(bills[i]);
+    }
+    for (var i of bills) {
+        if (i.BillType === option) {
+            ans[i.subCategory] += i.amount;
+        }
     }
     return ans;
 }
@@ -288,78 +291,8 @@ function viewByDay(bills) {
  *  Return a Dictionary/Object including arrays
  * @param {array} bills
  */
-function viewByMonth(bills) {
-    var ans = new Object();
-    for (var i = 0; i < bills.length; i++) {
-        if (ans[getDate(bills[i].time, choices.month)] == undefined) {
-            ans[getDate(bills[i].time, choices.month)] = [];
-        }
-        ans[getDate(bills[i].time, choices.month)].push(bills[i]);
-    }
-    return ans;
-}
-/**
- *  Return a Dictionary/Object including arrays
- * @param {array} bills
- */
-function viewByQuarter(bills) {
-    var ans = new Object();
-    for (var i = 0; i < bills.length; i++) {
-        if (ans[getDate(bills[i].time, choices.quarter)] == undefined) {
-            ans[getDate(bills[i].time, choices.quarter)] = [];
-        }
-        ans[getDate(bills[i].time, choices.quarter)].push(bills[i]);
-    }
-    return ans;
-}
-/**
- *  Return a Dictionary/Object including arrays
- * @param {array} bills
- */
-function viewByYear(bills) {
-    var ans = new Object();
-    for (var i = 0; i < bills.length; i++) {
-        if (ans[getDate(bills[i].time, choices.year)] == undefined) {
-            ans[getDate(bills[i].time, choices.year)] = [];
-        }
-        ans[getDate(bills[i].time, choices.year)].push(bills[i]);
-    }
-    return ans;
-}
-/**
- *  Return a Dictionary/Object including arrays
- * @param {array} bills
- */
-function viewByMainCat(bills) {
-    var ans = new Object();
-    for (var i = 0; i < bills.length; i++) {
-        if (ans[bills.mainCategory] == undefined) {
-            ans[bills.mainCategory] = [];
-        }
-        ans[bills.mainCategory].push(bills[i]);
-    }
-    return ans;
-}
-/**
- *  Return a Dictionary/Object including arrays
- * @param {array} bills
- */
-function viewBySubCat(bills) {
-    var ans = new Object();
-    for (var i = 0; i < bills.length; i++) {
-        if (ans[bills.subCategory] == undefined) {
-            ans[bills.subCategory] = [];
-        }
-        ans[bills.subCategory].push(bills[i]);
-    }
-    return ans;
-}
-/**
- *  Return a Dictionary/Object including arrays
- * @param {array} bills
- */
 function viewByAccount(bills) {
-    var ans = new Object();
+    var ans = [];
     for (var i = 0; i < bills.length; i++) {
         if (ans[bills.account] == undefined) {
             ans[bills.account] = [];
@@ -386,14 +319,19 @@ function viewByItem(bills) {
  *  Return a Dictionary/Object including arrays
  * @param {array} bills
  */
-function viewByMember(bills) {
-    var ans = new Object();
-    for (var i = 0; i < bills.length; i++) {
-        if (ans[bills.member] == undefined) {
-            ans[bills.member] = [];
-        }
-        ans[bills.member].push(bills[i]);
+function viewByMember(bills, memberList) {
+    var ans = {};
+    for (var j of memberList) {
+        ans[j] = 0;
     }
+    for (var j of memberList) {
+        for (var i of bills) {
+            if (i.BillType === option && i.member === j) {
+                ans[j] += i.amount;
+            }
+        }
+    }
+
     return ans;
 }
 /**
@@ -483,6 +421,7 @@ function billFilter(bills, object) {
     return ans;
 }
 
+// for test:
 // module.exports = {
 //     billFilter,
 //     viewByTimeLine,
