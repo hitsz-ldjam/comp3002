@@ -4,87 +4,100 @@
 <head>
     <meta charset='utf-8'>
     <meta name='viewport' content='width=device-width, initial-scale=1'>
-    <link href='./css/libs/mdb.min.css' rel='stylesheet'>
-    <link href='./css/bill_add.css' rel='stylesheet'>
-
-    <script src='./js/libs/jquery-3.5.1.min.js'></script>
-    <script src='./js/platform.js'></script>
-    <script src='./js/globals.js'></script>
-    <script src='./js/utils.js'></script>
-    <script src='./js/datajson_write.js'></script>
-    <script src='./js/bill_add.js'></script>
+    <link rel="stylesheet" href="css/libs/bootstrap.min.css">
+    <link rel="stylesheet" href="css/libs/mdb.min.css">
+    <link rel="stylesheet" href="css/bill_add.css">
 </head>
 
 <body>
-    <div class="container">
-        <h2 class="hint">记账</h2>
+    <div class="shell">
 
-        <label class = "tag" for="account">
-            <span>账户：</span>
-        </label>
-        <input class="onecolumn" list='account-list' id='account' />
-        <datalist id='account-list'>
-        </datalist>
-        <br />
+        <div class="card">
+            <div class="text-center card-header">
+                <h1 class="hint">记账</h2>
+            </div>
+            <div class="card-body">
+                <div class="form-outline">
+                    <input type="text" id="account" class="form-control" list="account-list"/>
+                    <label class="form-label" for="account">账户</label>
+                    <datalist id='account-list'>
+                    </datalist>
+                </div>
         
-        <label class = "tag" for="amount">
-            <span>金额：</span>
-        </label>
-        <input class="onecolumn" id='amount'>
-        <br />
-
-        <label class = "tag" for="category">
-            <span>类别：</span>
-        </label>
-        <input class="twocolumn" list='maincat-list' id='maincat' />
-        <datalist id='maincat-list'>
-        </datalist>
-        <input class="twocolumn" list='subcat-list' id='subcat' />
-        <datalist id='subcat-list'>
-        </datalist>
-        <br />
-
-        <label class = "tag" for="type">
-            <span>类型：</span>
-        </label>
-        <select class="sel" id='type'>
-            <option value='income'>收入</option>
-            <option value='expense'>支出</option>
-            <option value='transfer'>转账</option>
-        </select>
-        <select class="sel" id='flag'>
-        </select>
-        <br />
-
-        <label class = "tag" for="time">
-            <span>时间：</span>
-        </label>
-        <input class="onecolumn" type='datetime-local' id='time'>
-        <br />
-
-        <label class = "tag" for="member">
-            <span>成员：</span>
-        </label>
-        <input class="onecolumn" id='member'>
-        <br />
-
-        <label class = "tag" for="merchant">
-            <span>商家：</span>
-        </label>
-        <input class="onecolumn" id='merchant'>
-        <br />
-
-        <label class = "tag" for="item">
-            <span>项目：</span>
-        </label>
-        <input class="onecolumn" id='item'>
-        <br />
+                <div class="form-outline">
+                    <input type="number" id="amount" class="form-control">
+                    <label class="form-label" for="amount" type="number">金额</label>
+                </div>
         
-        <button class="btn btn-primary" id='submit'>确定</button>
+                <div class="form-outline left">
+                    <input type="text" id="maincat" class="form-control" list="maincat-list"/>
+                    <label class="form-label" for="category">类别</label>
+                    <datalist id='maincat-list'>
+                    </datalist>
+                </div>
+        
+                <div class="form-outline right">
+                    <input type="text" id="subcat" class="form-control" list="subcat-list"/>
+                    <datalist id='subcat-list'>
+                    </datalist>
+                </div>
+        
+                <br />
+        
+                <div class="form-outline left">
+                    <select class="browser-default custom-select" id='type'>
+                        <option selected>类型</option>
+                        <option value='income'>收入</option>
+                        <option value='expense'>支出</option>
+                        <option value='transfer'>转账</option>
+                    </select>
+                </div>  
+        
+                <div class="form-outline right">
+                    <select class="browser-default custom-select" id='flag'>
+                    </select>
+                </div>
+                
+                <div class="form-outline time">
+                    <input type="datetime-local" id="time" class="form-control">
+                    <label class="form-label" for="time"></label>
+                </div>
+        
+                <div class="form-outline">
+                    <input id="member" class="form-control" type="text">
+                    <label class="form-label" for="member">成员</label>
+                </div>
+        
+                <div class="form-outline">
+                    <input id="merchant" class="form-control" type="text">
+                    <label class="form-label" for="merchant">商家</label>
+                </div>
+                
+                <div class="form-outline">
+                    <input id="item" class="form-control" type="text">
+                    <label class="form-label" for="item">项目</label>
+                </div>
+            </div>
 
+            <div class="text-center card-footer">
+                <button class="btn btn-primary" id='submit'>确定</button>
+            </div>
+
+            </div>
+        </div>
     </div>
     
-    <script src='js/libs/mdb.min.js'></script>
+    <script type="text/javascript" src="js/libs/jquery-3.5.1.min.js"></script>
+    <script type="text/javascript" src="js/libs/sjcl.js"></script>
+    <script type="text/javascript" src="js/libs/bootstrap.min.js"></script>
+    <script type="text/javascript" src="js/libs/mdb.min.js"></script>
+    
+    <script type="text/javascript" src="js/platform.js"></script>
+    <script type="text/javascript" src="js/globals.js"></script>
+    <script type="text/javascript" src="js/utils.js"></script>
+    <script type="text/javascript" src="js/datajson_write.js"></script>
+    <script type="text/javascript" src="js/bill_add.js"></script>
+
 </body>
 
 </html>

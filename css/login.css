@@ -1,43 +1,51 @@
-body {
-    padding-top: 40px;
-    padding-bottom: 40px;
+.body {
+    background-color: whitesmoke;
 }
 
-div {
-    text-align: center;
+.shell {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
 }
 
-.hint {
-    margin: 20px auto 20px;
+.card {
+    margin: auto;
+    width: 300px;
+    background-color: white;
+}
+
+.card-body {
+    min-height: 300px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.carousel {
+    margin: auto;
+    width: 250px;
+}
+
+.carousel-inner {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.carousel-item {
+    margin: auto;
+}
+
+.btn-group {
+    margin-top: 20px;
+}
+
+.btn-primary,.btn-link {
+    margin-top: 10px;
+    margin-bottom: 10px;
 }
 
 .form-outline {
-    max-width: 200px;
-    margin: 20px auto 20px;
+    margin-top: 10px;
 }
-
-.btn {
-    margin-top: 20px;
-    margin-bottom: 20px;
-}
-
-/* .btn-upper {
-    margin: 20px auto 20px;
-    width: 80px;
-    height: 80px;
-    border-radius: 50%;
-}
-
-.btn-left, .btn-right {
-    margin: 20px auto 20px;
-    width: 80px;
-    height: 80px;
-    border-radius: 50%;
-}
-
-.btn-below {
-    margin-top: 20px;
-    text-align: center;
-    font: inherit;
-    margin-bottom: 20px;
-} */
