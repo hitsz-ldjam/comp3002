@@ -1,11 +1,3 @@
-class BillType {
-    static get income() {
-        return 1;
-    }
-    static get expense() {
-        return 2;
-    }
-}
 /**
  * input:                     可以不输入参数或者输入部分参数。
  * output:                    对象数组

@@ -255,15 +255,9 @@ function getDate(date, choice) {
 /**
  * use this function as following:
  * var ans = viewByHour(bills);
-<<<<<<< HEAD
  *
  * ans[8] contains a array of all the bills in 8'clock.
  * @param {array} bills
-=======
- * 
- * ans[8] contains a array of all the bills in 8'clock.
- * @param {array} bills 
->>>>>>> e38e2b9bdd00c2edc770307e6ae72d3fda0d3158
  */
 function viewByHour(bills) {
     var ans = new Array(24);
