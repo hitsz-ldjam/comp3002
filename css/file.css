@@ -1,0 +1,37 @@
+.body {
+    background-color: whitesmoke;
+}
+
+.shell {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+}
+
+.card {
+    margin: auto;
+    width: 300px;
+    background-color: white;
+}
+
+.card-body {
+    min-height: 300px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.container {
+    margin: auto;
+    width: 250px;
+}
+
+.btn-primary,.btn-link {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.form-outline {
+    margin-top: 10px;
+}
