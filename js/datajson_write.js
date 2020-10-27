@@ -88,22 +88,54 @@ function addSubCategory(main, sub, allowNewMain = false) {
     }
 }
 
+/**
+ * @param {number} num 
+ * @returns {string}
+ */
+function generateId(num = 2) {
+    return sjcl.codec.hex.fromBits(sjcl.random.randomWords(num, 0));;
+}
 
 // todo: validate mainCat & subCat by <select/> itself
+/**
+ * @param {string} account 
+ * @param {number} amount 
+ * @param {number} type 
+ * @param {number} flag 
+ * @param {string} mainCat 
+ * @param {string} subCat 
+ * @param {Date} time 
+ * @param {string} member 
+ * @param {string} merchant 
+ * @param {string} item 
+ */
 function addBill(account, amount, type, flag, mainCat, subCat, time, member, merchant, item) {
     if (subCategoryExists(mainCat, subCat)) {
-        global.dataJson.bills.push({
+        let bills = global.dataJson.bills;
+        
+        let data = {
+            id: generateId(),
             account: account,
             amount: amount,
             type: type,
             flag: flag,
             mainCategory: mainCat,
             subCategory: subCat,
-            time: time,
+            time: DateUtils.stringfy(time),
             member: member,
             merchant: merchant,
             item: item
-        });
+        };
+
+        let i = bills.length;
+        while (--i >= 0) {
+            let t = DateUtils.parse(bills[i].time);
+            if (t <= time) {
+                break;
+            }
+        }
+
+        bills.splice(i + 1, 0, data);
         return true;
     } else {
         return false;

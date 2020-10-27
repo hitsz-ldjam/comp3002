@@ -34,7 +34,7 @@ class Card {
         this.account = data.account;
         this.mainCat = data.mainCategory;
         this.subCat = data.subCategory;
-        this.time = new Date(data.time).toLocaleTimeString();
+        this.time = DateUtils.parse(data.time).toLocaleTimeString();
         this.amount = data.amount;
     }
     CreateCard(container) {
@@ -64,7 +64,7 @@ class Card {
 
         var addBillAmount = document.createElement('div');
         addBillAmount.setAttribute('class', 'bill-amount col-3 pr-4 pt-4 pb-4');
-        addBillAmount.innerHTML = (this.type == BillType.income ? "+":"-") + this.amount;
+        addBillAmount.innerHTML = (this.type == BillType.income ? "+" : "-") + this.amount;
         AddCardText.appendChild(addBillAmount);
         // <div class="card-body">
         //             <div class="card-text row justify-content-between">
