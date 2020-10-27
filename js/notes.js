@@ -1,30 +1,5 @@
 /**
  * READ HERE FIRST!!
- * 
- * If a key in bills is not defined, for example:
- *"bills": [
-        {
-            "account": "现金",
-            "amount": 20,
-            "type": 0, // 收入/支出
-            "flag": "", // 另一个账户的名字
-            "mainCategory": "食物",
-            "subCategory": "早餐",
-            "time": "2020-xx-yy",
-            "member": "我",
-            "merchant": "",
-            "item": ""
-        }
-    ]
-    member, merchant,item are not defined, those function for them will return as following:
-    undefined: [
-    {
-      account: '现金',
-      amount: 20,
-      type: 0,
-      flag: '',
-      ...
-    }]
     ============================================================================================
     |你主要将会使用  viewByTimeLine(); 以及  billFilter();
     |viewByTimeLine()只需要输入bills即可，billFilter()需要你仔细看一看。输入的bills需要保证按时间有序。
@@ -32,18 +7,9 @@
     |按三级目录的形式输出。
     |
     |亦或者使用billFilter()函数，配合viewByMainCat，viewBySubCat等一系列的查看函数，输出按对应函数的
-    |顺序（注意：这些函数是平面的，并没有像时间那样可以有三级的目录表示）
+    |顺序
     |===========================================================================================
  */
-class singleList {
-    constructor(token) {
-        this.token = token;
-        this.income = 0;
-        this.expense = 0;
-        this.remain = 0;
-        this.list = [];
-    }
-}
 /**
  * Returns a sorted list as following.
  *{
@@ -211,17 +177,17 @@ function viewByTimeLine(bills) {
     return viewByTime;
 }
 
+/**
+ * You will not use this function.
+ * @param {*} date
+ * @param {*} choice
+ */
 var choices = {
     day: 0,
     month: 1,
     year: 2,
     quarter: 3,
 };
-/**
- * You will not use this function.
- * @param {*} date
- * @param {*} choice
- */
 function getDate(date, choice) {
     var curYear = date.getFullYear();
     var curMonth = date.getMonth() + 1;
@@ -244,107 +210,85 @@ function getDate(date, choice) {
         // alert('Input not allowed.');
     }
 }
+
+// 功能待定
+// /**
+//  *
+//  * @param {list} bills
+//  * @param {list} mainCategory
+//  * @param {BillType} option
+//  */
+// function viewByMainCat(bills, mainCategories, option) {
+//     var ans = {
+//         label: [],
+//         amount: [],
+//     };
+//     var count = 0;
+//     var index = {}; //记录不同的Cat在哪
+//     for (var i of mainCategories) {
+//         index[i] = count;
+//         ans.label.push(i);
+//         ans.amount.push(0);
+//         count++;
+//     }
+//     for (var i of bills) {
+//         if (i.BillType === option) {
+//             ans[inedx[i.mainCategory]] += i.amount;
+//         }
+//     }
+//     return ans;
+// }
+// /**
+//  *
+//  * @param {list} bills
+//  * @param {list} mainCategory
+//  * @param {BillType} option
+//  */
+// function viewBySubCat(bills, mainCategories, option) {
+//     var ans = {
+//         label: [],
+//         amount: [],
+//     };
+//     var count = 0;
+//     var index = {}; //记录不同的Cat在哪
+//     for (var i of mainCategories) {
+//         for (var j of i.subCategories) {
+//             index[j] = count;
+//             ans.label.push(j);
+//             ans.amount.push(0);
+//             count++;
+//         }
+//     }
+//     for (var i of bills) {
+//         if (i.BillType === option) {
+//             ans[index[i.subCategory]] += i.amount;
+//         }
+//     }
+//     return ans;
+// }
 /**
  *
  * @param {list} bills
- * @param {list} mainCategory
- * @param {BillType} option
+ * @param {oneArray} oneArray  declared in utils.js
+ * @param {BillType} option declared in utils.js
  */
-function viewByMainCat(bills, mainCategories, option) {
-    var ans = {};
-    for (var i of mainCategories) {
-        if (ans[i.name] === undefined) {
-            ans[i.name] = 0;
+function viewByOneArray(bills, oneArray, option) {
+    var ans = {
+        label: [],
+        amount: [],
+    };
+    var temp = {};
+    for (var bill of bills) {
+        if (temp[bill[oneArray]] === undefined) {
+            temp[bill[oneArray]] = 0;
+        }
+        if (bill.type === option) {
+            temp[bill[oneArray]] += bills.amount;
         }
     }
-    for (var i of bills) {
-        if (i.BillType === option) {
-            ans[i.mainCategory] += i.amount;
-        }
-    }
-    return ans;
-}
-/**
- *
- * @param {list} bills
- * @param {list} mainCategory
- * @param {BillType} option
- */
-function viewBySubCat(bills, mainCategories, option) {
-    var ans = {};
-    for (var i of mainCategories) {
-        for (var j of subCategories) {
-            if (ans[j] === undefined) {
-                ans[j] = 0;
-            }
-        }
-    }
-    for (var i of bills) {
-        if (i.BillType === option) {
-            ans[i.subCategory] += i.amount;
-        }
-    }
-    return ans;
-}
-
-/**
- *  Return a Dictionary/Object including arrays
- * @param {array} bills
- */
-function viewByAccount(bills) {
-    var ans = [];
-    for (var i = 0; i < bills.length; i++) {
-        if (ans[bills.account] == undefined) {
-            ans[bills.account] = [];
-        }
-        ans[bills.account].push(bills[i]);
-    }
-    return ans;
-}
-/**
- *  Return a Dictionary/Object including arrays
- * @param {array} bills
- */
-function viewByItem(bills) {
-    var ans = new Object();
-    for (var i = 0; i < bills.length; i++) {
-        if (ans[bills.item] == undefined) {
-            ans[bills.item] = [];
-        }
-        ans[bills.item].push(bills[i]);
-    }
-    return ans;
-}
-/**
- *  Return a Dictionary/Object including arrays
- * @param {array} bills
- */
-function viewByMember(bills, memberList) {
-    var ans = {};
-    for (var j of memberList) {
-        ans[j] = 0;
-    }
-    for (var j of memberList) {
-        for (var i of bills) {
-            if (i.BillType === option && i.member === j) {
-                ans[j] += i.amount;
-            }
-        }
-    }
-
-    return ans;
-}
-/**
- *  Return a Dictionary/Object including arrays
- * @param {array} bills
- */
-function viewByMerchant(bills) {
-    var ans = new Object();
-    for (var i = 0; i < bills.length; i++) {
-        if (ans[bills.merchant] == undefined) {
-            ans[bills.merchant] = [];
-        }
-        ans[bills.merchant].push(bills[i]);
+    for (var key of Object.keys(temp)) {
+        ans.label.push(key);
+        ans.amount.push(temp[key]);
     }
     return ans;
 }
@@ -358,7 +302,7 @@ function viewByMerchant(bills) {
  * @param {array} bills
  * @param {string} account : [acc1,acc2,acc3, ...]   $
  * @param {numberRange} amount : [start, end]        *
- * @param {int} type , true: income; flase: cost    %
+ * @param {int} type , true: income; flase: cost     %
  * @param {string} flag , defined: name of account   %
  * @param {string} mainCat , [cat1, cat2,...,catn]   $
  * @param {string} subCat , [cat1, cat2,...,catn]    $
@@ -408,8 +352,6 @@ function billFilter(bills, object) {
                 }
             }
         }
-        // console.log(typeof key, key, bill[key]);
-        // console.log("f = ", f);
         var flag = true;
         for (var key of Object.keys(tempOb)) {
             flag &= f[key];
@@ -420,9 +362,3 @@ function billFilter(bills, object) {
     }
     return ans;
 }
-
-// for test:
-// module.exports = {
-//     billFilter,
-//     viewByTimeLine,
-// };

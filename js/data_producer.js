@@ -10,6 +10,7 @@
  * @param {list} memberList   成员类
  * @param {list} merList      商家类
  */
+
 function produce(
     n = 1000,
     accountList = [
@@ -117,8 +118,3 @@ function produce(
     });
     return bills;
 }
-
-// module.exports = {
-//     produce,
-//     BillType,
-// };

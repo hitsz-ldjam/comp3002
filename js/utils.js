@@ -8,3 +8,34 @@ class BillType {
         return 2;
     }
 }
+
+class oneArray {
+    static get account() {
+        return "account";
+    }
+    static get mainCategory() {
+        return "mainCategory";
+    }
+    static get subCategory() {
+        return "subCategory";
+    }
+    static get member() {
+        return "member";
+    }
+    static get merchant() {
+        return "merchant";
+    }
+    static get item() {
+        return "item";
+    }
+}
+
+class singleList {
+    constructor(token) {
+        this.token = token;
+        this.income = 0;
+        this.expense = 0;
+        this.remain = 0;
+        this.list = [];
+    }
+}
