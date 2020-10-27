@@ -9,7 +9,7 @@ class BillType {
     }
 }
 
-class oneArray {
+class OneArray {
     static get account() {
         return "account";
     }
@@ -30,7 +30,7 @@ class oneArray {
     }
 }
 
-class singleList {
+class SingleList {
     constructor(token) {
         this.token = token;
         this.income = 0;
