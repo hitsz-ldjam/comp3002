@@ -7,6 +7,11 @@ $(function () {
             platform.showMessage('请选择文件');
             return;
         }
+        let password = $('input#password').val();
+        if (!password.length) {
+            platform.showMessage('请输入密码');
+            return;
+        }
         let crypto = new CryptoData();
         crypto.salt = CryptoUtils.hexToBits(global.cryptoInfo.salt);
         crypto.iv = global.cryptoInfo.iv;

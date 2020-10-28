@@ -4,7 +4,7 @@
 $(function () {
     $('button#export').click(_ => {
         // text password only
-        let password = $('input#password-export').val();
+        let password = $('input#password').val();
         if (!password.length) {
             platform.showMessage('请选择文件');
             return;
