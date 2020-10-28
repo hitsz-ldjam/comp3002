@@ -43,7 +43,7 @@
  * @param {list} bills
  */
 function viewByTimeLine(bills) {
-    let viewByTime = new singleList("year-month-day");
+    let viewByTime = new SingleList("year-month-day");
     for (var bill of bills) {
         var year = viewByTime.list.findIndex(function (t) {
             // 找有没有xx年的记录
@@ -51,9 +51,9 @@ function viewByTimeLine(bills) {
         });
         if (year == -1) {
             // 没有xx年的记录
-            var viewByYear = new singleList(getDate(bill.time, choices.year));
-            var viewByMonth = new singleList(getDate(bill.time, choices.month));
-            var viewByDay = new singleList(getDate(bill.time, choices.day));
+            var viewByYear = new SingleList(getDate(bill.time, choices.year));
+            var viewByMonth = new SingleList(getDate(bill.time, choices.month));
+            var viewByDay = new SingleList(getDate(bill.time, choices.day));
 
             if (bill.type == BillType.income) {
                 viewByDay.income += bill.amount;
@@ -82,10 +82,10 @@ function viewByTimeLine(bills) {
             });
             if (month == -1) {
                 // 没有xx月的记录
-                var viewByMonth = new singleList(
+                var viewByMonth = new SingleList(
                     getDate(bill.time, choices.month)
                 );
-                var viewByDay = new singleList(getDate(bill.time, choices.day));
+                var viewByDay = new SingleList(getDate(bill.time, choices.day));
 
                 if (bill.type == BillType.income) {
                     viewByDay.income += bill.amount;
@@ -117,7 +117,7 @@ function viewByTimeLine(bills) {
                 );
                 if (day == -1) {
                     // 没有xx日的记录
-                    var viewByDay = new singleList(
+                    var viewByDay = new SingleList(
                         getDate(bill.time, choices.day)
                     );
                     if (bill.type == BillType.income) {
@@ -190,6 +190,7 @@ var choices = {
     quarter: 3,
 };
 function getDate(date, choice) {
+    date = DateUtils.parse(date);
     var curYear = date.getFullYear();
     var curMonth = date.getMonth() + 1;
     var curDate = date.getDate();
@@ -300,17 +301,17 @@ function viewByOneArray(bills, oneArray, option) {
  * filter(bills=bills, Object = ob)
  *
  * Object has these attributes.
- * @param {array} bills
- * @param {string} account : [acc1,acc2,acc3, ...]   $
+ * @param {array}       bills
+ * @param {string}      account : [acc1,acc2,acc3, ...]   $
  * @param {numberRange} amount : [start, end]        *
- * @param {int} type , true: income; flase: cost     %
- * @param {string} flag , defined: name of account   %
- * @param {string} mainCat , [cat1, cat2,...,catn]   $
- * @param {string} subCat , [cat1, cat2,...,catn]    $
- * @param {dateRange} time : [startDate, endDate]    *
- * @param {string} member : [mem1, mem2, mem3,...]   $
- * @param {string} merchant : [mer1, mer2,...]       $
- * @param {string} item : [it1, it2, ...]            $
+ * @param {BillType}    type ,   %
+ * @param {string}      flag , defined: name of account   %
+ * @param {string}      mainCategory , [cat1, cat2,...,catn]   $
+ * @param {string}      subCategory , [cat1, cat2,...,catn]    $
+ * @param {dateRange}   time : [startDate, endDate]    *
+ * @param {string}      member : [mem1, mem2, mem3,...]   $
+ * @param {string}      merchant : [mer1, mer2,...]       $
+ * @param {string}      item : [it1, it2, ...]            $
  */
 function billFilter(bills, object) {
     var tempOb = new Object();
