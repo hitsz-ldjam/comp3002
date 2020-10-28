@@ -142,8 +142,7 @@ class CryptoUtils {
 
     /**
      * @param {string} content File content.
-     * @returns {Map<string, string>} Crypto info of content. Possible keys including 
-     * 'salt', 'iv', 'ct', 'saltP', 'ivP', 'ctP'
+     * @returns {Map<string, string>} Crypto info of content. Possible keys including 'salt', 'iv', 'ct'.
      */
     static validateCryptoFile(content) {
         let info = new Map();
