@@ -91,20 +91,20 @@ function produce(
                 ? BillType.income
                 : BillType.expense;
         bill.flag = "";
-        bill.mainCategory =
+        bill.mainCat =
             mainCatList[Math.floor(Math.random() * mainCatList.length)];
 
-        if (bill.mainCategory == "食物") {
-            bill.subCategory =
+        if (bill.mainCat == "食物") {
+            bill.subCat =
                 subFood[Math.floor(Math.random() * subFood.length)];
-        } else if (bill.mainCategory == "出行") {
-            bill.subCategory =
+        } else if (bill.mainCat == "出行") {
+            bill.subCat =
                 subTrans[Math.floor(Math.random() * subTrans.length)];
-        } else if (bill.mainCategory == "琐碎") {
-            bill.subCategory =
+        } else if (bill.mainCat == "琐碎") {
+            bill.subCat =
                 subSuo[Math.floor(Math.random() * subSuo.length)];
         } else {
-            bill.subCategory = "没有定义";
+            bill.subCat = "没有定义";
         }
 
         bill.time = date;
