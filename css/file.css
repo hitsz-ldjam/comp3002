@@ -16,27 +16,22 @@
 }
 
 .card-body {
-    text-align: center;
+    min-height: 300px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
-.btn-primary {
-    width: 150px;
+.container {
+    margin: auto;
+    width: 250px;
+}
+
+.btn-primary,.btn-link {
+    margin-top: 10px;
+    margin-bottom: 10px;
 }
 
 .form-outline {
-    width: 250px;
-    margin-bottom: 10px;
-    display: inline-block;
-}
-
-.left {
-    width: 123px;
-}
-
-.right {
-    width: 123px;
-}
-
-.time {
-    display: -webkit-inline-box;
+    margin-top: 10px;
 }

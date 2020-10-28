@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="css/libs/bootstrap.min.css">
+    <link rel="stylesheet" href="css/libs/mdb.min.css">
+    <link rel="stylesheet" href="css/libs/patternlock.min.css">
+    <link rel="stylesheet" href="css/file.css">
+
+</head>
+
+<body>
+    <div class="shell">
+
+        <div class="card">
+            <div class="text-center card-header">
+                <h1>导出</h1>
+            </div>
+            <div class="text-center card-body">
+                <div class="container">
+                    <div class="form-outline">
+                        <input type="password" id="password-export" autocomplete="off" class="form-control" />
+                        <label class="form-label" for="password-export">密码</label>
+                    </div>
+                    <button class="btn btn-block btn-primary" id="export">导出</button>
+                </div>  
+            </div>
+            <div class="text-center card-footer">
+                <button class="btn btn-link" id='return'>返回</button>
+            </div>
+        </div>
+    </div>
+
+    <script type="text/javascript" src="js/libs/jquery-3.5.1.min.js"></script>
+    <script type="text/javascript" src="js/libs/sjcl.js"></script>
+    <script type="text/javascript" src="js/libs/bootstrap.min.js"></script>
+    <script type="text/javascript" src="js/libs/mdb.min.js"></script>
+    <script type="text/javascript" src="js/libs/patternlock.min.js"></script>
+
+    <script type="text/javascript" src="js/platform.js"></script>
+    <script type="text/javascript" src="js/globals.js"></script>
+    <script type="text/javascript" src="js/crypto.js"></script>
+    <script type="text/javascript" src="js/export.js"></script>
+
+</body>
+
+</html>
