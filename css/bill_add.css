@@ -17,6 +17,7 @@
 
 .card-body {
     text-align: center;
+    width: 300px;
 }
 
 .btn-primary {

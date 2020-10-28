@@ -1,0 +1,14 @@
+.body {
+    background-color: whitesmoke;
+}
+
+.form-outline {
+    width: 250px;
+    margin-bottom: 10px;
+    display: inline-block;
+}
+
+.time {
+    display: -webkit-inline-box;
+    width: 123px;
+}

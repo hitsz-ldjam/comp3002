@@ -63,12 +63,12 @@ $(function () {
     });
 
 
-    if (platform.hasSubPair()) {
-        $('button#login-method-pattern').show();
-    }
-    else {
-        $('button#login-method-pattern').hide();
-    }
+    // if (platform.hasSubPair()) {
+    //     $('button#login-method-pattern').show();
+    // }
+    // else {
+    //     $('button#login-method-pattern').hide();
+    // }
 
     $('button#login-method-pattern').click(_ => {
         $('.carousel').carousel(1);
