@@ -27,7 +27,9 @@
     </style>
     <script>
         $(function () {
-            $('button#add-bill').click(_ => {
+  
+
+            $('a#add-bill').click(_ => {
                 window.location.href = 'bill_add.html';
             });
             $('a#show-chart').click(_ => {
@@ -36,11 +38,17 @@
             $('a#export').click(_ => {
                 window.location.href = 'file_export.html';
             });
-            var Today=new Date().setHours(0,0,0);
+            var today=new Date().setHours(0,0,0);
             var tommorrow=new Date().setHours(23,59,59);
-            updateCard($('#page1'), billFilter(produce(0),{today,tommorrow}));
+            var tb = new ob();
+            // tb.time=[today,tommorrow];
+
+            updateCard($('#page1'), billFilter(produce(0,10),tb));
+            updateAccountList($('#otherSections'));
         });
-        //page change
+    </script>
+
+        <!-- //page change
         // $(document).ready(function () {
         //     $('a.nav-link').click(function () {
         //         var page_index = $(this).parent().index() - 1;
@@ -67,8 +75,7 @@
         //         };
         //         $(this).addClass("active").siblings().removeClass('active');
         //     })
-        // });
-    </script>
+        // }); -->
 </head>
 
 <body>
@@ -101,20 +108,15 @@
                 <li>
                     <a id="export">导出</a>
                 </li>
-                <!-- <li>
-                    <a href="#otherSections" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"
+                <li>
+                    <a href="" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"
                         role="button" aria-controls="otherSections">
                         <i class="fas fa-sync"></i>Other sections
                     </a>
                     <ul class="collapse list-unstyled" id="otherSections">
-                        <li>
-                            <a class="scroll-link" href="#">Our</a>
-                        </li>
-                        <li>
-                            <a class="scroll-link" href="#">We</a>
-                        </li>
+               
                     </ul>
-                </li> -->
+                </li>
             </ul>
 
             <!-- <div class="dark-light-buttons">
@@ -159,14 +161,9 @@
             </nav>
         </div>
         <!-- S NewRecordButton -->
-        <button id="add-bill" class="fixed-button rounded-circle " href="#">
-            <svg class="bi bi-plus-circle" width="4em" height="4em" viewBox="0 0 16 16" fill="#ffffff"
-                xmlns="http://www.w3.org/2000/svg">
-                <path fill-rule="evenodd"
-                    d="M8 3.5a.5.5 0 0 1 .5.5v4a.5.5 0 0 1-.5.5H4a.5.5 0 0 1 0-1h3.5V4a.5.5 0 0 1 .5-.5z" />
-                <path fill-rule="evenodd" d="M7.5 8a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1H8.5V12a.5.5 0 0 1-1 0V8z" />
-            </svg>
-        </button>
+        <a id="add-bill" class="fixed-button rounded-circle ">
+            <svg t="1603884170371" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="20804" width="64" height="64"><path d="M810.666667 554.666667h-256v256h-85.333334v-256H213.333333v-85.333334h256V213.333333h85.333334v256h256v85.333334z" fill="#ffffff" p-id="20805"></path></svg>
+        </a>
         <!-- S main content -->
         <div class="container-fluid" style="margin-top:5em;">
             <div id="page1" class="page cur-page">
