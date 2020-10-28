@@ -4,21 +4,17 @@
 $(function () {
     $('button#decrypt').click(_ => {
         if (!(global.cryptoInfo.salt)) {
-            platform.showMessage('Please select file');
+            platform.showMessage('请选择文件');
             return;
         }
-        let password = $('input#password-import').val();
-        if (!password.length) {
-            platform.showMessage('Please input password');
-            return;
-        }
-        let cryptoInfo = new CryptoInfo();
-        cryptoInfo.salt = global.cryptoInfo.salt;
-        cryptoInfo.iv = global.cryptoInfo.iv;
-        cryptoInfo.ct = global.cryptoInfo.ct;
-        let plaintext = CryptoUtils.decrypt(password, cryptoInfo);
-        // empty string cannot be encrypted
-        if (!plaintext) {
+        let crypto = new CryptoData();
+        crypto.salt = CryptoUtils.hexToBits(global.cryptoInfo.salt);
+        crypto.iv = global.cryptoInfo.iv;
+        crypto.ct = global.cryptoInfo.ct;
+        let key = crypto.deriveKey(password);
+        let plaintext = crypto.decrypt(key);
+        if (plaintext === null) {
+            platform.showMessage('密码错误');
             return;
         }
         // todo: handle possible errors
@@ -28,8 +24,21 @@ $(function () {
 
     $('button#import').click(_ => {
         platform.onFileImporterResult = function (data) {
-            let cryptoInfo = CryptoUtils.validateJsonFile(data);
-            global.cryptoInfo = { salt: cryptoInfo.salt, iv: cryptoInfo.iv, ct: cryptoInfo.ct };
+            let info = CryptoUtils.validateCryptoFile(data);
+            if (info.has('salt')) {
+                global.cryptoInfo = {
+                    salt: info.get('salt'),
+                    iv: info.get('iv'),
+                    ct: info.get('ct')
+                };
+                // if (info.has('saltP')) {
+                //     global.cryptoInfo['saltP'] = info.get('saltP');
+                //     global.cryptoInfo['ivP'] = info.get('ivP');
+                //     global.cryptoInfo['ctP'] = info.get('ctP');
+                // }
+            }
+            // todo: implement this. Clear saved subpwd pair
+            platform.clearSubPair();
         }
 
         platform.showFileImporter("application/json");
