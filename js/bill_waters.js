@@ -110,6 +110,7 @@ function updateAllListByTimeLine(jqueryContainer,data){
 
     // console.log("data");
     // console.log(data);
+    
     var listContainer = new billList(data.list,"Bill");
     jqueryContainer.append(listContainer.create(year));
 }

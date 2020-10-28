@@ -29,21 +29,7 @@
     </style>
     <script>
         $(function () {
-            console.log("beign");
-            var ob = {
-                account: ["现金"],
-                amount: [100,1000],
-                type: null,
-                flag: null,
-                mainCat:["食物"],
-                subCat: null,
-                time: null,
-                member: null,
-                merchant: null,
-                item: null
-            }
-            var x = viewByTimeLine(billFilter(produce(10000), ob));
-            updateAllListByTimeLine($('#list-place'), x);
+            updateAllListByTimeLine($('#list-place'),viewByTimeLine(produce(1)));
         })
     </script>
     </script>
@@ -102,11 +88,13 @@
                                 d="M11.854 4.146a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708-.708l7-7a.5.5 0 0 1 .708 0z" />
                             <path fill-rule="evenodd"
                                 d="M4.146 4.146a.5.5 0 0 0 0 .708l7 7a.5.5 0 0 0 .708-.708l-7-7a.5.5 0 0 0-.708 0z" />
-                        </svg></a>
+                        </svg>
+                    </a>
                 </div>
                 <div class=" modal-body">
                     <!-- 类型 -->
                     <div class="form-group">
+                        <!-- type -->
                         <div class="row">
                             <div class=" col-3">
                                 <input class="form-check-input " type="radio" name="gridRadios" id="gridRadios1"
@@ -134,6 +122,46 @@
                                 </label>
                             </div>
                         </div>
+                        <!-- amount -->
+                        <div>
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="basic-addon1">从</span>
+                                </div>
+                                <input type="number" class="form-control" placeholder="Username" aria-label="Username"
+                                    aria-describedby="basic-addon1">
+                            </div>
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="basic-addon2">到</span>
+                                </div>
+                                <input type="number" class="form-control" placeholder="Username" aria-label="Username"
+                                    aria-describedby="basic-addon2">
+                            </div>
+                        </div>
+                        <!-- mainCat -->
+                        <!-- subCat -->
+                        <!-- time -->
+                        <div>
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="basic-addon3">从</span>
+                                </div>
+                                <input type=" number" class="form-control" placeholder="Username" aria-label="Username"
+                                    aria-describedby="basic-addon3">
+                            </div>
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="basic-addon4">到</span>
+                                </div>
+                                <input type="number" class="form-control" placeholder="Username" aria-label="Username"
+                                    aria-describedby="basic-addon4">
+                            </div>
+                        </div>
+                        <!-- member -->
+                        <!-- merchant -->
+                        <!-- item -->
+
                     </div>
                     <!--  -->
                     <!-- zhanghu -->
