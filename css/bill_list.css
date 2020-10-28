@@ -72,6 +72,9 @@ body {
 }
 .fixed-top{
 	z-index: 997;width: 100%;
+    border-color: black;
+    border-width: 2px;
+    color: whitesmoke;
 }
 
 .card {
@@ -257,11 +260,13 @@ body {
 .content { width: 100%; transition: all 0.3s; }
 
 .open-menu { 
-	left: 2em;
-	 z-index: 997;
-	 padding: 0em;
-	 margin:1em;
-	 outline: none;border: none;width: 2em;height: 1.5em;background-color: whitesmoke;}
+	/* left: 2em; */
+	 /* z-index: 997; */
+	 /* padding: 0em; */
+	 /* margin:1em; */
+	 /* outline: none;border: none;width: 2em;height: 1.5em;background-color: whitesmoke; */
+	}
+
 
 
 

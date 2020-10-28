@@ -72,7 +72,7 @@ class card {
         var catandtime_data = $("<div class='cat-time-data'></div>").html(this.mainCategory + ">" + this.subCategory + "<br>" + this.time.getHours()+":"+this.time.getMinutes());
         var text_amount = $("<div class='bill-amount col-3  text-right'></div>").html("<b>" + (this.type == BillType.income ? "+" : "-") + this.amount + "</b>");
         var text_catandtime = $("<div class='bill-catandtime col-6 d-flex'></div>");
-        var text_date = $("<div class='bill-date w-15 text-center p-0'></div>").html("<strong>"+this.time.getDate() +"</strong>"+ "日<br>" + "<small class='text-muted'>"+(this.time.getMonth() + 1)+"月</small>");
+        var text_date = $("<div class='bill-date w-15 text-center p-0'></div>").html("<strong>"+this.time.getDate() +"</strong>"+ "日<br>" + "<small class='text-muted' hidden>"+(this.time.getMonth() + 1)+"月</small>");
         var body_text = $("<div class='card-text  align-items-center d-flex justify-content-between'></div>");
         var card_body = $("<div class='card-body'></div>");
         var bill_card = $("<div class='card ml-2'" + "id='" + this.tagID + "'></div>");

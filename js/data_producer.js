@@ -73,7 +73,7 @@ function produce(
     ]
 ) {
     if(flag == 0){
-        return global.dataJson.bills;
+        return global.dataJson.bills.slice().reverse();
     }
     var bills = [];
     for (var i = 0; i < n; i++) {

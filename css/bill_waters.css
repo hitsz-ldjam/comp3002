@@ -64,7 +64,9 @@ body {
 .card-body {
     padding: 0px;
 }
-
+.bill-link{
+	padding: 0em 1em;
+}
 
 .bill-time {
 	padding: 2.5em 0em 0em 3em;

@@ -190,6 +190,7 @@ var choices = {
     quarter: 3,
 };
 function getDate(date, choice) {
+    date = DateUtils.parse(date);
     var curYear = date.getFullYear();
     var curMonth = date.getMonth() + 1;
     var curDate = date.getDate();

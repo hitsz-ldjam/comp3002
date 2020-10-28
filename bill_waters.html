@@ -29,7 +29,7 @@
     </style>
     <script>
         $(function () {
-            updateAllListByTimeLine($('#list-place'),viewByTimeLine(produce(1)));
+            updateAllListByTimeLine($('#list-place'),viewByTimeLine(produce(0)));
         })
     </script>
     </script>
@@ -40,14 +40,16 @@
     <div class="wrapper">
         <!--S Sidebar -->
         <div class="fixed-top text-left bg-light">
-            <a class=" position-absolute">
+            <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <a class="pl-3" href="bill_list.html">
                 <svg class="bi bi-chevron-left" width="2em" height="2em" viewBox="0 0 16 16" fill="currentColor"
                     xmlns="http://www.w3.org/2000/svg">
                     <path fill-rule="evenodd"
                         d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z" />
                 </svg>
             </a>
-            <div class=" d-block text-center"><strong class=" text-black">流水</strong></div>
+            <div class=" text-center pr-3"><strong class=" text-black">流水</strong></div>
+        </div>
         </div>
         <!-- S NewRecordButton -->
         <button id="filter" class="fixed-button rounded-circle " data-toggle="modal" data-target="#filter-modal">
@@ -58,13 +60,14 @@
             </svg>
         </button>
         <!-- S main content -->
+        <br class=" hide">
         <div class="container-fluid mt-5">
-            <div class="d-block bg-image" style="color: white;background-image: url(./img/timg.jpg);">
-                <div id='account-type' class=" position-relative">账户:现金账户</div>
+            <div class="d-block bg-image" style="color: white;background-image: url(./images/timg.jpg);">
+                <div id='account-type' class=" position-relative">账户:nodata</div>
                 <div id='account-total' class="row text-center align-items-end mb-2">
-                    <div id='account-income' class=" col-3" style="height: fit-content;"><span>456<br></span>收入</div>
-                    <div id='account-remain' class=" col-6" style="font-size: 1.5em;"><span>-257<br></span>结余</div>
-                    <div id='account-expense' class=" col-3" style="height: fit-content;"><span>-793<br></span>支出</div>
+                    <div id='account-income' class=" col-3" style="height: fit-content;"><span>nodata<br></span>收入</div>
+                    <div id='account-remain' class=" col-6" style="font-size: 1.5em;"><span>nodata<br></span>结余</div>
+                    <div id='account-expense' class=" col-3" style="height: fit-content;"><span>nodata<br></span>支出</div>
                 </div>
             </div>
             <div class="container-fluid" id='list-place'>
