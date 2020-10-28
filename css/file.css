@@ -22,23 +22,9 @@
     justify-content: center;
 }
 
-.carousel {
+.container {
     margin: auto;
     width: 250px;
-}
-
-.carousel-inner {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.carousel-item {
-    margin: auto;
-}
-
-.btn-group {
-    margin-top: 20px;
 }
 
 .btn-primary,.btn-link {

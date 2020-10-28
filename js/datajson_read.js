@@ -346,7 +346,7 @@ function billFilter(bills, object) {
             } else {
                 // 其余的数组类型
                 for (var i of tempOb[key]) {
-                    // f[key] = false;
+                    f[key] = false;
                     if (bill[key] == i) {
                         f[key] = true;
                     }

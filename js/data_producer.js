@@ -118,4 +118,3 @@ function produce(
     });
     return bills;
 }
-
