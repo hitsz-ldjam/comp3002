@@ -1,0 +1,137 @@
+:root{
+	font-size: small;
+}
+html,
+body {
+	width: 100%;
+	height: 100%;
+	overflow: scroll;
+	background-color: whitesmoke;
+}
+
+*::-webkit-scrollbar {
+	width: 0px;
+	height: 0px;
+	display: none;
+}
+.page {
+	margin: 0em;
+}
+
+.page.cur-page {
+	display: block;
+}
+
+.page.ncur-page {
+	display: none;
+}
+.card-container {
+	width: 100%;
+}
+
+.container-fluid {
+	padding: 0em;
+}
+
+.card-container .card {
+	/* border-radius: 10px; */
+}
+
+.fixed-button {
+	position: fixed;
+	bottom: 2em;
+	right: 2em;
+	width: 2em;
+	height: 2em;
+	width: 4em;
+	height: 4em;
+	padding: 0em;
+	margin: 0em;
+	border: none;
+	outline: none;
+	background-color: dodgerblue;
+	z-index: 997;
+	box-shadow: 2px 5px 8px rgb(126, 126, 126);
+}
+
+
+
+.card-text {
+    justify-content: space-between;
+	height: 4.5em;
+}
+
+.card-body {
+    padding: 0px;
+}
+
+
+.bill-time {
+	padding: 2.5em 0em 0em 3em;
+}
+
+.bill-catandtime {
+	text-align: left;
+    padding: 1em 0em;
+}
+.bill-date{
+	margin-left: 1em;
+}
+.bill-amount {
+	padding: 0.5em 0.5em 0.5em 0em!important;
+	font-size: 22px;
+	font-family: sans-serif;
+    padding: 0px;
+	color: black;
+}
+.fixed-top{
+    z-index: 997;width: 100%;
+    border-color: black;
+    border-width: 2px;
+    color: whitesmoke;
+}
+.btn-link{
+	color: black;
+}
+.btn-link:focus{
+	background-color:white;
+}
+.container{
+	padding: 0em;
+}
+.dropdown-date{
+	font-family: serif;
+}
+input{
+    display: none;
+}
+label{
+    display: unset;
+}
+strong{
+	font-size: 1.5em;
+}
+/* <div class="card">
+                                    <div class="card-body">
+                                        <div class="card-text row justify-content-between">
+                                            <div class="bill-type col-3 text-center">
+                                                <h3>2020</h3>
+                                            </div>
+                                            <div class='bill-catandtime col-6'>收入:456<br>支出:-793</div>
+                                            <div class="bill-amount col-3 pr-4 pt-4 pb-4"><b>-257</b></div>
+                                        </div>
+                                    </div>
+                                </div>
+ <div class="card">
+                                            <div class="card-body">
+                                                <div class="card-text row justify-content-between">
+                                                    <div class="bill-type col-3 text-center">
+                                                        <h5>10月<br>2020</h5>
+                                                    </div>
+                                                    <div class='bill-catandtime col-6'>收入:456<br>支出:-793</div>
+                                                    <div class="bill-amount col-3 pr-4 pt-4 pb-4"><b>-257</b></div>
+                                                </div>
+                                            </div>
+                                        </div>
+ <div class=" card-container" id="CardContainer2"> */
+           

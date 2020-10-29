@@ -2,7 +2,8 @@
 
 class Global {
     constructor() {
-        this.varItems = ['dataJson', 'cryptoInfo']
+        // this.varItems = ['dataJson', 'cryptoInfo']
+        this.varItems = ['dataJson']
         this.varItems.forEach(key => {
             this.addVarItem(key);
         });

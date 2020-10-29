@@ -1,5 +1,57 @@
 "use strict"
 
+class DateUtils {
+    /**
+     * @param {Date} date 
+     * @returns Time in form of "YYYY-MM-DDThh-mm"
+     */
+    static stringfy(date) {
+        let year = date.getUTCFullYear();
+        let month = date.getUTCMonth() + 1;
+        let day = date.getUTCDate();
+        let hour = date.getUTCHours();
+        let minute = date.getUTCMinutes();
+
+        let twowords = n => {
+            if (n < 10) {
+                return "0" + n;
+            } else {
+                return n
+            }
+        }
+
+        let result = "";
+        result += year;
+        result += "-";
+        result += twowords(month);
+        result += "-";
+        result += twowords(day);
+        result += "T";
+        result += twowords(hour);
+        result += ":";
+        result += twowords(minute);
+        return result;
+    }
+
+    /**
+     * @param {String} time
+     * @returns {Date} null if time is invalid.
+     */
+    static parse(time) {
+        // YYYY-MM-DDThh:mm
+        let pattern = /([0-9]*)-([0-9]*)-([0-9]*)T([0-9]*):([0-9]*)/
+        let ary = pattern.exec(time);
+        if (ary) {
+            let date = new Date();
+            date.setUTCFullYear(ary[1], ary[2] - 1, ary[3]);
+            date.setUTCHours(ary[4], ary[5], 0, 0);
+            return date;
+        } else {
+            return null;
+        }
+    }
+}
+
 /**
  * Platform backend for web
  * Only for development.
@@ -249,7 +301,7 @@ class Platform {
     /**
      * Delete file.
      * @param {string} name Name of the file, can not contain path separators
-     * @returns True if the file was successfully deleted; else false.
+     * @returns {boolean} True if the file was successfully deleted; else false.
      */
     deleteAssetFile(name) {
         return this._backend.deleteAssetFile(name);
@@ -257,7 +309,7 @@ class Platform {
 
     /**
      * List all files.
-     * @returns Array of filenames.
+     * @returns {Array<string>} Array of filenames.
      */
     listAssetFiles() {
         return this._backend.listAssetFiles();

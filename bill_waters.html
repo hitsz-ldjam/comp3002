@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="./css/libs/mdb.min.css">
+    <link rel="stylesheet" href="./css/libs/jquery.mCustomScrollbar.min.css">
+    <link rel="stylesheet" href="./css/bill_waters.css">
+    <script type="application/javascript" src="./js/libs/jquery-3.5.1.min.js"></script>
+    <script type="application/javascript" src="./js/libs/bootstrap.bundle.min.js"></script>
+    <script type="application/javascript" src="./js/libs/mdb.min.js"></script>
+    <script src="./js/libs/jquery.mCustomScrollbar.concat.min.js"></script>
+    <script src="./js/mainpage.js"></script>
+    <script src='./js/platform.js'></script>
+    <script src='./js/globals.js'></script>
+    <script src='./js/bill_list.js'></script>
+    <script src="./js/utils.js"></script>
+    <script src="./js/datajson_read.js"></script>
+    <script src="./js/bill_waters.js"></script>
+    <!-- test -->
+    <script src='./js/data_producer.js'></script>
+
+    <title>
+        bill_waters
+    </title>
+    <style>
+    </style>
+    <script>
+        $(function () {
+            console.log("beign");
+            var ob = {
+                account: ["现金"],
+                amount: [100,1000],
+                type: null,
+                flag: null,
+                mainCat:["食物"],
+                subCat: null,
+                time: null,
+                member: null,
+                merchant: null,
+                item: null
+            }
+            var x = viewByTimeLine(billFilter(produce(10000), ob));
+            updateAllListByTimeLine($('#list-place'), x);
+        })
+    </script>
+    </script>
+</head>
+
+<body>
+    <!-- Wrapper -->
+    <div class="wrapper">
+        <!--S Sidebar -->
+        <div class="fixed-top text-left bg-light">
+            <a class=" position-absolute">
+                <svg class="bi bi-chevron-left" width="2em" height="2em" viewBox="0 0 16 16" fill="currentColor"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <path fill-rule="evenodd"
+                        d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z" />
+                </svg>
+            </a>
+            <div class=" d-block text-center"><strong class=" text-black">流水</strong></div>
+        </div>
+        <!-- S NewRecordButton -->
+        <button id="filter" class="fixed-button rounded-circle " data-toggle="modal" data-target="#filter-modal">
+            <svg class="bi bi-funnel" width="2.3em" height="2.3em" viewBox="0 0 16 16" fill="white"
+                xmlns="http://www.w3.org/2000/svg">
+                <path fill-rule="evenodd"
+                    d="M1.5 1.5A.5.5 0 0 1 2 1h12a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-.128.334L10 8.692V13.5a.5.5 0 0 1-.342.474l-3 1A.5.5 0 0 1 6 14.5V8.692L1.628 3.834A.5.5 0 0 1 1.5 3.5v-2zm1 .5v1.308l4.372 4.858A.5.5 0 0 1 7 8.5v5.306l2-.666V8.5a.5.5 0 0 1 .128-.334L13.5 3.308V2h-11z" />
+            </svg>
+        </button>
+        <!-- S main content -->
+        <div class="container-fluid mt-5">
+            <div class="d-block bg-image" style="color: white;background-image: url(./images/timg.jpg);">
+                <div id='account-type' class=" position-relative">账户:现金账户</div>
+                <div id='account-total' class="row text-center align-items-end mb-2">
+                    <div id='account-income' class=" col-3" style="height: fit-content;"><span>456<br></span>收入</div>
+                    <div id='account-remain' class=" col-6" style="font-size: 1.5em;"><span>-257<br></span>结余</div>
+                    <div id='account-expense' class=" col-3" style="height: fit-content;"><span>-793<br></span>支出</div>
+                </div>
+            </div>
+            <div class="container-fluid" id='list-place'>
+                <!-- Year 0 -->
+
+            </div>
+        </div>
+    </div>
+
+    <!-- E main content -->
+    <div id="filter-modal" class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class=" modal-dialog modal-sm">
+            <div class=" modal-content ">
+                <div class="modal-header">
+                    <p class="modal-title" id="exampleModalLabel">选择</p>
+                    <a data-dismiss="modal" aria-label="Close">
+                        <svg class="bi bi-x" width="2em" height="2em" viewBox="0 0 16 16" fill="currentColor"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd"
+                                d="M11.854 4.146a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708-.708l7-7a.5.5 0 0 1 .708 0z" />
+                            <path fill-rule="evenodd"
+                                d="M4.146 4.146a.5.5 0 0 0 0 .708l7 7a.5.5 0 0 0 .708-.708l-7-7a.5.5 0 0 0-.708 0z" />
+                        </svg></a>
+                </div>
+                <div class=" modal-body">
+                    <!-- 类型 -->
+                    <div class="form-group">
+                        <div class="row">
+                            <div class=" col-3">
+                                <input class="form-check-input " type="radio" name="gridRadios" id="gridRadios1"
+                                    checked>
+                                <label class="form-check-label" for="gridRadios1">
+                                    所有
+                                </label>
+                            </div>
+                            <div class=" col-3">
+                                <input class="form-check-input " type="radio" name="gridRadios" id="gridRadios2">
+                                <label class="form-check-label" for="gridRadios2">
+                                    支出
+                                </label>
+                            </div>
+                            <div class=" col-3">
+                                <input class="form-check-input " type="radio" name="gridRadios" id="gridRadios3">
+                                <label class="form-check-label" for="gridRadios3">
+                                    转账
+                                </label>
+                            </div>
+                            <div class=" col-3">
+                                <input class="form-check-input  " type="radio" name="gridRadios" id="gridRadios4">
+                                <label class="form-check-label " for="gridRadios4">
+                                    收入
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <!--  -->
+                    <!-- zhanghu -->
+                    <select class="form-control form-control-lg" id=account>
+                        <datalist id="account-list"></datalist>
+                        <select class="form-control form-control-lg" id=account>
+                            <datalist id="account-list"></datalist>
+                            </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</body>
+
+</html>

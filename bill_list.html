@@ -17,124 +17,55 @@
     <script src='./js/globals.js'></script>
     <script src='./js/bill_list.js'></script>
     <script src="./js/utils.js"></script>
-
+    <!-- test -->
+    <script src="./js/datajson_read.js"></script>
+    <script src='./js/data_producer.js'></script>
     <title>
         content
     </title>
     <style>
-        .page {
-            margin: 0em;
-        }
-
-        .page.cur-page {
-            display: block;
-        }
-
-        .page.ncur-page {
-            display: none;
-        }
-
-        .card-container {
-            width: 100%;
-        }
-
-        .container-fluid {
-            padding: 0em;
-        }
-
-        .card-container .card {
-            border-radius: 10px;
-        }
-
-        .fixed-button {
-            position: fixed;
-            bottom: 2em;
-            right: 2em;
-            width: 2em;
-            height: 2em;
-            width: 4em;
-            height: 4em;
-            padding: 0em;
-            margin: 0em;
-            border: none;
-            outline: none;
-            background-color: dodgerblue;
-            z-index: 997;
-            box-shadow: 2px 5px 8px rgb(126, 126, 126);
-        }
-
-        html,
-        body {
-            width: 100%;
-            height: 100%;
-            overflow: scroll;
-            background-color: whitesmoke;
-        }
-
-        *::-webkit-scrollbar {
-            width: 0px;
-            height: 0px;
-            display: none;
-        }
-
-        .card {
-            margin: 1em;
-        }
-
-        .card-text {
-            height: 5em;
-            justify-content: space-between;
-        }
-
-        .card-body {
-            padding: 0px;
-        }
-
-
-        .bill-time {
-            padding: 2.5em 0em 0em 3em;
-        }
-
-        .bill-catandtime {
-            text-align: left;
-            padding: 0.5em;
-        }
-
-        .bill-amount {
-            padding: 1em;
-            font-size: 22px;
-            font-family: sans-serif;
-            color: black;
-        }
     </style>
     <script>
-        $(document).ready(function () {
-            $('a.nav-link').click(function () {
-                var page_index = $(this).parent().index() - 1;
-                switch (page_index) {
-                    case 0:
-                        $('#page1').addClass('cur-page').removeClass('ncur-page');
-                        $('#page1').siblings().removeClass('cur-page').addClass('ncur-page');
-                        break;
-                    case 1:
-                        $('#page2').addClass('cur-page').removeClass('ncur-page');
-                        $('#page2').siblings().removeClass('cur-page').addClass('ncur-page');
-
-                        break;
-                    case 2:
-                        $('#page3').addClass('cur-page').removeClass('ncur-page');
-                        $('#page3').siblings().removeClass('cur-page').addClass('ncur-page');
-
-                        break;
-                    case 3:
-                        $('#page4').addClass('cur-page').removeClass('ncur-page');
-                        $('#page4').siblings().removeClass('cur-page').addClass('ncur-page');
-
-                        break;
-                };
-                $(this).addClass("active").siblings().removeClass('active');
-            })
+        $(function () {
+            $('button#add-bill').click(_ => {
+                window.location.href = 'bill_add.html';
+            });
+            $('a#show-chart').click(_ => {
+                window.location.href = 'doughnut_chart.html';
+            });
+            $('a#export').click(_ => {
+                window.location.href = 'file_export.html';
+            });
+            // updateCard($('#page1'));
         });
+        //page change
+        // $(document).ready(function () {
+        //     $('a.nav-link').click(function () {
+        //         var page_index = $(this).parent().index() - 1;
+        //         switch (page_index) {
+        //             case 0:
+        //                 $('#page1').addClass('cur-page').removeClass('ncur-page');
+        //                 $('#page1').siblings().removeClass('cur-page').addClass('ncur-page');
+        //                 break;
+        //             case 1:
+        //                 $('#page2').addClass('cur-page').removeClass('ncur-page');
+        //                 $('#page2').siblings().removeClass('cur-page').addClass('ncur-page');
+
+        //                 break;
+        //             case 2:
+        //                 $('#page3').addClass('cur-page').removeClass('ncur-page');
+        //                 $('#page3').siblings().removeClass('cur-page').addClass('ncur-page');
+
+        //                 break;
+        //             case 3:
+        //                 $('#page4').addClass('cur-page').removeClass('ncur-page');
+        //                 $('#page4').siblings().removeClass('cur-page').addClass('ncur-page');
+
+        //                 break;
+        //         };
+        //         $(this).addClass("active").siblings().removeClass('active');
+        //     })
+        // });
     </script>
 </head>
 
@@ -163,6 +94,23 @@
                 <li>
                     <a id="export">导出</a>
                 </li>
+                <li>
+                    <a id="water">流水</a>
+                </li>
+                <li>
+                    <a href="#otherSections" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"
+                        role="button" aria-controls="otherSections">
+                        <i class="fas fa-sync"></i>Other sections
+                    </a>
+                    <ul class="collapse list-unstyled" id="otherSections">
+                        <li>
+                            <a class="scroll-link" href="#">Our</a>
+                        </li>
+                        <li>
+                            <a class="scroll-link" href="#">We</a>
+                        </li>
+                    </ul>
+                </li>
             </ul>
 
             <!-- <div class="dark-light-buttons">
@@ -173,7 +121,7 @@
         </nav>
         <!-- E sidebar -->
         <div class="overlay"></div>
-        <div class="fixed-top" style="z-index: 997;width: 100%;">
+        <div class="fixed-top">
             <nav class="navbar navbar-expand-lg navbar-light bg-light">
                 <!--S open sidebar menu -->
                 <button class="open-menu btn-lg" type="button" data-toggle="collapse"
@@ -217,8 +165,6 @@
         <!-- S main content -->
         <div class="container-fluid" style="margin-top:5em;">
             <div id="page1" class="page cur-page">
-                <div class="card-container" id="CardContainer">
-                </div>
             </div>
             <div id="page2" class="page ncur-page"></div>
             <div id="page3" class="page ncur-page">page3</div>
