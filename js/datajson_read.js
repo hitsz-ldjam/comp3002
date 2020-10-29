@@ -190,6 +190,7 @@ var choices = {
     quarter: 3,
 };
 function getDate(date, choice) {
+    date = DateUtils.parse(date);
     var curYear = date.getFullYear();
     var curMonth = date.getMonth() + 1;
     var curDate = date.getDate();
@@ -303,10 +304,10 @@ function viewByOneArray(bills, oneArray, option) {
  * @param {array}       bills
  * @param {string}      account : [acc1,acc2,acc3, ...]   $
  * @param {numberRange} amount : [start, end]        *
- * @param {int}         type , true: income; flase: cost     %
+ * @param {BillType}    type ,   %
  * @param {string}      flag , defined: name of account   %
- * @param {string}      mainCat , [cat1, cat2,...,catn]   $
- * @param {string}      subCat , [cat1, cat2,...,catn]    $
+ * @param {string}      mainCategory , [cat1, cat2,...,catn]   $
+ * @param {string}      subCategory , [cat1, cat2,...,catn]    $
  * @param {dateRange}   time : [startDate, endDate]    *
  * @param {string}      member : [mem1, mem2, mem3,...]   $
  * @param {string}      merchant : [mer1, mer2,...]       $

@@ -12,6 +12,7 @@
  */
 
 function produce(
+    flag = 0,
     n = 1000,
     accountList = [
         "现金",
@@ -71,6 +72,9 @@ function produce(
         "健身房",
     ]
 ) {
+    if(flag == 0){
+        return global.dataJson.bills.slice().reverse();
+    }
     var bills = [];
     for (var i = 0; i < n; i++) {
         var year = Math.floor(Math.random() * 10 + 2010);

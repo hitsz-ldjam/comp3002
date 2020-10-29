@@ -36,7 +36,9 @@
             $('a#export').click(_ => {
                 window.location.href = 'file_export.html';
             });
-            // updateCard($('#page1'));
+            var Today=new Date().setHours(0,0,0);
+            var tommorrow=new Date().setHours(23,59,59);
+            updateCard($('#page1'), billFilter(produce(0),{today,tommorrow}));
         });
         //page change
         // $(document).ready(function () {
@@ -76,7 +78,6 @@
         <nav class="sidebar">
             <div class="ml-4" style="width: 8em;height: 8em;text-align: center;line-height: 8em;"><span
                     style="font-size: 50px;font-family:Arial, Helvetica, sans-serif ;">Zebra</span></div>
-            <div class="row"></div>
             <!-- S close sidebar menu -->
             <div class="dismiss">
                 <svg class="bi bi-arrow-left" width="2em" height="2em" viewBox="0 0 16 16" fill="currentColor">
@@ -92,12 +93,15 @@
                     <a id='show-chart'>图表</a>
                 </li>
                 <li>
+                    <a id="water" href="bill_waters.html">流水</a>
+                </li>
+                <li>
+                    <a id='set-subpwd' href='set_subpwd.html'>设置图案密码</a>
+                </li>
+                <li>
                     <a id="export">导出</a>
                 </li>
-                <li>
-                    <a id="water">流水</a>
-                </li>
-                <li>
+                <!-- <li>
                     <a href="#otherSections" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"
                         role="button" aria-controls="otherSections">
                         <i class="fas fa-sync"></i>Other sections
@@ -110,7 +114,7 @@
                             <a class="scroll-link" href="#">We</a>
                         </li>
                     </ul>
-                </li>
+                </li> -->
             </ul>
 
             <!-- <div class="dark-light-buttons">
@@ -124,20 +128,21 @@
         <div class="fixed-top">
             <nav class="navbar navbar-expand-lg navbar-light bg-light">
                 <!--S open sidebar menu -->
-                <button class="open-menu btn-lg" type="button" data-toggle="collapse"
+                <a class="open-menu pl-2" type="button" data-toggle="collapse"
                     data-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent"
                     aria-expanded="false" aria-label="Toggle navigation">
-                    <svg class="bi bi-list" width="2em" height="2em" viewBox="0 0 16 16" fill="currentColor"
-                        xmlns="http://www.w3.org/2000/svg">
-                        <path fill-rule="evenodd"
-                            d="M2.5 11.5A.5.5 0 0 1 3 11h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4A.5.5 0 0 1 3 7h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4A.5.5 0 0 1 3 3h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z" />
+                    <svg t="1603875674150" class="icon" viewBox="0 0 1024 1024" version="1.1"
+                        xmlns="http://www.w3.org/2000/svg" p-id="20570" width="32" height="32">
+                        <path
+                            d="M128 256h768v85.333333H128V256m0 213.333333h768v85.333334H128v-85.333334m0 213.333334h768v85.333333H128v-85.333333z"
+                            fill="#1296db" p-id="20571"></path>
                     </svg>
-                </button>
+                </a>
                 <!--E open sidebar menu -->
 
                 <div class="nav-item">
 
-                    <a class="nav-link active" href="#"><svg class="bi bi-calendar3" width="1em" height="1em"
+                    <a class="pr-2" href="#"><svg class="bi bi-calendar3" width="1em" height="1em"
                             viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                             <path fill-rule="evenodd"
                                 d="M14 0H2a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2zM1 3.857C1 3.384 1.448 3 2 3h12c.552 0 1 .384 1 .857v10.286c0 .473-.448.857-1 .857H2c-.552 0-1-.384-1-.857V3.857z" />

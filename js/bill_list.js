@@ -27,9 +27,9 @@ class billList {
         return listContainer;
     }
 }
-function iconSelector(mainCat){
+function iconSelector(mainCategory){
     var mainCatList = ["食物", "出行", "琐碎"];
-    switch(mainCat){
+    switch(mainCategory){
         case mainCatList[0]://food
             return "<svg t='1603848557726' class='icon' viewBox='0 0 1024 1024' version='1.1' xmlns='http://www.w3.org/2000/svg' p-id='1254' width='32' height='32'><path d='M661.333333 896L597.333333 341.333333h95.146667L644.266667 147.626667 718.506667 128l53.333333 213.333333H938.666667l-64 554.666667h-213.333334M213.333333 469.333333h213.333334a128 128 0 0 1 128 128H85.333333a128 128 0 0 1 128-128m341.333334 298.666667a128 128 0 0 1-128 128H213.333333a128 128 0 0 1-128-128h469.333334M128 640h213.333333l64 64L469.333333 640h42.666667a42.666667 42.666667 0 0 1 42.666667 42.666667 42.666667 42.666667 0 0 1-42.666667 42.666666H128a42.666667 42.666667 0 0 1-42.666667-42.666666 42.666667 42.666667 0 0 1 42.666667-42.666667z' fill='#7dc5eb' p-id='1255'></path></svg>"
         case mainCatList[1]://trans
@@ -44,8 +44,8 @@ class card {
     constructor(data, tagID) {
         this.type = data.type;
         this.account = data.account;
-        this.mainCat = data.mainCat;
-        this.subCat = data.subCat;
+        this.mainCategory = data.mainCategory;
+        this.subCategory = data.subCategory;
         this.time = new Date(data.time);
         this.amount = data.amount;
         this.tagID = tagID;
@@ -67,12 +67,12 @@ class card {
                 </div>
             </div>
         </div> */
-        var catandtime_icon = $("<div class='bill-icon pr-2'></div>").html(iconSelector(this.mainCat));
+        var catandtime_icon = $("<div class='bill-icon pr-2'></div>").html(iconSelector(this.mainCategory));
         // alert(catandtime_icon);
-        var catandtime_data = $("<div class='cat-time-data'></div>").html(this.mainCat + ">" + this.subCat + "<br>" + this.time.getHours()+":"+this.time.getMinutes());
+        var catandtime_data = $("<div class='cat-time-data'></div>").html(this.mainCategory + ">" + this.subCategory + "<br>" + this.time.getHours()+":"+this.time.getMinutes());
         var text_amount = $("<div class='bill-amount col-3  text-right'></div>").html("<b>" + (this.type == BillType.income ? "+" : "-") + this.amount + "</b>");
         var text_catandtime = $("<div class='bill-catandtime col-6 d-flex'></div>");
-        var text_date = $("<div class='bill-date w-15 text-center p-0'></div>").html("<strong>"+this.time.getDate() +"</strong>"+ "日<br>" + "<small class='text-muted'>"+(this.time.getMonth() + 1)+"月</small>");
+        var text_date = $("<div class='bill-date w-15 text-center p-0'></div>").html("<strong>"+this.time.getDate() +"</strong>"+ "日<br>" + "<small class='text-muted' hidden>"+(this.time.getMonth() + 1)+"月</small>");
         var body_text = $("<div class='card-text  align-items-center d-flex justify-content-between'></div>");
         var card_body = $("<div class='card-body'></div>");
         var bill_card = $("<div class='card ml-2'" + "id='" + this.tagID + "'></div>");
