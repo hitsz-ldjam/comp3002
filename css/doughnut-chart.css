@@ -2,13 +2,11 @@
     background-color: whitesmoke;
 }
 
-.form-outline {
-    width: 250px;
-    margin-bottom: 10px;
-    display: inline-block;
+.shell {
+    display: flex;
 }
 
-.time {
-    display: -webkit-inline-box;
-    width: 123px;
+.left, .right {
+    margin: auto; 
+    width: 50%;
 }
