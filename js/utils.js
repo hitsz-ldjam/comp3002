@@ -39,3 +39,18 @@ class SingleList {
         this.list = [];
     }
 }
+
+class ob{
+    constructor() {
+        this.account = null;
+        this.amount = null;
+        this.type = null;
+        this.flag = null;
+        this.mainCategory =null;
+        this.subCategory =null;
+        this.time = null;
+        this.member = null;
+        this.merchant = null;
+        this.item = null;
+    }
+}
