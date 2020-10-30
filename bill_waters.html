@@ -19,7 +19,6 @@
     <script src="./js/utils.js"></script>
     <script src="./js/datajson_read.js"></script>
     <script src="./js/bill_waters.js"></script>
-    <!-- test -->
     <script src='./js/data_producer.js'></script>
 
     <title>
@@ -37,8 +36,7 @@
             else{
                 obWithAccount.account = null;
             }
-            console.log(obWithAccount.account);
-            updateAllListByTimeLine($('#list-place'), global.dataJson.bills, obWithAccount);
+            updateAllListByTimeLineWithAccount($('#list-place'), global.dataJson.bills, obWithAccount);
         });
         
     </script>
@@ -70,7 +68,7 @@
             </svg>
         </a>
         <!-- S main content -->
-        <!-- <br class=" hide"> -->
+        <!-- <hr class=" hide"> -->
         <div class="container-fluid mt-5">
             <div class="d-block bg-image" style="color: white;background-image: url(./images/timg.jpg);">
                 <div id='account-type' class=" position-relative">账户:nodata</div>

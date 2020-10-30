@@ -93,7 +93,7 @@ class month {
     }
 }
 
-function updateAllListByTimeLine(jqueryContainer, bills, ob) {
+function updateAllListByTimeLineWithAccount(jqueryContainer, bills, ob) {
     // alert("update", typeof(data));
     var after_filter = viewByTimeLine(billFilter(bills, ob));
     var account = ob.account;

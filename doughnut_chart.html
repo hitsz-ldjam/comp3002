@@ -7,15 +7,29 @@
     <link href="css/libs/mdb.min.css" rel="stylesheet">
     <link rel='stylesheet' type='text/css' href='./css/libs/Chart.min.css'>
     <script src='./js/libs/jquery-3.5.1.min.js'></script>
+    <script type="application/javascript" src="./js/libs/bootstrap.bundle.min.js"></script>
     <script src='./js/libs/Chart.bundle.min.js'></script>
     <script src='./js/globals.js'></script>
     <script src='./js/utils.js'></script>
     <script src='./js/doughnut_chart.js'></script>
+    <script src='js/libs/mdb.min.js'></script>
+    <script src="./js/platform.js"></script>
+    <script src="./js/bill_list.js"></script>
+    <script src="./js/bill_waters.js"></script>
+    <script src="./js/datajson_read.js"></script>
+    <script src='./js/data_producer.js'></script>
+
     <style>
-        .btn-link.zebra-list-button:focus {
+        .zebra-list-button:focus {
             background-color: white;
         }
     </style>
+    <script>
+        $(function () {
+            var tb = new ob();
+            updateAllListByTimeLineWithAccount($('#chart-cardlist'), produce(), tb);
+        });
+    </script>
 </head>
 
 <body style="background-color: whitesmoke;">
@@ -26,12 +40,13 @@
         <!-- Container wrapper -->
         <div class="container-fluid">
             <!-- Navbar brand -->
-            <a class="navbar-brand" href="#">
+            <a class="navbar-brand" onclick="javascript :history.back(-1);">
                 <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-arrow-left" fill="currentColor"
                     xmlns="http://www.w3.org/2000/svg">
                     <path fill-rule="evenodd"
                         d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z" />
                 </svg>
+
             </a>
 
             <span class="navbar-text">
@@ -56,147 +71,11 @@
 
     <hr style="visibility: hidden;">
     <!-- Year 0 -->
-    <div class="card mt-3 ml-1 mr-1">
-        <div class="card-body p-0 h-100">
-            <button class="btn btn-block btn-link zebra-list-button pl-2 pr-2" type="button" data-toggle="collapse"
-                data-target="#collapse-year-0" aria-expanded="false" aria-controls="collapse-year-0">
-                <div class="container p-0">
-                    <div class="row">
-                        <div class="col-3 text-left m-0" style="font-size: large;">
-                            2020年
-                        </div>
-                        <div class="col-9 text-left" style="font-size: small;">
-                            结余:+2000<br>
-                            收入:4000 | 支出:1000
-                        </div>
-                    </div>
-                </div>
-            </button></div>
-        <!-- Collapsed content -->
-        <div class="collapse" style="background-color: whitesmoke;" id="collapse-year-0">
-            <hr class="m-0 mb-2">
-            <div class="card ml-3 mb-2">
-                <div class="card-body p-0">
-                    <button class="btn btn-block btn-link" type="button" data-toggle="collapse"
-                        data-target="#collapse-month-0-0" aria-expanded="false" aria-controls="collapse-month-0-0">
-                        <div class="container p-0">
-                            <div class="row">
-                                <div class="col-3 text-left m-0" style="font-size: medium;">
-                                    9月
-                                </div>
-                                <div class="col-9 text-left" style="font-size: smaller" ;>
-                                    结余:+1000<br>
-                                    收入:2000 | 支出:500
-                                </div>
-                            </div>
-                        </div>
-                    </button>
+    <div class="container-fluid" id="chart-cardlist">
 
-                    <!-- Collapsed content -->
-                    <div class="collapse" style="background-color: whitesmoke;" id="collapse-month-0-0">
-                        <hr class="m-0 mb-2">
-                        <div class="card ml-2">
-                            <div class="card-body p-0">
-                                <ul class="list-group list-group-flush">
-                                    <li class="list-group-item">
-                                        <div class="container p-0">
-                                            <div class="row">
-                                                <div class="col-3 text-left m-0" style="font-size: smaller;">
-                                                    15日
-                                                </div>
-                                                <div class="col-9 text-left" style="font-size: x-small" ;>
-                                                    结余:+500<br>
-                                                    收入:1000 | 支出:250
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li class="list-group-item">
-                                        <div class="container p-0">
-                                            <div class="row">
-                                                <div class="col-3 text-left m-0" style="font-size: smaller;">
-                                                    30日
-                                                </div>
-                                                <div class="col-9 text-left" style="font-size: x-small" ;>
-                                                    结余:+500<br>
-                                                    收入:1000 | 支出:250
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="card ml-3 mb-2">
-                <div class="card-body p-0">
-                    <button class="btn btn-block btn-link" type="button" data-toggle="collapse"
-                        data-target="#collapse-month-0-1" aria-expanded="false" aria-controls="collapse-month-0-1">
-                        <div class="container p-0">
-                            <div class="row">
-                                <div class="col-3 text-left m-0" style="font-size: medium;">
-                                    8月
-                                </div>
-                                <div class="col-9 text-left" style="font-size: smaller" ;>
-                                    结余:+1000<br>
-                                    收入:2000 | 支出:500
-                                </div>
-                            </div>
-                        </div>
-                    </button>
-
-                    <!-- Collapsed content -->
-                    <div class="collapse" id="collapse-month-0-1">
-                        <hr class="m-0">
-                        <ul class="list-group list-group-flush">
-
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    </div>
-
-    <!-- Year 1 -->
-    <div class="card mt-3 ml-1 mr-1">
-        <div class="card-body p-2">
-            <button class="btn btn-block btn-link" type="button" data-toggle="collapse" data-target="#collapse-year-1"
-                aria-expanded="false" aria-controls="collapse-year-1">
-                Year
-            </button></div>
-        <!-- Collapsed content -->
-        <div class="collapse" id="collapse-year-1">
-            <hr class="m-0">
-            <div class="card ml-1 mr-1">
-                <div class="card-body p-2">
-                    <button class="btn btn-block btn-link" type="button" data-toggle="collapse"
-                        data-target="#collapse-month-1-0" aria-expanded="false" aria-controls="collapse-month-1-0">
-                        Month
-                    </button>
-
-                    <!-- Collapsed content -->
-                    <div class="collapse" id="collapse-month-1-0">
-                        <hr class="m-0">
-                        <div class="card ml-1 mr-1">
-                            <ul class="list-group list-group-flush">
-                                <li class="list-group-item">Cras justo odio</li>
-                                <li class="list-group-item">Dapibus ac facilisis in</li>
-                                <li class="list-group-item">Vestibulum at eros</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
     </div>
 
 
-    <script src='js/libs/mdb.min.js'></script>
 </body>
 
 </html>
