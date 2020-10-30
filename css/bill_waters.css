@@ -47,7 +47,9 @@ body {
 	background-color: dodgerblue;
 	box-shadow: 2px 5px 8px rgb(126, 126, 126);
 }
-
+.row{
+	margin: 0em;
+}
 
 
 .card-text {
