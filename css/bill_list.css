@@ -1,19 +1,5 @@
 
-body { font-family: 'Roboto', sans-serif; font-size: 16px; font-weight: 300; color: #888; line-height: 30px; text-align: center; }
 
-strong { font-weight: 500; }
-
-
-h1, h2 { margin-top: 10px; font-size: 38px; font-weight: 100; color: #555; line-height: 50px; }
-h3 { font-size: 22px; font-weight: 300; color: #555; line-height: 30px; }
-h4 { font-size: 18px; font-weight: 300; color: #555; line-height: 26px; }
-
-img { max-width: 100%; }
-
-.medium-paragraph { font-size: 18px; line-height: 34px; }
-
-::-moz-selection { background: #f35b3f; color: #fff; text-shadow: none; }
-::selection { background: #f35b3f; color: #fff; text-shadow: none; }
 
 html,
 body {
@@ -65,6 +51,9 @@ body {
 .card-body {
     padding: 0px;
 }
+.bill-icon{
+	margin-right: 0.5em;
+}
 .bill-link{
 	padding: 0em 1em;
 }
@@ -79,6 +68,8 @@ body {
 }
 .bill-date{
 	margin-left: 1em;
+	min-width: 2rem;
+	padding: 0em;
 }
 .bill-amount {
 	padding: 0.5em 0.5em 0.5em 0em!important;

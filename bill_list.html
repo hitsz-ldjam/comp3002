@@ -27,7 +27,7 @@
     </style>
     <script>
         $(function () {
-  
+
 
             $('a#add-bill').click(_ => {
                 window.location.href = 'bill_add.html';
@@ -38,17 +38,14 @@
             $('a#export').click(_ => {
                 window.location.href = 'file_export.html';
             });
-            var today=new Date().setHours(0,0,0);
-            var tommorrow=new Date().setHours(23,59,59);
             var tb = new ob();
-            // tb.time=[today,tommorrow];
 
-            updateCard($('#page1'), billFilter(produce(0,10),tb));
+            updateCard($('#page1'), billFilter(produce(),tb));
             updateAccountList($('#otherSections'));
         });
     </script>
 
-        <!-- //page change
+    <!-- //page change
         // $(document).ready(function () {
         //     $('a.nav-link').click(function () {
         //         var page_index = $(this).parent().index() - 1;
@@ -109,12 +106,11 @@
                     <a id="export">导出</a>
                 </li>
                 <li>
-                    <a href="" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"
-                        role="button" aria-controls="otherSections">
-                        <i class="fas fa-sync"></i>Other sections
+                    <a href="" data-toggle="collapse" class="dropdown-toggle" role="button" data-target="#otherSections">
+                        账户
                     </a>
                     <ul class="collapse list-unstyled" id="otherSections">
-               
+
                     </ul>
                 </li>
             </ul>
@@ -144,13 +140,13 @@
 
                 <div class="nav-item">
 
-                    <a class="pr-2" href="#"><svg class="bi bi-calendar3" width="1em" height="1em"
-                            viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                    <a class="pr-2" href="#"><svg class="bi bi-calendar3" width="1em" height="1em" viewBox="0 0 16 16"
+                            fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                             <path fill-rule="evenodd"
                                 d="M14 0H2a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2zM1 3.857C1 3.384 1.448 3 2 3h12c.552 0 1 .384 1 .857v10.286c0 .473-.448.857-1 .857H2c-.552 0-1-.384-1-.857V3.857z" />
                             <path fill-rule="evenodd"
                                 d="M6.5 7a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm-9 3a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm-9 3a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2z" />
-                        </svg>Today <span class="sr-only">(current)</span></a>
+                        </svg>Today</a>
                 </div>
                 <!-- <div class="nav-item">
                         <a class="nav-link" href="#">page2</a>
@@ -161,18 +157,26 @@
             </nav>
         </div>
         <!-- S NewRecordButton -->
-        <a id="add-bill" class="fixed-button rounded-circle ">
-            <svg t="1603884170371" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="20804" width="64" height="64"><path d="M810.666667 554.666667h-256v256h-85.333334v-256H213.333333v-85.333334h256V213.333333h85.333334v256h256v85.333334z" fill="#ffffff" p-id="20805"></path></svg>
+        <a id="add-bill" class="fixed-button rounded-circle">
+            <svg t="1603884170371" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg"
+                p-id="20804" width="64" height="64">
+                <path
+                    d="M810.666667 554.666667h-256v256h-85.333334v-256H213.333333v-85.333334h256V213.333333h85.333334v256h256v85.333334z"
+                    fill="#ffffff" p-id="20805"></path>
+            </svg>
         </a>
         <!-- S main content -->
-        <div class="container-fluid" style="margin-top:5em;">
+        <div class="container-fluid" style="margin-top: 4em;">
             <div id="page1" class="page cur-page">
+
             </div>
             <div id="page2" class="page ncur-page"></div>
             <div id="page3" class="page ncur-page">page3</div>
             <div id="page4" class="page ncur-page">page4</div>
         </div>
         <!-- E main content -->
+        <div class="d-block" style="visibility: hidden;height: 5em;">
+        </div>
     </div>
 
 

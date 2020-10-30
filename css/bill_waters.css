@@ -70,6 +70,9 @@ body {
 	text-align: left;
     padding: 1em 0em;
 }
+.bill-icon{
+	margin-right: 0.5em;
+}
 .bill-date{
 	margin-left: 1em;
 	min-width: 3em;
