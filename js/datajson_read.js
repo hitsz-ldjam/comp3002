@@ -271,28 +271,34 @@ function getDate(date, choice) {
 /**
  *
  * @param {list} bills
- * @param {oneArray} oneArray  declared in utils.js
- * @param {BillType} option declared in utils.js
+ * @param {OneArray} oneArray  declared in utils.js
+ * @param {BillType} billType declared in utils.js
+ * @return {Map} Keys: labels, data
  */
-function viewByOneArray(bills, oneArray, option) {
-    var ans = {
-        label: [],
-        amount: [],
-    };
-    var temp = {};
-    for (var bill of bills) {
-        if (temp[bill[oneArray]] === undefined) {
-            temp[bill[oneArray]] = 0;
-        }
-        if (bill.type === option) {
-            temp[bill[oneArray]] += bills.amount;
-        }
+function viewByOneArray(bills, oneArray, billType) {
+    const buffer = new Map();
+    for (const bill of bills) {
+        const key = bill[oneArray];
+        if (!key)
+            continue;
+        let count = 0;
+        if (buffer.has(key))
+            count = buffer.get(key);
+        if (bill.type === billType)
+            buffer.set(key, count + Math.abs(bill.amount));
     }
-    for (var key of Object.keys(temp)) {
-        ans.label.push(key);
-        ans.amount.push(temp[key]);
+    const labels = [];
+    const data = [];
+    for (const [key, value] of buffer) {
+        if (value === 0)
+            continue;
+        labels.push(key);
+        data.push(value);
     }
-    return ans;
+    const map = new Map();
+    map.set('labels', labels);
+    map.set('data', data);
+    return map;
 }
 
 /**
