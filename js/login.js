@@ -62,6 +62,14 @@ $(function () {
         $('.carousel').carousel(0);
     });
 
+
+    if (platform.hasSubPair()) {
+        $('button#login-method-pattern').show();
+    }
+    else {
+        $('button#login-method-pattern').hide();
+    }
+
     $('button#login-method-pattern').click(_ => {
         $('.carousel').carousel(1);
     });

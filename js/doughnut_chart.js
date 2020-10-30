@@ -131,17 +131,46 @@ $(function () {
             maintainAspectRatio: false,
             // todo: comment the following options on PC
             // ----------------------
-            legend: {
-                labels: {
-                    fontSize: 40
-                }
-            },
-            tooltips: {
-                bodyFontSize: 30
-            }
+            // legend: {
+            //     labels: {
+            //         fontSize: 40
+            //     }
+            // },
+            // tooltips: {
+            //     bodyFontSize: 30
+            // }
             // -----------------------
         }
     });
 
-    updateDoughnut(chart);
+    /** @type {Array} */
+    let bills = global.dataJson.bills.slice();
+
+    // bills = bills.filter(bill => {
+    //     return DateUtils.parse(bill.time) > new Date(2020, 10, 15);
+    // });
+
+    // bills = bills.slice(3);
+
+    const re = viewByOneArray(bills, OneArray.item, BillType.expense);
+
+    data = {
+        datasets: [{
+            backgroundColor: [],
+            data: []
+        }],
+        labels: []
+    };
+
+    data.labels = re.get('labels');
+
+    for (const amt of re.get('data')) {
+        data.datasets[0].backgroundColor.push(randomColorString());
+        data.datasets[0].data.push(amt);
+    }
+
+    console.log(re);
+
+    chart.data = data;
+    chart.update();
 });
