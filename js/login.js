@@ -62,14 +62,6 @@ $(function () {
         $('.carousel').carousel(0);
     });
 
-
-    if (platform.hasSubPair()) {
-        $('button#login-method-pattern').show();
-    }
-    else {
-        $('button#login-method-pattern').hide();
-    }
-
     $('button#login-method-pattern').click(_ => {
         $('.carousel').carousel(1);
     });
@@ -108,15 +100,15 @@ $(function () {
             }
 
             // should use a more secure method instead
-            const pair = platform.getSubPair();
+            const pair = JSON.parse(platform.getSubPair());
             const subpwdSaved = pair['subpwd'];
             if (subpwd !== subpwdSaved) {
                 platform.showMessage('图案密码错误');
                 return false;
             }
-            const key = pair['pair'];
+            const key = CryptoUtils.hexToBits(pair['key']);
 
-            const plaintext = data.decrypt(key);
+            const plaintext = crypto.decrypt(key);
             if (plaintext === null) {
                 platform.showMessage('图案密码错误');
                 return false;
