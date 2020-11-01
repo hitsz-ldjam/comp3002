@@ -1,6 +1,7 @@
 "use strict";
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 class DateUtils {
     /**
      * @param {Date} date
@@ -53,6 +54,8 @@ class DateUtils {
     }
 }
 
+=======
+>>>>>>> parent of 3236e70... Merge remote-tracking branch 'upstream/master'
 =======
 >>>>>>> parent of 3236e70... Merge remote-tracking branch 'upstream/master'
 /**

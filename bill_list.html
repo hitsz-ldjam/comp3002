@@ -21,8 +21,12 @@
     <script src='./js/bill_list.js'></script>
     <script src="./js/utils.js"></script>
 <<<<<<< HEAD
+<<<<<<< HEAD
     <script src="./js/datajson_read.js"></script>
     <script src='./js/data_producer.js'></script>
+=======
+
+>>>>>>> parent of 3236e70... Merge remote-tracking branch 'upstream/master'
 =======
 
 >>>>>>> parent of 3236e70... Merge remote-tracking branch 'upstream/master'
@@ -117,6 +121,7 @@
     </style>
     <script>
 <<<<<<< HEAD
+<<<<<<< HEAD
         $(function () {
 
             $('a#add-bill').click(_ => {
@@ -191,6 +196,35 @@
                 $(this).addClass("active").siblings().removeClass('active');
             })
         });
+=======
+        $(document).ready(function () {
+            $('a.nav-link').click(function () {
+                var page_index = $(this).parent().index() - 1;
+                switch (page_index) {
+                    case 0:
+                        $('#page1').addClass('cur-page').removeClass('ncur-page');
+                        $('#page1').siblings().removeClass('cur-page').addClass('ncur-page');
+                        break;
+                    case 1:
+                        $('#page2').addClass('cur-page').removeClass('ncur-page');
+                        $('#page2').siblings().removeClass('cur-page').addClass('ncur-page');
+
+                        break;
+                    case 2:
+                        $('#page3').addClass('cur-page').removeClass('ncur-page');
+                        $('#page3').siblings().removeClass('cur-page').addClass('ncur-page');
+
+                        break;
+                    case 3:
+                        $('#page4').addClass('cur-page').removeClass('ncur-page');
+                        $('#page4').siblings().removeClass('cur-page').addClass('ncur-page');
+
+                        break;
+                };
+                $(this).addClass("active").siblings().removeClass('active');
+            })
+        });
+>>>>>>> parent of 3236e70... Merge remote-tracking branch 'upstream/master'
     </script>
 >>>>>>> parent of 3236e70... Merge remote-tracking branch 'upstream/master'
 </head>
@@ -221,6 +255,7 @@
                     <a id="export">导出</a>
                 </li>
 <<<<<<< HEAD
+<<<<<<< HEAD
                 <li>
                     <a href="" data-toggle="collapse" class="dropdown-toggle" role="button" data-target="#otherSections">
                         账户
@@ -229,6 +264,8 @@
 
                     </ul>
                 </li>
+=======
+>>>>>>> parent of 3236e70... Merge remote-tracking branch 'upstream/master'
 =======
 >>>>>>> parent of 3236e70... Merge remote-tracking branch 'upstream/master'
             </ul>
@@ -258,9 +295,12 @@
                 <div class="nav-item">
 
 <<<<<<< HEAD
+<<<<<<< HEAD
                     <a class="pr-2" href="#"><svg class="bi bi-calendar3" width="1em" height="1em" viewBox="0 0 16 16"
                             fill="currentColor" xmlns="http://www.w3.org/2000/svg">
 =======
+=======
+>>>>>>> parent of 3236e70... Merge remote-tracking branch 'upstream/master'
                     <a class="nav-link active" href="#"><svg class="bi bi-calendar3" width="1em" height="1em"
                             viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
 >>>>>>> parent of 3236e70... Merge remote-tracking branch 'upstream/master'
@@ -291,7 +331,12 @@
         <div class="container-fluid" style="margin-top: 4em;">
             <div id="page1" class="page cur-page">
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+                <div class="card-container" id="CardContainer">
+                </div>
+>>>>>>> parent of 3236e70... Merge remote-tracking branch 'upstream/master'
 =======
                 <div class="card-container" id="CardContainer">
                 </div>

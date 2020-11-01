@@ -101,6 +101,7 @@ class CryptoUtils {
         return true;
     }
 <<<<<<< HEAD
+<<<<<<< HEAD
 
     /**
      * @param {string} password
@@ -179,6 +180,8 @@ class CryptoUtils {
         }
         return info;
     }
+=======
+>>>>>>> parent of 3236e70... Merge remote-tracking branch 'upstream/master'
 =======
 >>>>>>> parent of 3236e70... Merge remote-tracking branch 'upstream/master'
 }

@@ -3,8 +3,12 @@
 class Global {
     constructor() {
 <<<<<<< HEAD
+<<<<<<< HEAD
         // this.varItems = ['dataJson', 'cryptoInfo']
         this.varItems = ['dataJson', '_demoUnsafeMagic_']
+=======
+        this.varItems = ['dataJson', 'cryptoInfo']
+>>>>>>> parent of 3236e70... Merge remote-tracking branch 'upstream/master'
 =======
         this.varItems = ['dataJson', 'cryptoInfo']
 >>>>>>> parent of 3236e70... Merge remote-tracking branch 'upstream/master'

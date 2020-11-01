@@ -75,6 +75,7 @@ $(function () {
             console.log(pattern)
             }
 <<<<<<< HEAD
+<<<<<<< HEAD
             const info = CryptoUtils.validateCryptoFile(content);
             if (!info.has('salt')) {
                 platform.showMessage('文件格式不合法');
@@ -125,6 +126,13 @@ $(function () {
             window.location.href = './bill_list.html';
             return true;
         }
+=======
+        });
+    });
+
+    $('button#login-method-finger').click(_ => {
+        $('.carousel').carousel(2);
+>>>>>>> parent of 3236e70... Merge remote-tracking branch 'upstream/master'
 =======
         });
     });

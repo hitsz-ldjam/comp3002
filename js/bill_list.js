@@ -2,6 +2,7 @@
 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 class billList {
     /**
      *@param {array} dataList      
@@ -59,14 +60,40 @@ class CardList {
 
     CreateCardList(container) {
 
+=======
+$(function () {
+    $('button#add-bill').click(_ => {
+        window.location.href = 'bill_add.html';
+    });
+    $('a#show-chart').click(_ => {
+        window.location.href = 'doughnut_chart.html';
+    });
+    $('a#export').click(_ => {
+        window.location.href = 'login.html';
+    });
+    updateCard(document.getElementById('CardContainer'));
+});
+
+class CardList {
+    constructor(DataList) {
+        this.DataList = DataList;
+    }
+
+    CreateCardList(container) {
+
+>>>>>>> parent of 3236e70... Merge remote-tracking branch 'upstream/master'
         this.DataList.forEach(element => {
             var cardtemplet = new Card(element);
             cardtemplet.CreateCard(container);
         });
+<<<<<<< HEAD
+>>>>>>> parent of 3236e70... Merge remote-tracking branch 'upstream/master'
+=======
 >>>>>>> parent of 3236e70... Merge remote-tracking branch 'upstream/master'
     }
 
 }
+<<<<<<< HEAD
 <<<<<<< HEAD
 class card {
     constructor(data) {
@@ -148,6 +175,43 @@ class Card {
         addBillCatandTime.innerHTML = this.mainCat + '>' + this.subCat + '<br>' + this.time;
         AddCardText.appendChild(addBillCatandTime);
 
+=======
+
+class Card {
+    constructor(data) {
+        this.type = data.type;
+        this.account = data.account;
+        this.mainCat = data.mainCategory;
+        this.subCat = data.subCategory;
+        this.time = new Date(data.time).toLocaleTimeString();
+        this.amount = data.amount;
+    }
+    CreateCard(container) {
+        // alert('hascreated');
+
+        var AddCard = document.createElement('div');
+        AddCard.setAttribute('class', 'card');
+        container.appendChild(AddCard);
+
+        var AddCardBody = document.createElement('div');
+        AddCardBody.setAttribute('class', 'card-body');
+        AddCard.appendChild(AddCardBody);
+
+        var AddCardText = document.createElement('div');
+        AddCardText.setAttribute('class', 'card-text row justify-content-between');
+        AddCardBody.appendChild(AddCardText);
+
+        var addBillIcon = document.createElement('div');
+        addBillIcon.setAttribute('class', 'col-3');
+        addBillIcon.innerHTML = '';
+        AddCardText.appendChild(addBillIcon);
+
+        var addBillCatandTime = document.createElement('div');
+        addBillCatandTime.setAttribute('class', 'bill-catandtime col-6');
+        addBillCatandTime.innerHTML = this.mainCat + '>' + this.subCat + '<br>' + this.time;
+        AddCardText.appendChild(addBillCatandTime);
+
+>>>>>>> parent of 3236e70... Merge remote-tracking branch 'upstream/master'
         var addBillAmount = document.createElement('div');
         addBillAmount.setAttribute('class', 'bill-amount col-3 pr-4 pt-4 pb-4');
         addBillAmount.innerHTML = (this.type == BillType.income ? "+":"-") + this.amount;
@@ -159,12 +223,16 @@ class Card {
         //                 <div class="bill-amount col-3"><b>amount</b></div>
         //             </div>
         //         </div>
+<<<<<<< HEAD
+>>>>>>> parent of 3236e70... Merge remote-tracking branch 'upstream/master'
+=======
 >>>>>>> parent of 3236e70... Merge remote-tracking branch 'upstream/master'
     }
 
 
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 function updateCard(container, bills) {
     var listContainer = new billList(bills, 1);
@@ -184,6 +252,12 @@ $(function () {
         this
     })
 })
+=======
+function updateCard(container) {
+    var cardlist = new CardList(global.dataJson.bills);
+    cardlist.CreateCardList(container);
+}
+>>>>>>> parent of 3236e70... Merge remote-tracking branch 'upstream/master'
 =======
 function updateCard(container) {
     var cardlist = new CardList(global.dataJson.bills);
