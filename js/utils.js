@@ -9,7 +9,7 @@ class BillType {
     }
 }
 
-class oneArray {
+class OneArray {
     static get account() {
         return "account";
     }
@@ -30,7 +30,7 @@ class oneArray {
     }
 }
 
-class singleList {
+class SingleList {
     constructor(token) {
         this.token = token;
         this.income = 0;
@@ -40,14 +40,14 @@ class singleList {
     }
 }
 
-class ob{
+class ob {
     constructor() {
         this.account = null;
         this.amount = null;
         this.type = null;
         this.flag = null;
-        this.mainCategory =null;
-        this.subCategory =null;
+        this.mainCategory = null;
+        this.subCategory = null;
         this.time = null;
         this.member = null;
         this.merchant = null;

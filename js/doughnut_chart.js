@@ -213,7 +213,6 @@ function showChart() {
     }
 
     console.log(re);
-
     chart.data = data;
     chart.update();
 }
