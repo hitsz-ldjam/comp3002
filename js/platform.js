@@ -67,6 +67,18 @@ class PlatformWeb {
         alert(message);
     }
 
+    logMessage(message) {
+        console.log(message);
+    }
+
+    logError(error) {
+        console.error(error);
+    }
+
+    logWTF(wtf) {
+        console.error('> WTF: ' + wtf);
+    }
+
     loadAssetFile(name) {
         if (this._assets.has(name)) {
             return this._assets.get(name);
@@ -307,6 +319,10 @@ class PlatformAndroid {
         return this._backend.showFileImporter(type);
     }
 
+    getRequestedData() {
+        return this._backend.getRequestedData();
+    }
+
     showFileExporter(name, type) {
         return this._backend.showFileExporter(name, type);
     }
@@ -317,7 +333,7 @@ class PlatformAndroid {
      */
     saveSubPair(subpwd, key) {
         return this._backend.saveSubPair(subpwd, key);
-    }   
+    }
 
     clearSubPair() {
         return this._backend.clearSubPair();
@@ -383,6 +399,12 @@ class Platform {
                 this._backend = new PlatformWeb(this);
                 break;
         }
+
+        this.onFileExporterResult = null;
+        this.onFileImporterResult = null;
+        this.onStop = null;
+
+        this.logMessage("Platform created(backend = " + this.settings.platform + " )");
     }
 
     /**
@@ -494,7 +516,6 @@ class Platform {
      * }
      * 
      */
-    onFileImporterResult;
 
 
     /**
@@ -526,7 +547,6 @@ class Platform {
      *     // do something...
      * }
      */
-    onFileExporterResult;
 
     /**
      * Save sub password and key to local.
@@ -555,7 +575,6 @@ class Platform {
         return this._backend.getSubPair();
     }
 
-
     /////////////////////////////////////////////
     //     Functions used by platform codes    //
     //                                         //
@@ -569,6 +588,11 @@ class Platform {
     _onFileExporterResult(success) {
         this.onFileExporterResult(success);
     }
+
+    _onStop() {
+        this.onStop();
+    }
+
 }
 
 let platform = new Platform();

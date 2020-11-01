@@ -11,13 +11,13 @@ class billList {
     }
 
     create(elementType) {
-        var listContainer = $("<div class='container' "+"id='" + this.tagID + "'></div>");
+        var listContainer = $("<div class='container' " + "id='" + this.tagID + "'></div>");
         // this.dataList.forEach(element => {
         //     var cardtemplet = new card(element);
         //     listContainer.append(cardtemplet.createCard());
         // });
         // alert(typeof(this.dataList));
-   
+
         for (var i = 0; i < this.dataList.length; i++) {
             var cardtemplet = new elementType(this.dataList[i], this.tagID + i.toString());
             // alert(listContainer[0]);
@@ -38,6 +38,7 @@ function iconSelector(mainCategory,mainCategories){
         default://other
             return "<svg t='1603891144446' class='icon' viewBox='0 0 1024 1024' version='1.1' xmlns='http://www.w3.org/2000/svg' p-id='61919' width='40' height='40'><path d='M938.666667 641.706667c0 93.44-75.093333 168.96-167.68 168.96H253.013333C160.426667 810.666667 85.333333 735.146667 85.333333 641.706667c0-84.053333 61.013333-153.6 141.226667-166.4-1.28-5.973333-1.706667-11.946667-1.706667-18.346667 0-58.88 47.36-107.093333 106.24-107.093333 26.026667 0 50.346667 9.813333 68.693334 25.6 32.853333-74.666667 75.093333-143.36 193.706666-143.36 143.786667 0 211.626667 111.786667 211.626667 229.973333 0 4.693333 0 9.813333-0.426667 14.506667A168.533333 168.533333 0 0 1 938.666667 641.706667z' fill='#1296db' p-id='61920'></path></svg>";
     }
+
 }
 class card {
     constructor(data) {
@@ -45,7 +46,7 @@ class card {
         this.account = data.account;
         this.mainCategory = data.mainCategory;
         this.subCategory = data.subCategory;
-        this.time =  data.time;
+        this.time = data.time;
         this.amount = data.amount;
         this.tagID = data.id;
     }
@@ -66,19 +67,20 @@ class card {
                 </div>
             </div>
         </div> */
-        var catandtime_icon = $("<div class='bill-icon'></div>").html(iconSelector(this.mainCategory,global.dataJson.mainCategories));
+        // iconSelector(this.mainCategory, global.dataJson.mainCategories)
+        var catandtime_icon = $("<div class='bill-icon'></div>").html("");
         // alert(catandtime_icon);
-        var catandtime_data = $("<div class='cat-time-data'></div>").html(this.mainCategory + ">" + this.subCategory + "<br>" +"<small class='text-muted font-weight-light'>"+ DateUtils.parse(this.time).getHours()+":"
-        +Math.round(DateUtils.parse(this.time).getMinutes()/10)+Math.round(DateUtils.parse(this.time).getMinutes()%10)+"</small>");
-        var text_amount = $("<div class='bill-amount col-3  text-right'></div>").html("<b class='"+(this.type == BillType.income ? "text-success" : "text-danger")+"'>" + (this.type == BillType.income ? "+" : "-") + this.amount + "</b>");
+        var catandtime_data = $("<div class='cat-time-data'></div>").html(this.mainCategory + ">" + this.subCategory + "<br>" + "<small class='text-muted font-weight-light'>" + DateUtils.parse(this.time).getHours() + ":" +
+            Math.round(DateUtils.parse(this.time).getMinutes() / 10) + Math.round(DateUtils.parse(this.time).getMinutes() % 10) + "</small>");
+        var text_amount = $("<div class='bill-amount col-3  text-right'></div>").html("<b class='" + (this.type == BillType.income ? "text-success" : "text-danger") + "'>" + (this.type == BillType.income ? "+" : "-") + this.amount + "</b>");
         var text_catandtime = $("<div class='bill-catandtime col-6 d-flex align-items-center'></div>");
-        var text_date = $("<div class='bill-date text-center'></div>").html("<strong>"+DateUtils.parse(this.time).getDate() +"</strong>"+ "<small>日</small><br>" + "<small class='text-muted' hidden>"+(DateUtils.parse(this.time).getMonth() + 1)+"月</small>");
-        var body_text = $("<div class='card-text  align-items-center d-flex justify-content-between'></div>");
-        var card_body = $("<div class='card-body'></div>");
-        var bill_card = $("<div class='card'" + "id='" + this.tagID + "'></div>");
+        var text_date = $("<div class='bill-date text-center'></div>").html("<strong class='more'>" + DateUtils.parse(this.time).getDate() + "</strong>" + "<small>日</small><br>" + "<small class='text-muted' hidden>" + (DateUtils.parse(this.time).getMonth() + 1) + "月</small>");
+        var body_text = $("<div class='card-text zebra align-items-center d-flex justify-content-between'></div>");
+        var card_body = $("<div class='card-body zebra'></div>");
+        var bill_card = $("<div class='card zebra'" + "id='" + this.tagID + "'></div>");
 
         text_catandtime.append(catandtime_icon, catandtime_data);
-        body_text.append(text_date, text_catandtime,text_amount);
+        body_text.append(text_date, text_catandtime, text_amount);
         card_body.append(body_text);
         bill_card.append(card_body);
         return bill_card;
@@ -87,21 +89,21 @@ class card {
 
 }
 
-function updateCard(container,bills) {
-    var listContainer = new billList(bills,1);
+function updateCard(container, bills) {
+    var listContainer = new billList(bills, 1);
     container.append(listContainer.create(card));
 }
-function updateAccountList(container){
+
+function updateAccountList(container) {
 
     global.dataJson.accounts.forEach(element => {
 
-        var li=$("<li><a class='scroll-link' href='bill_waters.html?account="+element.name+"'>"+element.name+"</a></li>");
+        var li = $("<li><a class='scroll-link' href='bill_waters.html?account=" + element.name + "'>" + element.name + "</a></li>");
         container.append(li);
     });
 }
-$(function(){
-    $(".card").on("click",function(){
+$(function () {
+    $(".card").on("click", function () {
         this
     })
 })
-

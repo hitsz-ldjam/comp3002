@@ -140,3 +140,5 @@ function backupInternalUnsafe() {
     };
     platform.storeAssetFile(backupFilename, JSON.stringify(cryptoInfo));
 }
+
+platform.onStop = function () { backupInternalUnsafe() }

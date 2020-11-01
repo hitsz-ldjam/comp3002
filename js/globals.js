@@ -7,6 +7,7 @@ class Global {
         this.varItems.forEach(key => {
             this.addVarItem(key);
         });
+
     }
 
     addVarItem(key) {
@@ -30,6 +31,5 @@ class Global {
 
 
 let global = new Global();
-
 
 window.onunload = _ => { global.updateAllItems(); };
