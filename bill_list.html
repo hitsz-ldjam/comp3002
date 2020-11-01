@@ -13,8 +13,11 @@
     <script type="application/javascript" src="./js/libs/mdb.min.js"></script>
     <script src="./js/libs/jquery.mCustomScrollbar.concat.min.js"></script>
     <script src="./js/mainpage.js"></script>
-    <script src='./js/platform.js'></script>
-    <script src='./js/globals.js'></script>
+    <script type="text/javascript" src="js/libs/sjcl.js"></script>
+    <script type="text/javascript" src="js/platform.js"></script>
+    <script type="text/javascript" src="js/crypto.js"></script>
+    <script type="text/javascript" src="js/set_subpwd.js"></script>
+    <script type="text/javascript" src="js/globals.js"></script>
     <script src='./js/bill_list.js'></script>
     <script src="./js/utils.js"></script>
     <script src="./js/datajson_read.js"></script>
@@ -27,7 +30,6 @@
     <script>
         $(function () {
 
-
             $('a#add-bill').click(_ => {
                 window.location.href = 'bill_add.html';
             });
@@ -39,7 +41,7 @@
             });
             var tb = new ob();
 
-            updateCard($('#page1'), billFilter(produce(),tb));
+            updateCard($('#page1'), produce());
             updateAccountList($('#otherSections'));
         });
     </script>

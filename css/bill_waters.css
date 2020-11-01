@@ -22,19 +22,10 @@ body {
 .page.ncur-page {
 	display: none;
 }
-.card-container {
-	width: 100%;
-}
 
-.container-fluid {
+
+.card.zebra{
 	padding: 0em;
-}
-
-.card {
-	/* border-radius: 10px; */
-	/* border-top-style:solid ;
-	border-color: rgb(36, 36, 36);
-	border-top:2px solid rgb(36, 36, 36); */
 }
 
 .fixed-button {
@@ -47,17 +38,17 @@ body {
 	background-color: dodgerblue;
 	box-shadow: 2px 5px 8px rgb(126, 126, 126);
 }
-.row{
+.row.zebra{
 	margin: 0em;
 }
 
 
-.card-text {
+.card-text.zebra{
     justify-content: space-between;
 	height: 4.5em;
 }
 
-.card-body {
+.card-body.zebra{
     padding: 0px;
 }
 .bill-link{
@@ -93,26 +84,30 @@ body {
     border-width: 2px;
     color: whitesmoke;
 }
-.btn-link{
-	color: black;
-}
-.btn-link:focus{
-	background-color:white;
-}
 .container{
 	padding: 0em;
 }
-.dropdown-date{
-	font-family: serif;
-}
-input{
-    display: none;
-}
-label{
-    display: unset;
-}
-strong{
+strong.more{
 	font-size: 1.5em;
+}
+.btn-link.zebra:focus {
+	background-color: white;
+	color: black;
+}
+.btn-link.zebra{
+	color: black;
+}
+.list-year{
+	font-size:x-large ;
+}
+.list-year-total{
+	font-size: 1.2em;
+}
+.list-month{
+	font-size: large;
+}
+.list-month-total{
+	font-size: 1.2em;
 }
 /* <div class="card">
                                     <div class="card-body">

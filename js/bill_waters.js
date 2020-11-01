@@ -24,14 +24,14 @@ class year {
     }
     create() {
 
-        var year_card = $("<div class='card mt-3 ml-1'></div>");
+        var year_card = $("<div class='card mt-3 ml-1 zebra'></div>");
 
-        var card_body = $("<div class='card-body'></div>");
-        var body_button = $("<a class='btn btn-block btn-link zebra-list-button pl-2 pr-0 ' type='button' data-toggle='collapse'" + " data-target='#" + this.tagID + "'></a>");
-        var button_row = $("<div class='row d-flex'></div>");
+        var card_body = $("<div class='card-body zebra'></div>");
+        var body_button = $("<button class='btn btn-block zebra pl-2 pr-0 ' type='button' data-toggle='collapse'" + " data-target='#" + this.tagID + "'></button>");
+        var button_row = $("<div class='row d-flex zebra'></div>");
 
-        var row_col3 = $("<div class='col-3 text-center m-0 p-0' style='font-size:x-large;'></div>").html(this.year);
-        var row_col9 = $("<div class='col-auto text-left p-0' style='font-size:small;'></div>").html("结余:" + this.remain + "<br>" + "收入:" + this.income + "|" + "支出:" + this.expense)
+        var row_col3 = $("<div class='col-3 text-center m-0 p-0 list-year'></div>").html(this.year);
+        var row_col9 = $("<div class='col-auto text-left p-0 list-year-total'></div>").html("结余:" + this.remain + "<br>" + "收入:" + this.income + "|" + "支出:" + this.expense)
 
         var card_collapse = $("<div class='collapse' style='background-color: whitesmoke;' id='" + this.tagID + "'></div>");
 
@@ -59,17 +59,17 @@ class month {
     }
     create() {
         // alert("month");
-        var month_card = $("<div class='card mt-3 ml-1'></div>");
+        var month_card = $("<div class='card zebra mt-1 ml-1'></div>");
 
-        var card_body = $("<div class='card-body'></div>");
-        var body_button = $("<button class='btn btn-block btn-link zebra-list-button pl-2 pr-0' type='button' data-toggle='collapse'" + " data-target='#" + this.tagID + "'></button>");
-        var button_contain = $("<div class='container p-0'></div>");
-        var contain_row = $("<div class='row contain_row'></div>");
+        var card_body = $("<div class='card-body zebra'></div>");
+        var body_button = $("<button class='btn btn-block btn-link zebra pl-2 pr-0' type='button' data-toggle='collapse'" + " data-target='#" + this.tagID + "'></button>");
+        var button_contain = $("<div class='container'></div>");
+        var contain_row = $("<div class='row zebra'></div>");
 
-        var row_col3 = $("<div class='col-3 text-center m-0 dropdown-date' style='font-size: large;'></div>").html(parseInt(this.month.slice(5), 10) + "月");
-        var row_col9 = $("<div class='col-9 text-left dropdown-total p-0' style='font-size: small;'></div>").html("结余:" + this.remain + "<br>" + "收入:" + this.income + "|" + "支出:" + this.expense)
+        var row_col3 = $("<div class='col-3 text-center m-0 list-month'></div>").html(parseInt(this.month.slice(5), 10) + "月");
+        var row_col9 = $("<div class='col-9 text-left list-month-total'></div>").html("结余:" + this.remain + "<br>" + "收入:" + this.income + "|" + "支出:" + this.expense)
 
-        var card_collapse = $("<div class='collapse' style='background-color: whitesmoke;' id='" + this.tagID + "'></div>");
+        var card_collapse = $("<div class='collapse pl-1' style='background-color: whitesmoke;' id='" + this.tagID + "'></div>");
 
         contain_row.append(row_col3, row_col9);
         button_contain.append(contain_row);

@@ -3,10 +3,11 @@
 class Global {
     constructor() {
         // this.varItems = ['dataJson', 'cryptoInfo']
-        this.varItems = ['dataJson']
+        this.varItems = ['dataJson', '_demoUnsafeMagic_']
         this.varItems.forEach(key => {
             this.addVarItem(key);
         });
+
     }
 
     addVarItem(key) {
@@ -30,6 +31,5 @@ class Global {
 
 
 let global = new Global();
-
 
 window.onunload = _ => { global.updateAllItems(); };
