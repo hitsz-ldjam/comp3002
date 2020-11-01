@@ -1,0 +1,12 @@
+.body {
+    background-color: whitesmoke;
+}
+
+.shell {
+    display: flex;
+}
+
+.left, .right {
+    margin: auto; 
+    width: 50%;
+}

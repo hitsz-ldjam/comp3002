@@ -67,6 +67,18 @@ class PlatformWeb {
         alert(message);
     }
 
+    logMessage(message) {
+        console.log(message);
+    }
+
+    logError(error) {
+        console.error(error);
+    }
+
+    logWTF(wtf) {
+        console.error('> WTF: ' + wtf);
+    }
+
     loadAssetFile(name) {
         if (this._assets.has(name)) {
             return this._assets.get(name);
@@ -136,6 +148,24 @@ class PlatformWeb {
         }
 
     }
+
+    saveSubPair(subpwd, key) {
+        this.logError("PlatformWeb: saveSubPair(subpwd, key) not implemented");
+    }
+
+    clearSubPair() {
+        this.logError("PlatformWeb: clearSubPair() not implemented");
+    }
+
+    hasSubPair() {
+        this.logError("PlatformWeb: hasSubPair() not implemented");
+        return false;
+    }
+
+    getSubPair() {
+        this.logError("PlatformWeb: getSubPair() not implemented");
+        return null;
+    }
 }
 
 /**
@@ -149,7 +179,21 @@ class PlatformDesktop {
     }
 
     showMessage(message) {
-        alert(message);
+        // todo make a popup
+        console.log(message);
+    }
+
+    logMessage(message) {
+        console.log(message);
+    }
+
+    logError(error) {
+        console.error(error);
+    }
+
+    /** WTF stands for What a Terrible Failure */
+    logWTF(wtf) {
+        console.error(wtf);
     }
 
     loadAssetFile(name) {
@@ -211,6 +255,104 @@ class PlatformDesktop {
         }
 
     }
+
+    saveSubPair(subpwd, key) {
+        this.logError("PlatformDesktop: saveSubPair(subpwd, key) not implemented");
+    }
+
+    clearSubPair() {
+        this.logError("PlatformDesktop: clearSubPair() not implemented");
+    }
+
+    hasSubPair() {
+        this.logError("PlatformDesktop: hasSubPair() not implemented");
+        return false;
+    }
+
+    getSubPair() {
+        this.logError("PlatformDesktop: getSubPair() not implemented");
+        return null;
+    }
+}
+
+/**
+ * Platform backend for Android
+ */
+class PlatformAndroid {
+    constructor(platform) {
+        this._backend = platformAndroid;
+    }
+
+    showMessage(message) {
+        return this._backend.showMessage(message);
+    }
+
+    logMessage(message) {
+        return this._backend.logMessage(message);
+    }
+
+    logError(error) {
+        return this._backend.logError(error);
+    }
+
+    logWTF(wtf) {
+        return this._backend.logWTF(wtf);
+    }
+
+    loadAssetFile(name) {
+        return this._backend.loadAssetFile(name);
+    }
+
+    storeAssetFile(name, data) {
+        return this._backend.storeAssetFile(name, data);
+    }
+
+    deleteAssetFile(name) {
+        return this._backend.deleteAssetFile(name);
+    }
+
+    listAssetFiles() {
+        return this._backend.listAssetFiles();
+    }
+
+    showFileImporter(type) {
+        return this._backend.showFileImporter(type);
+    }
+
+    getRequestedData() {
+        return this._backend.getRequestedData();
+    }
+
+    showFileExporter(name, type) {
+        return this._backend.showFileExporter(name, type);
+    }
+
+    /**
+     * @param {string} subpwd 
+     * @param {string} key 
+     */
+    saveSubPair(subpwd, key) {
+        return this._backend.saveSubPair(subpwd, key);
+    }
+
+    clearSubPair() {
+        return this._backend.clearSubPair();
+    }
+
+    /**
+     * @returns {boolean}
+     */
+    hasSubPair() {
+        return this._backend.hasSubPair();
+    }
+
+    /**
+     * @returns {string}
+     */
+    getSubPair() {
+        return this._backend.getSubPair();
+    }
+
 }
 
 /**
@@ -244,10 +386,11 @@ class Platform {
             this.settings["platform"] = "web";
         }
 
+        this.settings["platform"] = this.settings["platform"].toLowerCase();
 
-        switch (this.settings["platform"].toLowerCase()) {
+        switch (this.settings["platform"]) {
             case "android":
-                this._backend = platformAndroid;
+                this._backend = new PlatformAndroid(this);
                 break;
             case "desktop":
                 this._backend = new PlatformDesktop(this);
@@ -256,6 +399,23 @@ class Platform {
                 this._backend = new PlatformWeb(this);
                 break;
         }
+
+        this.onFileExporterResult = null;
+        this.onFileImporterResult = null;
+        this.onStop = null;
+
+        this.logMessage("Platform created(backend = " + this.settings.platform + " )");
+    }
+
+    /**
+     * Get a string indicating the current platform
+     * @returns {string}
+     * - "web" Web platform
+     * - "android" Android
+     * - "desktop" Windows/Linux
+     */
+    getCurrentPlatform() {
+        return this.settings["platform"];
     }
 
     /**
@@ -266,17 +426,30 @@ class Platform {
         return this._backend.showMessage(message);
     }
 
+    /**
+     * Log a message to console.
+     * @param {string} message 
+     */
     logMessage(message) {
-        console.log(message);
+        return this._backend.logMessage(message);
     }
 
+    /**
+     * Log a error message to console.
+     * @param {string} error 
+     */
     logError(error) {
-        console.error(error);
+        return this._backend.logError(error);
     }
 
-    /** WTF stands for What a Terrible Failure */
+    /**
+     * Log a fatal error message to console.
+     * WTF stands for What a Terrible Failure
+     * 
+     * @param {string} wtf 
+     */
     logWTF(wtf) {
-        console.error('> WTF: ' + wtf);
+        return this._backend.logWTF('> WTF: ' + wtf);
     }
 
     /**
@@ -343,7 +516,6 @@ class Platform {
      * }
      * 
      */
-    onFileImporterResult;
 
 
     /**
@@ -375,8 +547,33 @@ class Platform {
      *     // do something...
      * }
      */
-    onFileExporterResult;
 
+    /**
+     * Save sub password and key to local.
+     * @param {string} subpwd 
+     * @param {string} key 
+     */
+    saveSubPair(subpwd, key) {
+        return this._backend.saveSubPair(subpwd, key);
+    }
+
+    clearSubPair() {
+        return this._backend.clearSubPair();
+    }
+
+    /**
+     * @returns {boolean}
+     */
+    hasSubPair() {
+        return this._backend.hasSubPair();
+    }
+
+    /**
+     * @returns {string}
+     */
+    getSubPair() {
+        return this._backend.getSubPair();
+    }
 
     /////////////////////////////////////////////
     //     Functions used by platform codes    //
@@ -391,6 +588,11 @@ class Platform {
     _onFileExporterResult(success) {
         this.onFileExporterResult(success);
     }
+
+    _onStop() {
+        this.onStop();
+    }
+
 }
 
 let platform = new Platform();

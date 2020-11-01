@@ -147,7 +147,8 @@ class CryptoUtils {
     static validateCryptoFile(content) {
         let info = new Map();
         try {
-            const json = JSON.parse(content);
+            let json = JSON.parse(content);
+
             if (!(json.salt && json.iv && json.ct))
                 throw new SyntaxError();
             info.set('salt', json.salt);

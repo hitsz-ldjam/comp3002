@@ -1,19 +1,5 @@
 
-body { font-family: 'Roboto', sans-serif; font-size: 16px; font-weight: 300; color: #888; line-height: 30px; text-align: center; }
 
-strong { font-weight: 500; }
-
-
-h1, h2 { margin-top: 10px; font-size: 38px; font-weight: 100; color: #555; line-height: 50px; }
-h3 { font-size: 22px; font-weight: 300; color: #555; line-height: 30px; }
-h4 { font-size: 18px; font-weight: 300; color: #555; line-height: 26px; }
-
-img { max-width: 100%; }
-
-.medium-paragraph { font-size: 18px; line-height: 34px; }
-
-::-moz-selection { background: #f35b3f; color: #fff; text-shadow: none; }
-::selection { background: #f35b3f; color: #fff; text-shadow: none; }
 
 html,
 body {
@@ -42,54 +28,35 @@ body {
 	display: none;
 }
 
-.card-container {
-	width: 100%;
-}
-
-.container-fluid {
-	padding: 0em;
-}
-
-.card-container .card {
-	border-radius: 10px;
-}
-
 .fixed-button {
 	position: fixed;
 	bottom: 2em;
 	right: 2em;
-	width: 2em;
-	height: 2em;
-	width: 4em;
-	height: 4em;
-	padding: 0em;
-	margin: 0em;
-	border: none;
-	outline: none;
-	background-color: dodgerblue;
+	min-width: 64px;
+	min-height: 64px;
 	z-index: 997;
+	background-color: dodgerblue;
 	box-shadow: 2px 5px 8px rgb(126, 126, 126);
 }
-.fixed-top{
-	z-index: 997;width: 100%;
-    border-color: black;
-    border-width: 2px;
-    color: whitesmoke;
+
+.card.zebra{
+	margin-bottom: 1em;
 }
 
-.card {
-	margin: 1em;
+.card-text.zebra {
+    justify-content: space-between;
+	height: 4.5em;
 }
 
-.card-text {
-	height: 5em;
-	justify-content: space-between;
+.card-body.zebra {
+    padding: 0px;
 }
-
-.card-body {
-	padding: 0px;
+.bill-icon{
+	margin-right: 0.5em;
 }
-
+.bill-link{
+	padding: 0em 1em;
+}
 
 .bill-time {
 	padding: 2.5em 0em 0em 3em;
@@ -97,14 +64,31 @@ body {
 
 .bill-catandtime {
 	text-align: left;
-	padding: 0.5em;
+    padding: 1em 0em;
 }
-
+.bill-date{
+	margin-left: 1em;
+	min-width: 2rem;
+	padding: 0em;
+}
 .bill-amount {
-	padding: 1em;
+	padding: 0.5em 0.5em 0.5em 0em!important;
 	font-size: 22px;
 	font-family: sans-serif;
+    padding: 0px;
 	color: black;
+}
+.fixed-top{
+    z-index: 997;width: 100%;
+    border-color: black;
+    border-width: 2px;
+    color: whitesmoke;
+}
+.container{
+	padding: 0em;
+}
+strong.more {
+    font-size: 1.2em;
 }
 
 
@@ -248,11 +232,11 @@ body {
 /***** Dark overlay *****/
 
 .overlay {
-    display: none; position: fixed; width: 100vw; height: 100vh; 
-    background: rgba(51, 51, 51, 0.7); z-index: 998; opacity: 0; transition: all .5s ease-in-out;
+    display: none; position: fixed ; width: 100vw; height: 100vh; top:0;
+    background: rgba(51, 51, 51, 0.7); z-index: 998; opacity: 0; transition: all 1s ease-in-out;
 }
 
-.overlay.active { display: block; opacity: 0; }
+.overlay.active { display: block; opacity: 100; }
 
 
 /***** Content *****/

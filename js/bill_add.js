@@ -6,13 +6,13 @@ function initDropdowns() {
     let accountList = $('datalist#account-list');
     accountList.empty();
     for (const account of global.dataJson.accounts)
-        accountList.append(`<option value='${account.name}'></option>`);
+        accountList.append(`<option value='${account.name}'>`);
 
     $('input#maincat').val('');
     let mainCatList = $('datalist#maincat-list');
     mainCatList.empty();
     for (const mainCategory of global.dataJson.mainCategories)
-        mainCatList.append(`<option value='${mainCategory.name}'></option>`);
+        mainCatList.append(`<option value='${mainCategory.name}'>`);
 
     $('input#subcat').val('');
     $('datalist#subcat-list').empty();
@@ -42,7 +42,7 @@ $(function () {
         for (const mainCategory of global.dataJson.mainCategories)
             if (mainCatVal === mainCategory.name) {
                 for (const subCategory of mainCategory.subCategories)
-                    subCatList.append(`<option value='${subCategory}'></option>`);
+                    subCatList.append(`<option value='${subCategory}'>`);
                 return;
             }
     });

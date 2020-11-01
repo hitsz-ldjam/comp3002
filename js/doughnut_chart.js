@@ -1,5 +1,4 @@
-'use strict';
-
+"use strict";
 
 /** @returns {Number} Random int in [min, max) */
 function randomInt(min, max) {
@@ -15,7 +14,6 @@ function randomColorString() {
     var b = randomInt(0, 256);
     return `rgb(${r}, ${g}, ${b})`;
 }
-
 
 // /**
 //  * @param {Chart} chart Doughnut chart
@@ -67,31 +65,27 @@ function randomColorString() {
 
 //     return false;
 // }
-
-
 function updateDoughnut(chart, bills = global.dataJson.bills) {
     // todo: dirty code / cache this
     let data = {
-        datasets: [{
-            backgroundColor: [],
-            data: []
-        }],
-        labels: []
+        datasets: [
+            {
+                backgroundColor: [],
+                data: [],
+            },
+        ],
+        labels: [],
     };
 
     let mainCategories = new Map();
     for (const bill of bills) {
-        if (bill.flag)
-            continue;
+        if (bill.flag) continue;
         let amount = 0;
         if (mainCategories.has(bill.mainCategory))
             amount = mainCategories.get(bill.mainCategory);
-        if (bill.type === BillType.income)
-            amount += bill.amount;
-        else if (bill.type === BillType.expense)
-            amount -= bill.amount;
-        else
-            continue;
+        if (bill.type === BillType.income) amount += bill.amount;
+        else if (bill.type === BillType.expense) amount -= bill.amount;
+        else continue;
         // bug: final amount should > 0
         mainCategories.set(bill.mainCategory, amount);
         // todo: handle sub category
@@ -105,43 +99,121 @@ function updateDoughnut(chart, bills = global.dataJson.bills) {
     chart.data = data;
     chart.update();
 }
+$("#account").click(function () {
+    window.choice = OneArray.account;
+    console.log("account selected");
+    console.log("choice is ", window.choice);
+    showChart();
+});
+$("#mainCategory").click(function () {
+    console.log("mainCategory selected");
+    window.choice = OneArray.mainCategory;
+    console.log("choice is ", window.choice, "");
+    showChart();
+});
+$("#subCategory").click(function () {
+    window.choice = OneArray.subCategory;
+    showChart();
+});
+$("#member").click(function () {
+    console.log("member selected");
+    window.choice = OneArray.member;
+    showChart();
+});
+$("#merchant").click(function () {
+    console.log("merchant selected");
+    window.choice = OneArray.merchant;
+    showChart();
+});
+$("#item").click(function () {
+    console.log("item selected");
+    window.choice = OneArray.item;
+    showChart();
+});
 
-
+$("#income").click(function () {
+    window.billType = BillType.income;
+    showChart();
+});
+$("#expense").click(function () {
+    window.billType = BillType.expense;
+    showChart();
+});
+window.choice = OneArray.account;
+window.billType = BillType.income;
 $(function () {
+    showChart();
+});
+
+function showChart() {
     // todo: set CSP
 
     // Disable automatic style injection
     Chart.platform.disableCSSInjection = true;
 
-    let ctx = $("canvas#doughnut-chart")[0].getContext('2d');
+    let ctx = $("canvas#doughnut-chart")[0].getContext("2d");
 
     let data = {
-        datasets: [{
-            backgroundColor: [],
-            data: []
-        }],
-        labels: []
+        datasets: [
+            {
+                backgroundColor: [],
+                data: [],
+            },
+        ],
+        labels: [],
     };
 
     let chart = new Chart(ctx, {
-        type: 'doughnut',
+        type: "doughnut",
         data: data,
         options: {
             responsive: true,
             maintainAspectRatio: false,
             // todo: comment the following options on PC
             // ----------------------
-            legend: {
-                labels: {
-                    fontSize: 40
-                }
-            },
-            tooltips: {
-                bodyFontSize: 30
-            }
+            // legend: {
+            //     labels: {
+            //         fontSize: 40
+            //     }
+            // },
+            // tooltips: {
+            //     bodyFontSize: 30
+            // }
             // -----------------------
-        }
+        },
     });
 
-    updateDoughnut(chart);
-});
+    /** @type {Array} */
+    let bills = global.dataJson.bills.slice();
+
+    // bills = bills.filter(bill => {
+    //     return DateUtils.parse(bill.time) > new Date(2020, 10, 15);
+    // });
+
+    // bills = bills.slice(3);
+
+    console.log("choice is ", choice);
+    const re = viewByOneArray(bills, window.choice, window.billType);
+    console.log("re is ", re);
+    data = {
+        datasets: [
+            {
+                backgroundColor: [],
+                data: [],
+            },
+        ],
+        labels: [],
+    };
+
+    data.labels = re.get("labels");
+
+    for (const amt of re.get("data")) {
+        data.datasets[0].backgroundColor.push(randomColorString());
+        data.datasets[0].data.push(amt);
+    }
+
+    console.log(re);
+
+    chart.data = data;
+    chart.update();
+}
