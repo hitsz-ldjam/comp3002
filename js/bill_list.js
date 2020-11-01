@@ -1,8 +1,6 @@
 'use strict';
 
 
-<<<<<<< HEAD
-<<<<<<< HEAD
 class billList {
     /**
      *@param {array} dataList      
@@ -39,62 +37,9 @@ function iconSelector(mainCategory,mainCategories){
             return "<svg t='1603891563042' class='icon' viewBox='0 0 1024 1024' version='1.1' xmlns='http://www.w3.org/2000/svg' p-id='81892' width='40' height='40'><path d='M725.333333 768a85.333333 85.333333 0 0 1 85.333334 85.333333 85.333333 85.333333 0 0 1-85.333334 85.333334 85.333333 85.333333 0 0 1-85.333333-85.333334c0-47.36 37.973333-85.333333 85.333333-85.333333M42.666667 85.333333h139.52l40.106666 85.333334H853.333333a42.666667 42.666667 0 0 1 42.666667 42.666666c0 7.253333-2.133333 14.506667-5.12 21.333334l-152.746667 276.053333c-14.506667 26.026667-42.666667 43.946667-74.666666 43.946667H345.6l-38.4 69.546666-1.28 5.12a10.666667 10.666667 0 0 0 10.666667 10.666667H810.666667v85.333333H298.666667a85.333333 85.333333 0 0 1-85.333334-85.333333c0-14.933333 3.84-29.013333 10.24-40.96l58.026667-104.533333L128 170.666667H42.666667V85.333333m256 682.666667a85.333333 85.333333 0 0 1 85.333333 85.333333 85.333333 85.333333 0 0 1-85.333333 85.333334 85.333333 85.333333 0 0 1-85.333334-85.333334c0-47.36 37.973333-85.333333 85.333334-85.333333m384-298.666667l118.613333-213.333333H261.973333l100.693334 213.333333H682.666667z' fill='#1296db' p-id='81893'></path></svg>";    
         default://other
             return "<svg t='1603891144446' class='icon' viewBox='0 0 1024 1024' version='1.1' xmlns='http://www.w3.org/2000/svg' p-id='61919' width='40' height='40'><path d='M938.666667 641.706667c0 93.44-75.093333 168.96-167.68 168.96H253.013333C160.426667 810.666667 85.333333 735.146667 85.333333 641.706667c0-84.053333 61.013333-153.6 141.226667-166.4-1.28-5.973333-1.706667-11.946667-1.706667-18.346667 0-58.88 47.36-107.093333 106.24-107.093333 26.026667 0 50.346667 9.813333 68.693334 25.6 32.853333-74.666667 75.093333-143.36 193.706666-143.36 143.786667 0 211.626667 111.786667 211.626667 229.973333 0 4.693333 0 9.813333-0.426667 14.506667A168.533333 168.533333 0 0 1 938.666667 641.706667z' fill='#1296db' p-id='61920'></path></svg>";
-=======
-$(function () {
-    $('button#add-bill').click(_ => {
-        window.location.href = 'bill_add.html';
-    });
-    $('a#show-chart').click(_ => {
-        window.location.href = 'doughnut_chart.html';
-    });
-    $('a#export').click(_ => {
-        window.location.href = 'login.html';
-    });
-    updateCard(document.getElementById('CardContainer'));
-});
-
-class CardList {
-    constructor(DataList) {
-        this.DataList = DataList;
-    }
-
-    CreateCardList(container) {
-
-=======
-$(function () {
-    $('button#add-bill').click(_ => {
-        window.location.href = 'bill_add.html';
-    });
-    $('a#show-chart').click(_ => {
-        window.location.href = 'doughnut_chart.html';
-    });
-    $('a#export').click(_ => {
-        window.location.href = 'login.html';
-    });
-    updateCard(document.getElementById('CardContainer'));
-});
-
-class CardList {
-    constructor(DataList) {
-        this.DataList = DataList;
-    }
-
-    CreateCardList(container) {
-
->>>>>>> parent of 3236e70... Merge remote-tracking branch 'upstream/master'
-        this.DataList.forEach(element => {
-            var cardtemplet = new Card(element);
-            cardtemplet.CreateCard(container);
-        });
-<<<<<<< HEAD
->>>>>>> parent of 3236e70... Merge remote-tracking branch 'upstream/master'
-=======
->>>>>>> parent of 3236e70... Merge remote-tracking branch 'upstream/master'
     }
 
 }
-<<<<<<< HEAD
-<<<<<<< HEAD
 class card {
     constructor(data) {
         this.type = data.type;
@@ -139,101 +84,11 @@ class card {
         card_body.append(body_text);
         bill_card.append(card_body);
         return bill_card;
-=======
-
-class Card {
-    constructor(data) {
-        this.type = data.type;
-        this.account = data.account;
-        this.mainCat = data.mainCategory;
-        this.subCat = data.subCategory;
-        this.time = new Date(data.time).toLocaleTimeString();
-        this.amount = data.amount;
-    }
-    CreateCard(container) {
-        // alert('hascreated');
-
-        var AddCard = document.createElement('div');
-        AddCard.setAttribute('class', 'card');
-        container.appendChild(AddCard);
-
-        var AddCardBody = document.createElement('div');
-        AddCardBody.setAttribute('class', 'card-body');
-        AddCard.appendChild(AddCardBody);
-
-        var AddCardText = document.createElement('div');
-        AddCardText.setAttribute('class', 'card-text row justify-content-between');
-        AddCardBody.appendChild(AddCardText);
-
-        var addBillIcon = document.createElement('div');
-        addBillIcon.setAttribute('class', 'col-3');
-        addBillIcon.innerHTML = '';
-        AddCardText.appendChild(addBillIcon);
-
-        var addBillCatandTime = document.createElement('div');
-        addBillCatandTime.setAttribute('class', 'bill-catandtime col-6');
-        addBillCatandTime.innerHTML = this.mainCat + '>' + this.subCat + '<br>' + this.time;
-        AddCardText.appendChild(addBillCatandTime);
-
-=======
-
-class Card {
-    constructor(data) {
-        this.type = data.type;
-        this.account = data.account;
-        this.mainCat = data.mainCategory;
-        this.subCat = data.subCategory;
-        this.time = new Date(data.time).toLocaleTimeString();
-        this.amount = data.amount;
-    }
-    CreateCard(container) {
-        // alert('hascreated');
-
-        var AddCard = document.createElement('div');
-        AddCard.setAttribute('class', 'card');
-        container.appendChild(AddCard);
-
-        var AddCardBody = document.createElement('div');
-        AddCardBody.setAttribute('class', 'card-body');
-        AddCard.appendChild(AddCardBody);
-
-        var AddCardText = document.createElement('div');
-        AddCardText.setAttribute('class', 'card-text row justify-content-between');
-        AddCardBody.appendChild(AddCardText);
-
-        var addBillIcon = document.createElement('div');
-        addBillIcon.setAttribute('class', 'col-3');
-        addBillIcon.innerHTML = '';
-        AddCardText.appendChild(addBillIcon);
-
-        var addBillCatandTime = document.createElement('div');
-        addBillCatandTime.setAttribute('class', 'bill-catandtime col-6');
-        addBillCatandTime.innerHTML = this.mainCat + '>' + this.subCat + '<br>' + this.time;
-        AddCardText.appendChild(addBillCatandTime);
-
->>>>>>> parent of 3236e70... Merge remote-tracking branch 'upstream/master'
-        var addBillAmount = document.createElement('div');
-        addBillAmount.setAttribute('class', 'bill-amount col-3 pr-4 pt-4 pb-4');
-        addBillAmount.innerHTML = (this.type == BillType.income ? "+":"-") + this.amount;
-        AddCardText.appendChild(addBillAmount);
-        // <div class="card-body">
-        //             <div class="card-text row justify-content-between">
-        //                 <div class="bill-type col-3">time</div>
-        //                 <div class='bill-catandtime col-6'>mainCat/subCat</div>
-        //                 <div class="bill-amount col-3"><b>amount</b></div>
-        //             </div>
-        //         </div>
-<<<<<<< HEAD
->>>>>>> parent of 3236e70... Merge remote-tracking branch 'upstream/master'
-=======
->>>>>>> parent of 3236e70... Merge remote-tracking branch 'upstream/master'
     }
 
 
 }
 
-<<<<<<< HEAD
-<<<<<<< HEAD
 function updateCard(container, bills) {
     var listContainer = new billList(bills, 1);
     container.append(listContainer.create(card));
@@ -252,15 +107,3 @@ $(function () {
         this
     })
 })
-=======
-function updateCard(container) {
-    var cardlist = new CardList(global.dataJson.bills);
-    cardlist.CreateCardList(container);
-}
->>>>>>> parent of 3236e70... Merge remote-tracking branch 'upstream/master'
-=======
-function updateCard(container) {
-    var cardlist = new CardList(global.dataJson.bills);
-    cardlist.CreateCardList(container);
-}
->>>>>>> parent of 3236e70... Merge remote-tracking branch 'upstream/master'

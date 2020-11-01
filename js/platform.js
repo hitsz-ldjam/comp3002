@@ -1,10 +1,8 @@
-"use strict";
+"use strict"
 
-<<<<<<< HEAD
-<<<<<<< HEAD
 class DateUtils {
     /**
-     * @param {Date} date
+     * @param {Date} date 
      * @returns Time in form of "YYYY-MM-DDThh-mm"
      */
     static stringfy(date) {
@@ -14,13 +12,13 @@ class DateUtils {
         let hour = date.getUTCHours();
         let minute = date.getUTCMinutes();
 
-        let twowords = (n) => {
+        let twowords = n => {
             if (n < 10) {
                 return "0" + n;
             } else {
-                return n;
+                return n
             }
-        };
+        }
 
         let result = "";
         result += year;
@@ -41,7 +39,7 @@ class DateUtils {
      */
     static parse(time) {
         // YYYY-MM-DDThh:mm
-        let pattern = /([0-9]*)-([0-9]*)-([0-9]*)T([0-9]*):([0-9]*)/;
+        let pattern = /([0-9]*)-([0-9]*)-([0-9]*)T([0-9]*):([0-9]*)/
         let ary = pattern.exec(time);
         if (ary) {
             let date = new Date();
@@ -54,10 +52,6 @@ class DateUtils {
     }
 }
 
-=======
->>>>>>> parent of 3236e70... Merge remote-tracking branch 'upstream/master'
-=======
->>>>>>> parent of 3236e70... Merge remote-tracking branch 'upstream/master'
 /**
  * Platform backend for web
  * Only for development.
@@ -94,7 +88,7 @@ class PlatformWeb {
     }
 
     storeAssetFile(name, data) {
-        this._assets.set(name, data);
+        this._assets.set(name, data)
         return true;
     }
 
@@ -106,7 +100,7 @@ class PlatformWeb {
     }
 
     listAssetFiles() {
-        let files = new Array();
+        let files = new Array()
         for (let key of this._assets.keys()) {
             files.push(key);
         }
@@ -122,16 +116,16 @@ class PlatformWeb {
         input.style.display = "none";
         input.type = "file";
 
-        input.onchange = (e) => {
+        input.onchange = e => {
             let file = e.target.files[0];
             let reader = new FileReader();
             reader.readAsText(file, "UTF-8");
 
-            reader.onload = (readerEvent) => {
+            reader.onload = readerEvent => {
                 this._file = readerEvent.target.result;
                 this._platform._onFileImporterResult();
-            };
-        };
+            }
+        }
 
         input.click();
     }
@@ -139,7 +133,7 @@ class PlatformWeb {
     showFileExporter(name, type) {
         if (this._assets.has(name)) {
             let blob = new Blob([this._assets.get(name)], {
-                type: type,
+                type: type
             });
             let url = window.URL.createObjectURL(blob);
 
@@ -152,6 +146,7 @@ class PlatformWeb {
         } else {
             this._platform._onFileExporterResult(false);
         }
+
     }
 
     saveSubPair(subpwd, key) {
@@ -226,16 +221,16 @@ class PlatformDesktop {
         input.style.display = "none";
         input.type = "file";
 
-        input.onchange = (e) => {
+        input.onchange = e => {
             let file = e.target.files[0];
             let reader = new FileReader();
             reader.readAsText(file, "UTF-8");
 
-            reader.onload = (readerEvent) => {
+            reader.onload = readerEvent => {
                 this._file = readerEvent.target.result;
                 this._platform._onFileImporterResult();
-            };
-        };
+            }
+        }
 
         input.click();
     }
@@ -244,7 +239,7 @@ class PlatformDesktop {
         let files = this.listAssetFiles();
         if (files.includes(name)) {
             let blob = new Blob([this.loadAssetFile(name)], {
-                type: type,
+                type: type
             });
 
             let url = window.URL.createObjectURL(blob);
@@ -258,12 +253,11 @@ class PlatformDesktop {
         } else {
             this._platform._onFileExporterResult(false);
         }
+
     }
 
     saveSubPair(subpwd, key) {
-        this.logError(
-            "PlatformDesktop: saveSubPair(subpwd, key) not implemented"
-        );
+        this.logError("PlatformDesktop: saveSubPair(subpwd, key) not implemented");
     }
 
     clearSubPair() {
@@ -334,8 +328,8 @@ class PlatformAndroid {
     }
 
     /**
-     * @param {string} subpwd
-     * @param {string} key
+     * @param {string} subpwd 
+     * @param {string} key 
      */
     saveSubPair(subpwd, key) {
         return this._backend.saveSubPair(subpwd, key);
@@ -358,6 +352,7 @@ class PlatformAndroid {
     getSubPair() {
         return this._backend.getSubPair();
     }
+
 }
 
 /**
@@ -373,15 +368,17 @@ class Platform {
 
             let pairs = str.split(";");
 
-            pairs.forEach((element) => {
+            pairs.forEach(element => {
                 let str = element.trim();
-                if (str.length == 0) return;
+                if (str.length == 0)
+                    return;
 
                 let pair = str.split(":");
                 let key = pair[0].trim();
                 let value = pair[1].trim();
 
-                if (key.length == 0) return;
+                if (key.length == 0)
+                    return;
 
                 this.settings[key] = value;
             });
@@ -423,7 +420,7 @@ class Platform {
 
     /**
      * Show a message popup.
-     * @param {string} message
+     * @param {string} message 
      */
     showMessage(message) {
         return this._backend.showMessage(message);
@@ -431,7 +428,7 @@ class Platform {
 
     /**
      * Log a message to console.
-     * @param {string} message
+     * @param {string} message 
      */
     logMessage(message) {
         return this._backend.logMessage(message);
@@ -439,7 +436,7 @@ class Platform {
 
     /**
      * Log a error message to console.
-     * @param {string} error
+     * @param {string} error 
      */
     logError(error) {
         return this._backend.logError(error);
@@ -448,11 +445,11 @@ class Platform {
     /**
      * Log a fatal error message to console.
      * WTF stands for What a Terrible Failure
-     *
-     * @param {string} wtf
+     * 
+     * @param {string} wtf 
      */
     logWTF(wtf) {
-        return this._backend.logWTF("> WTF: " + wtf);
+        return this._backend.logWTF('> WTF: ' + wtf);
     }
 
     /**
@@ -477,7 +474,7 @@ class Platform {
     /**
      * Delete file.
      * @param {string} name Name of the file, can not contain path separators
-     * @returns True if the file was successfully deleted; else false.
+     * @returns {boolean} True if the file was successfully deleted; else false.
      */
     deleteAssetFile(name) {
         return this._backend.deleteAssetFile(name);
@@ -485,7 +482,7 @@ class Platform {
 
     /**
      * List all files.
-     * @returns Array of filenames.
+     * @returns {Array<string>} Array of filenames.
      */
     listAssetFiles() {
         return this._backend.listAssetFiles();
@@ -493,17 +490,17 @@ class Platform {
 
     /**
      * Show file importer. Use this with onFileImporterResult to
-     * get the result. This is used to let the user select the file,
+     * get the result. This is used to let the user select the file, 
      * if you just want to open an asset file use loadAssetFile instead.
-     *
+     * 
      * @param {string} type MIME of the file.
-     *
-     * @example
+     * 
+     * @example  
      * platform.onFileImporterResult = function (data) {
-     *     $("#textarea-maindata").val(data);
+     *     $("#textarea-maindata").val(data);    
      * }
      * platform.showFileImporter("application/json");
-     *
+     * 
      */
     showFileImporter(type) {
         return this._backend.showFileImporter(type);
@@ -512,23 +509,24 @@ class Platform {
     /**
      * Global callback for function showFileImporter. This will be called
      * when file importer returns.
-     *
+     * 
      * @example
      * platform.onFileImporterResult = function(data) {
      *     // do something...
      * }
-     *
+     * 
      */
+
 
     /**
      * Show file exporter. Use this with onFileExporterResult to
-     * get the result. This is used to let the user select the file,
+     * get the result. This is used to let the user select the file, 
      * if you just want to write an asset file use storeAssetFile instead.
-     *
+     * 
      * @param {string} name File to export.
      * @param {string} type MIME of the file.
-     *
-     * @example
+     * 
+     * @example  
      * platform.onFileExporterResult = function (success) {
      *     // do something
      * }
@@ -540,10 +538,10 @@ class Platform {
 
     /**
      * Global callback for function showFileExporter. This will be called
-     * when file exporter returns.
-     *
+     * when file exporter returns.  
+     * 
      * You will alway get true on Android as I didn't yet find a good method to check if the operation is successful.
-     *
+     * 
      * @example
      * platform.onFileExporterResult = function(success) {
      *     // do something...
@@ -552,8 +550,8 @@ class Platform {
 
     /**
      * Save sub password and key to local.
-     * @param {string} subpwd
-     * @param {string} key
+     * @param {string} subpwd 
+     * @param {string} key 
      */
     saveSubPair(subpwd, key) {
         return this._backend.saveSubPair(subpwd, key);
