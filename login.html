@@ -15,19 +15,26 @@
     <div class="shell">
         <div>
             <div class="text-center card-header">
-                <h1>登录</h1>
+                <h1>验证</h1>
             </div>
             <div class="text-center card-body">
+<<<<<<< HEAD
                 <div id="login-method-slide" class="carousel" data-touch=false data-interval="0">
+=======
+                <!-- Login method begin -->
+                <div id="login-method-slide" class="carousel slide" data-touch=false data-interval="0">
+>>>>>>> parent of 3236e70... Merge remote-tracking branch 'upstream/master'
                     <div class="carousel-inner">
                         <div class="carousel-item active">
+                            <!-- Method 1 -->
                             <div class="form-outline">
                                 <input type="password" id="password" autocomplete="off" class="form-control" />
-                                <label class="form-label" for="password">密码</label>
+                                <label class="form-label" for="Password">密码</label>
                             </div>
-                            <button class="btn btn-block btn-primary" id="login">登录</button>
+                            <button class="btn btn-block btn-primary" id="decrypt">解密</button>
                         </div>
                         <div class="carousel-item">
+                            <!-- Method 2 -->
                             <svg class="patternlock" id="lock" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
                                 <g class="lock-actives"></g>
                                 <g class="lock-lines"></g>
@@ -46,8 +53,13 @@
                                 </g>
                             </svg>
                         </div>
+                        <div class="carousel-item">
+                            <!-- Method 3 -->
+                            <img src="images/finger.svg" height="150" width="150"/>
+                        </div>
                     </div>
                 </div>
+                <!-- Login method end -->
 
             </div>
             <div class="text-center card-footer">
@@ -55,10 +67,14 @@
                     <div class="btn-group" role="group">
                         <button type="button" class="btn btn-secondary bg-primary" id="login-method-pwd">密码</button>
                         <button type="button" class="btn btn-secondary bg-primary" id="login-method-pattern">图案</button>
+                        <button type="button" class="btn btn-secondary bg-primary" id="login-method-finger">指纹</button>
                     </div>
                 </div>
+                <br />
+                <button class="btn btn-primary" id='new'>新建</button>
+                <br />
                 <button class="btn btn-link" id='import'>导入</button>
-                <button class="btn btn-link" id='new'>新建</button>
+                <button class="btn btn-link" id='export'>导出</button>
             </div>
         </div>
     </div>
