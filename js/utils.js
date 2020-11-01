@@ -9,7 +9,15 @@ class BillType {
     }
 }
 
+<<<<<<< HEAD
+<<<<<<< HEAD
+class oneArray {
+=======
 class OneArray {
+>>>>>>> 9f393a7a99f369d6697d78b7c52201a2bf37806c
+=======
+class OneArray {
+>>>>>>> b41645c840d959b4d6698b5da40d556de80113a6
     static get account() {
         return "account";
     }
@@ -30,7 +38,15 @@ class OneArray {
     }
 }
 
+<<<<<<< HEAD
+<<<<<<< HEAD
+class singleList {
+=======
 class SingleList {
+>>>>>>> 9f393a7a99f369d6697d78b7c52201a2bf37806c
+=======
+class SingleList {
+>>>>>>> b41645c840d959b4d6698b5da40d556de80113a6
     constructor(token) {
         this.token = token;
         this.income = 0;
