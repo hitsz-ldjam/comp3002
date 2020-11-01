@@ -12,7 +12,6 @@
  */
 
 function produce(
-    flag = 0,
     n = 1000,
     accountList = [
         "现金",
@@ -72,9 +71,6 @@ function produce(
         "健身房",
     ]
 ) {
-    if (flag == 0) {
-        return global.dataJson.bills.slice().reverse();
-    }
     var bills = [];
     for (var i = 0; i < n; i++) {
         var year = Math.floor(Math.random() * 10 + 2010);
@@ -95,17 +91,20 @@ function produce(
                 ? BillType.income
                 : BillType.expense;
         bill.flag = "";
-        bill.mainCat =
+        bill.mainCategory =
             mainCatList[Math.floor(Math.random() * mainCatList.length)];
 
-        if (bill.mainCat == "食物") {
-            bill.subCat = subFood[Math.floor(Math.random() * subFood.length)];
-        } else if (bill.mainCat == "出行") {
-            bill.subCat = subTrans[Math.floor(Math.random() * subTrans.length)];
-        } else if (bill.mainCat == "琐碎") {
-            bill.subCat = subSuo[Math.floor(Math.random() * subSuo.length)];
+        if (bill.mainCategory == "食物") {
+            bill.subCategory =
+                subFood[Math.floor(Math.random() * subFood.length)];
+        } else if (bill.mainCategory == "出行") {
+            bill.subCategory =
+                subTrans[Math.floor(Math.random() * subTrans.length)];
+        } else if (bill.mainCategory == "琐碎") {
+            bill.subCategory =
+                subSuo[Math.floor(Math.random() * subSuo.length)];
         } else {
-            bill.subCat = "没有定义";
+            bill.subCategory = "没有定义";
         }
 
         bill.time = date;

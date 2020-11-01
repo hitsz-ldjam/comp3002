@@ -1,95 +1,106 @@
 'use strict';
 
 
-class CryptoData {
+class CryptoInfo {
     constructor() {
-        /** 
-         * @summary Base64 encoded string
-         * @type {Array<number>}
-         */
         this.salt = null;
-        /** 
-         * @summary Base64 encoded string
-         * @type {string}
-         */
         this.iv = null;
-        /** 
-         * @summary Base64 encoded string
-         * @type {string}
-         */
         this.ct = null;
     }
 
-    get pbkdfIter() { return 10000; }
+    get iter() { return 10000; }
 
     /** AES block cipher with CCM mode */
-    get aesParams() { return { v: 1, iter: 14, ks: 256, ts: 128, mode: 'ccm', adata: '', cipher: 'aes' }; }
+    get aesParams() { return { v: 1, iter: this.iter, ks: 256, ts: 128, mode: 'ccm', adata: '', cipher: 'aes' }; }
+}
 
 
+class CryptoUtils {
     /**
-     * @param {string} password
-     * @return {Array<number>}
+     * @param {string} content File content.
+     * @returns {CryptoInfo} Crypto info of content, null if error.
      */
-    deriveKey(password) {
-        const words = 2;
-        let salt = this.salt;
-        if (!salt || !(salt instanceof Array) || salt.length != words)
-            // 64-bit salt
-            salt = sjcl.random.randomWords(words, 0);
-        let key = sjcl.misc.pbkdf2(password, salt, this.pbkdfIter);
-        this.salt = salt;
-        return key;
+    static validateJsonFile(content) {
+        let cryptoInfo = null;
+        try {
+            const json = JSON.parse(content);
+            if (!(json.salt && json.iv && json.ct))
+                throw new SyntaxError();
+            cryptoInfo = new CryptoInfo();
+            cryptoInfo.salt = sjcl.codec.hex.toBits(json.salt);
+            cryptoInfo.iv = json.iv;
+            cryptoInfo.ct = json.ct;
+        }
+        catch (error) {
+            if (error instanceof SyntaxError)
+                platform.logError('Syntax error in file');
+            else
+                platform.logWTF(error);
+        }
+        return cryptoInfo;
     }
 
 
+    // todo: pass key instead of raw password
+    // todo: redesign this
     /**
-     * @param {Array<number>} key An array of 8 ints representing a 256-bit key
-     * @returns {string} Null if error.
+     * @param {string} password
+     * @param {CryptoInfo} cryptoInfo
+     * @returns {string}
      */
-    decrypt(key) {
+    static decrypt(password, cryptoInfo) {
+        let salt = cryptoInfo.salt;
+        // PBKDF2-HMAC-SHA256
+        let key = sjcl.misc.pbkdf2(password, salt, cryptoInfo.iter);
         let plaintext = null;
-        let params = this.aesParams;
-        params.iv = this.iv;
-        params.ct = this.ct;
+        let params = cryptoInfo.aesParams;
+        params.iv = cryptoInfo.iv;
+        params.ct = cryptoInfo.ct;
         try {
             plaintext = sjcl.json.decrypt(key, JSON.stringify(params));
         }
-        catch (e) {
-            if (e instanceof sjcl.exception.corrupt)
-                platform.logMessage('Wrong password');
-            else if (e instanceof sjcl.exception.invalid)
-                platform.logError('SJCL invalid error: ' + e.message);
+        catch (error) {
+            if (error instanceof sjcl.exception.corrupt)
+                platform.showMessage('Wrong password');
+            else if (error instanceof sjcl.exception.invalid)
+                platform.logError('SJCL invalid error: ' + error.message);
             else
-                platform.logWTF(e);
+                platform.logWTF(error);
         }
         return plaintext;
     }
 
 
+    // todo: pass key instead of raw password
     /**
-     * @param {Array<number>} key An Array of 8 ints representing a 256-bit key
+     * @param {string} password
      * @param {string} plaintext
+     * @param {CryptoInfo} cryptoInfo Modified inplace
      * @returns {boolean}
      */
-    encrypt(key, plaintext) {
-        let params = this.aesParams;
-        // 128-bit iv
+    static encrypt(password, plaintext, cryptoInfo) {
+        // 16-bit salt
+        let salt = sjcl.random.randomWords(2, 0);
+        let key = sjcl.misc.pbkdf2(password, salt, cryptoInfo.iter);
+        let params = cryptoInfo.aesParams;
         params.iv = sjcl.random.randomWords(4, 0);
         try {
-            let cipherjson = sjcl.json.encrypt(key, plaintext, params);
-            cipherjson = JSON.parse(cipherjson);
-            this.iv = cipherjson.iv;
-            this.ct = cipherjson.ct;
+            let cipherJson = sjcl.json.encrypt(key, plaintext, params);
+            cipherJson = JSON.parse(cipherJson);
+            cryptoInfo.ct = cipherJson.ct;
+            cryptoInfo.iv = cipherJson.iv;
+            cryptoInfo.salt = sjcl.codec.hex.fromBits(salt);
         }
-        catch (e) {
-            if (e instanceof sjcl.exception.invalid)
-                platform.logError('SJCL invalid error: ' + e.message);
+        catch (error) {
+            if (error instanceof sjcl.exception.invalid)
+                platform.logError('SJCL invalid error: ' + error.message);
             else
-                platform.logWTF(e);
+                platform.logWTF(error);
             return false;
         }
         return true;
     }
+<<<<<<< HEAD
 
     /**
      * @param {string} password
@@ -168,6 +179,8 @@ class CryptoUtils {
         }
         return info;
     }
+=======
+>>>>>>> parent of 3236e70... Merge remote-tracking branch 'upstream/master'
 }
 
 

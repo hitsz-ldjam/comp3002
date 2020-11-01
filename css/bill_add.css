@@ -38,6 +38,12 @@
     width: 123px;
 }
 
+.custom-select {
+    width: 123px;
+    height: 34px;
+    border: 1px solid lightgray;
+}
+
 .time {
     display: -webkit-inline-box;
 }
