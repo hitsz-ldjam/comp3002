@@ -72,7 +72,7 @@ function produce(
         "健身房",
     ]
 ) {
-    if(flag == 0){
+    if (flag == 0) {
         return global.dataJson.bills.slice().reverse();
     }
     var bills = [];
