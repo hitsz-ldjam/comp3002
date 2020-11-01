@@ -15,6 +15,98 @@ img { max-width: 100%; }
 ::-moz-selection { background: #f35b3f; color: #fff; text-shadow: none; }
 ::selection { background: #f35b3f; color: #fff; text-shadow: none; }
 
+html,
+body {
+	width: 100%;
+	height: 100%;
+	overflow: scroll;
+	background-color: whitesmoke;
+}
+
+*::-webkit-scrollbar {
+	width: 0px;
+	height: 0px;
+	display: none;
+}
+
+/* card page*/
+.page {
+	margin: 0em;
+}
+
+.page.cur-page {
+	display: block;
+}
+
+.page.ncur-page {
+	display: none;
+}
+
+.card-container {
+	width: 100%;
+}
+
+.container-fluid {
+	padding: 0em;
+}
+
+.card-container .card {
+	border-radius: 10px;
+}
+
+.fixed-button {
+	position: fixed;
+	bottom: 2em;
+	right: 2em;
+	width: 2em;
+	height: 2em;
+	width: 4em;
+	height: 4em;
+	padding: 0em;
+	margin: 0em;
+	border: none;
+	outline: none;
+	background-color: dodgerblue;
+	z-index: 997;
+	box-shadow: 2px 5px 8px rgb(126, 126, 126);
+}
+.fixed-top{
+	z-index: 997;width: 100%;
+    border-color: black;
+    border-width: 2px;
+    color: whitesmoke;
+}
+
+.card {
+	margin: 1em;
+}
+
+.card-text {
+	height: 5em;
+	justify-content: space-between;
+}
+
+.card-body {
+	padding: 0px;
+}
+
+
+.bill-time {
+	padding: 2.5em 0em 0em 3em;
+}
+
+.bill-catandtime {
+	text-align: left;
+	padding: 0.5em;
+}
+
+.bill-amount {
+	padding: 1em;
+	font-size: 22px;
+	font-family: sans-serif;
+	color: black;
+}
+
 
 /***** Wrapper *****/
 
@@ -168,11 +260,13 @@ img { max-width: 100%; }
 .content { width: 100%; transition: all 0.3s; }
 
 .open-menu { 
-	left: 2em;
-	 z-index: 997;
-	 padding: 0em;
-	 margin:1em;
-	 outline: none;border: none;width: 2em;height: 1.5em;background-color: whitesmoke;}
+	/* left: 2em; */
+	 /* z-index: 997; */
+	 /* padding: 0em; */
+	 /* margin:1em; */
+	 /* outline: none;border: none;width: 2em;height: 1.5em;background-color: whitesmoke; */
+	}
+
 
 
 
