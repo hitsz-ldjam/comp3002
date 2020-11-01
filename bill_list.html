@@ -20,103 +20,14 @@
     <script type="text/javascript" src="js/globals.js"></script>
     <script src='./js/bill_list.js'></script>
     <script src="./js/utils.js"></script>
-<<<<<<< HEAD
     <script src="./js/datajson_read.js"></script>
     <script src='./js/data_producer.js'></script>
-=======
-
->>>>>>> parent of 3236e70... Merge remote-tracking branch 'upstream/master'
     <title>
         content
     </title>
     <style>
-        .page {
-            margin: 0em;
-        }
-
-        .page.cur-page {
-            display: block;
-        }
-
-        .page.ncur-page {
-            display: none;
-        }
-
-        .card-container {
-            width: 100%;
-        }
-
-        .container-fluid {
-            padding: 0em;
-        }
-
-        .card-container .card {
-            border-radius: 10px;
-        }
-
-        .fixed-button {
-            position: fixed;
-            bottom: 2em;
-            right: 2em;
-            width: 2em;
-            height: 2em;
-            width: 4em;
-            height: 4em;
-            padding: 0em;
-            margin: 0em;
-            border: none;
-            outline: none;
-            background-color: dodgerblue;
-            z-index: 997;
-            box-shadow: 2px 5px 8px rgb(126, 126, 126);
-        }
-
-        html,
-        body {
-            width: 100%;
-            height: 100%;
-            overflow: scroll;
-            background-color: whitesmoke;
-        }
-
-        *::-webkit-scrollbar {
-            width: 0px;
-            height: 0px;
-            display: none;
-        }
-
-        .card {
-            margin: 1em;
-        }
-
-        .card-text {
-            height: 5em;
-            justify-content: space-between;
-        }
-
-        .card-body {
-            padding: 0px;
-        }
-
-
-        .bill-time {
-            padding: 2.5em 0em 0em 3em;
-        }
-
-        .bill-catandtime {
-            text-align: left;
-            padding: 0.5em;
-        }
-
-        .bill-amount {
-            padding: 1em;
-            font-size: 22px;
-            font-family: sans-serif;
-            color: black;
-        }
     </style>
     <script>
-<<<<<<< HEAD
         $(function () {
 
             $('a#add-bill').click(_ => {
@@ -163,36 +74,6 @@
         //         $(this).addClass("active").siblings().removeClass('active');
         //     })
         // }); -->
-=======
-        $(document).ready(function () {
-            $('a.nav-link').click(function () {
-                var page_index = $(this).parent().index() - 1;
-                switch (page_index) {
-                    case 0:
-                        $('#page1').addClass('cur-page').removeClass('ncur-page');
-                        $('#page1').siblings().removeClass('cur-page').addClass('ncur-page');
-                        break;
-                    case 1:
-                        $('#page2').addClass('cur-page').removeClass('ncur-page');
-                        $('#page2').siblings().removeClass('cur-page').addClass('ncur-page');
-
-                        break;
-                    case 2:
-                        $('#page3').addClass('cur-page').removeClass('ncur-page');
-                        $('#page3').siblings().removeClass('cur-page').addClass('ncur-page');
-
-                        break;
-                    case 3:
-                        $('#page4').addClass('cur-page').removeClass('ncur-page');
-                        $('#page4').siblings().removeClass('cur-page').addClass('ncur-page');
-
-                        break;
-                };
-                $(this).addClass("active").siblings().removeClass('active');
-            })
-        });
-    </script>
->>>>>>> parent of 3236e70... Merge remote-tracking branch 'upstream/master'
 </head>
 
 <body>
@@ -202,7 +83,6 @@
         <nav class="sidebar">
             <div class="ml-4" style="width: 8em;height: 8em;text-align: center;line-height: 8em;"><span
                     style="font-size: 50px;font-family:Arial, Helvetica, sans-serif ;">Zebra</span></div>
-            <div class="row"></div>
             <!-- S close sidebar menu -->
             <div class="dismiss">
                 <svg class="bi bi-arrow-left" width="2em" height="2em" viewBox="0 0 16 16" fill="currentColor">
@@ -218,9 +98,14 @@
                     <a id='show-chart'>图表</a>
                 </li>
                 <li>
+                    <a id="water" href="bill_waters.html">流水</a>
+                </li>
+                <li>
+                    <a id='set-subpwd' href='set_subpwd.html'>设置图案密码</a>
+                </li>
+                <li>
                     <a id="export">导出</a>
                 </li>
-<<<<<<< HEAD
                 <li>
                     <a href="" data-toggle="collapse" class="dropdown-toggle" role="button" data-target="#otherSections">
                         账户
@@ -229,8 +114,6 @@
 
                     </ul>
                 </li>
-=======
->>>>>>> parent of 3236e70... Merge remote-tracking branch 'upstream/master'
             </ul>
 
             <!-- <div class="dark-light-buttons">
@@ -241,29 +124,25 @@
         </nav>
         <!-- E sidebar -->
         <div class="overlay"></div>
-        <div class="fixed-top" style="z-index: 997;width: 100%;">
+        <div class="fixed-top">
             <nav class="navbar navbar-expand-lg navbar-light bg-light">
                 <!--S open sidebar menu -->
-                <button class="open-menu btn-lg" type="button" data-toggle="collapse"
+                <a class="open-menu pl-2" type="button" data-toggle="collapse"
                     data-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent"
                     aria-expanded="false" aria-label="Toggle navigation">
-                    <svg class="bi bi-list" width="2em" height="2em" viewBox="0 0 16 16" fill="currentColor"
-                        xmlns="http://www.w3.org/2000/svg">
-                        <path fill-rule="evenodd"
-                            d="M2.5 11.5A.5.5 0 0 1 3 11h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4A.5.5 0 0 1 3 7h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4A.5.5 0 0 1 3 3h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z" />
+                    <svg t="1603875674150" class="icon" viewBox="0 0 1024 1024" version="1.1"
+                        xmlns="http://www.w3.org/2000/svg" p-id="20570" width="32" height="32">
+                        <path
+                            d="M128 256h768v85.333333H128V256m0 213.333333h768v85.333334H128v-85.333334m0 213.333334h768v85.333333H128v-85.333333z"
+                            fill="#1296db" p-id="20571"></path>
                     </svg>
-                </button>
+                </a>
                 <!--E open sidebar menu -->
 
                 <div class="nav-item">
 
-<<<<<<< HEAD
                     <a class="pr-2" href="#"><svg class="bi bi-calendar3" width="1em" height="1em" viewBox="0 0 16 16"
                             fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-=======
-                    <a class="nav-link active" href="#"><svg class="bi bi-calendar3" width="1em" height="1em"
-                            viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
->>>>>>> parent of 3236e70... Merge remote-tracking branch 'upstream/master'
                             <path fill-rule="evenodd"
                                 d="M14 0H2a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2zM1 3.857C1 3.384 1.448 3 2 3h12c.552 0 1 .384 1 .857v10.286c0 .473-.448.857-1 .857H2c-.552 0-1-.384-1-.857V3.857z" />
                             <path fill-rule="evenodd"
@@ -290,12 +169,7 @@
         <!-- S main content -->
         <div class="container-fluid" style="margin-top: 4em;">
             <div id="page1" class="page cur-page">
-<<<<<<< HEAD
 
-=======
-                <div class="card-container" id="CardContainer">
-                </div>
->>>>>>> parent of 3236e70... Merge remote-tracking branch 'upstream/master'
             </div>
             <div id="page2" class="page ncur-page"></div>
             <div id="page3" class="page ncur-page">page3</div>

@@ -1,7 +1,6 @@
 
 
 
-<<<<<<< HEAD
 html,
 body {
 	width: 100%;
@@ -92,8 +91,6 @@ strong.more {
     font-size: 1.2em;
 }
 
-=======
->>>>>>> parent of 3236e70... Merge remote-tracking branch 'upstream/master'
 
 /***** Wrapper *****/
 
@@ -247,11 +244,13 @@ strong.more {
 .content { width: 100%; transition: all 0.3s; }
 
 .open-menu { 
-	left: 2em;
-	 z-index: 997;
-	 padding: 0em;
-	 margin:1em;
-	 outline: none;border: none;width: 2em;height: 1.5em;background-color: whitesmoke;}
+	/* left: 2em; */
+	 /* z-index: 997; */
+	 /* padding: 0em; */
+	 /* margin:1em; */
+	 /* outline: none;border: none;width: 2em;height: 1.5em;background-color: whitesmoke; */
+	}
+
 
 
 

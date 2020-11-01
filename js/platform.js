@@ -1,6 +1,5 @@
 "use strict";
 
-<<<<<<< HEAD
 class DateUtils {
     /**
      * @param {Date} date
@@ -53,8 +52,6 @@ class DateUtils {
     }
 }
 
-=======
->>>>>>> parent of 3236e70... Merge remote-tracking branch 'upstream/master'
 /**
  * Platform backend for web
  * Only for development.
@@ -474,7 +471,7 @@ class Platform {
     /**
      * Delete file.
      * @param {string} name Name of the file, can not contain path separators
-     * @returns True if the file was successfully deleted; else false.
+     * @returns {boolean} True if the file was successfully deleted; else false.
      */
     deleteAssetFile(name) {
         return this._backend.deleteAssetFile(name);
@@ -482,7 +479,7 @@ class Platform {
 
     /**
      * List all files.
-     * @returns Array of filenames.
+     * @returns {Array<string>} Array of filenames.
      */
     listAssetFiles() {
         return this._backend.listAssetFiles();
