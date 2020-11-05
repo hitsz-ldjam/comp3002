@@ -13,7 +13,6 @@
     <script src='./js/globals.js'></script>
     <script src='./js/utils.js'></script>
     <script src='./js/doughnut_chart.js'></script>
-    <script src='js/libs/mdb.min.js'></script>
     <script src="./js/platform.js"></script>
     <script src="./js/bill_list.js"></script>
     <script src="./js/bill_waters.js"></script>
@@ -79,8 +78,8 @@
         <div class="card-body text-center">
             <div class="list-group">
                 <button type="button" class="list-group-item active" id="account" data-toggle="list">账户</button>
-                <button type="button" class="list-group-item" id="maincat" data-toggle="list">一级类别</button>
-                <button type="button" class="list-group-item" id="subcat" data-toggle="list">二级类别</button>
+                <button type="button" class="list-group-item" id="mainCategory" data-toggle="list">一级类别</button>
+                <button type="button" class="list-group-item" id="subCategory" data-toggle="list">二级类别</button>
                 <button type="button" class="list-group-item" id="member" data-toggle="list">成员</button>
                 <button type="button" class="list-group-item" id="merchant" data-toggle="list">商家</button>
                 <button type="button" class="list-group-item" id="item" data-toggle="list">项目</button>
@@ -99,9 +98,10 @@
             </div>
         </div>
     </div>
+
     <!-- modal begin -->
     <!-- https://mdbootstrap.com/docs/jquery/modals/basic/#usage -->
-    <div class="modal fade" id="ModalCenter" tabindex="-1" role="dialog" aria-labelledby="ModalCenterTitle"
+    <!-- <div class="modal fade" id="ModalCenter" tabindex="-1" role="dialog" aria-labelledby="ModalCenterTitle"
         aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
@@ -116,26 +116,19 @@
                     </select>
                 </div>
                 <div class="modal-footer">
-                    <!-- <button type="button" class="btn btn-primary" data-dismiss="modal">取消</button>
-                <button type="button" class="btn btn-primary">确定</button> -->
+                    <button type="button" class="btn btn-primary" data-dismiss="modal">取消</button>
+                <button type="button" class="btn btn-primary">确定</button>
                 </div>
             </div>
         </div>
-    </div>
+    </div> -->
     <!-- modal end -->
 
-    <script src='./js/libs/jquery-3.5.1.min.js'></script>
-    <script src='./js/libs/Chart.bundle.min.js'></script>
+
     <script src='js/libs/mdb.min.js'></script>
 
-    <script src='./js/globals.js'></script>
-    <script src='./js/utils.js'></script>
-    <script src='./js/doughnut_chart.js'></script>
-    <script src='./js/datajson_read.js'></script>
-    <script src='./js/platform.js'></script>
-
     <script>
-        $('button#subcat').click(_ => {
+        $('button#subCategory').click(_ => {
             $('#ModalCenter').modal('show')
         });
     </script>
