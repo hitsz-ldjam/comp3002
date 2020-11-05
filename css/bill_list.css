@@ -232,11 +232,11 @@ strong.more {
 /***** Dark overlay *****/
 
 .overlay {
-    display: none; position: fixed ; width: 100vw; height: 100vh; top:0;
-    background: rgba(51, 51, 51, 0.7); z-index: 998; opacity: 0; transition: all 1s ease-in-out;
+    display: block; position: fixed ; width: 100vw; height: 100vh; top:0;
+    background: rgba(51, 51, 51, 0.7); z-index: -1; opacity: 0; transition: opacity .2s ease-in-out;
 }
 
-.overlay.active { display: block; opacity: 100; }
+.overlay.active { z-index: 998; opacity: 100; }
 
 
 /***** Content *****/
