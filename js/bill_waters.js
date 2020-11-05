@@ -14,7 +14,7 @@
 
 
 class year {
-    constructor(data, tagID) {//父元素ID
+    constructor(data, tagID) { //父元素ID
         this.year = data.token;
         this.income = data.income;
         this.expense = data.expense;
@@ -42,7 +42,7 @@ class year {
         // collapse content
         // var tempmonth = new billList(this.dataList, this.tagID);
         // card_collapse.append(tempmonth.create(month));
-        updateElementListIn(card_collapse,this.dataList,month);
+        updateElementListIn(card_collapse, this.dataList, month);
 
         year_card.append(card_body, card_collapse);
 
@@ -89,7 +89,7 @@ class month {
 
         // var last_layer_bills = new billList(bills, this.tagID);
         // card_collapse.append(last_layer_bills.create(card));
-        updateElementListIn(card_collapse,bills,card);
+        updateElementListIn(card_collapse, bills, card);
 
 
         month_card.append(card_body, card_collapse);
@@ -99,10 +99,10 @@ class month {
     }
 }
 
-function updateAllListByTimeLineWithAccount(jqueryContainer, bills=global.dataJson.bills, ob) {
+function updateAllListByTimeLineWithAccount(jqueryContainer, bills = global.dataJson.bills, ob) {
     // alert("update", typeof(data));
     var after_filter = viewByTimeLine(billFilter(bills, ob));
-    var account = ob.account;
+    console.log(after_filter);
     if (ob.account == null || ob.account[0] == null) {
         $('#account-type').html("账户:" + "所有账户");
     } else {
@@ -116,7 +116,7 @@ function updateAllListByTimeLineWithAccount(jqueryContainer, bills=global.dataJs
     // console.log("data");
     // console.log(data);
 
-    updateElementListIn(jqueryContainer,after_filter.list,year);
+    updateElementListIn(jqueryContainer, after_filter.list, year);
 }
 /**
  * 
@@ -129,16 +129,30 @@ function updateAllListByTimeLineWithAccount(jqueryContainer, bills=global.dataJs
  */
 function getQueryVariable(variable) {
     var query = window.location.search.substring(1);
+    // console.log("query = ", query);
+    var ans = [];
     var vars = query.split("&");
     for (var i = 0; i < vars.length; i++) {
         var pair = vars[i].split("=");
         if (pair[0] == variable) {
-            
+
             var gbk = decodeURI(pair[1]);
-            return gbk;
+            ans.push(gbk);
         }
     }
-    return (false);
+    if (ans.length == 0) {
+        return null;
+    } else {
+        return ans;
+    }
+}
+
+function rangeWrapper(start, end) {
+    if (start == "" || end == ""||start==null||end==null) {
+        return null;
+    } else {
+        return [start[0], end[0]];
+    }
 }
 //复选框加全选逻辑
 // $(function(){

@@ -40,17 +40,35 @@ class SingleList {
     }
 }
 
-class ob{
-    constructor() {
-        this.account = null;
-        this.amount = null;
-        this.type = null;
-        this.flag = null;
-        this.mainCategory =null;
-        this.subCategory =null;
-        this.time = null;
-        this.member = null;
-        this.merchant = null;
-        this.item = null;
+class ob {
+    constructor(account = null,
+        amount = null,
+        type = null,
+        flag = null,
+        mainCategory = null,
+        subCategory = null,
+        time = null,
+        member = null,
+        merchant = null,
+        item = null) 
+        {
+        this.account = this.judge(account);
+        this.amount = this.judge(amount);
+        this.type = (type==null||type[0]=="null")?null:Number(type[0]);
+        this.flag = flag;
+        this.mainCategory = this.judge(mainCategory);
+        this.subCategory = this.judge(subCategory);
+        this.time = this.judge(time);
+        this.member = this.judge(member);
+        this.merchant = this.judge(merchant);
+        this.item = this.judge(item);
+    };
+    judge(params) {
+        if(params==null||params.length==0){
+            return null;
+        }else{
+            return params;
+        }
     }
+
 }

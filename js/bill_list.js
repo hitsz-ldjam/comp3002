@@ -122,6 +122,16 @@ class optionInput {
     }
 
 }
+class optionselect{
+    constructor(value,tagID){
+        this.value=value;
+        this.tagID=tagID;
+    }
+    create(faContainer){
+        var option=$('<option></option>').attr("value",this.value).html(this.value);
+        faContainer.append(option);
+    }
+}
 /**
  * 
  * @param {Object} faContainer jquery父元素

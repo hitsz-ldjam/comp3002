@@ -33,14 +33,30 @@
     <script>
         $(function () {
             //流水更新
-            var obWithAccount = new ob();
-            var account = getQueryVariable("account");
-            if (account) {
-                obWithAccount.account = [account];
-            } else {
-                obWithAccount.account = null;
-            }
-            updateAllListByTimeLineWithAccount($('#list-place'), global.dataJson.bills, obWithAccount);
+            var starttime=getQueryVariable("start-time");
+            var endtime=getQueryVariable("endt-ime");
+            var startamount=getQueryVariable("start-amount");
+            var endtamount=getQueryVariable("end-amount");
+            var time=rangeWrapper(starttime,endtime);
+            var amount=rangeWrapper(startamount,endtamount);
+            var obFilter = new ob(
+                getQueryVariable("account"),
+                amount,
+                getQueryVariable("type"),
+                getQueryVariable("flag"),
+                getQueryVariable("mainCategory"),
+                getQueryVariable("subCategory"),
+                time,
+                getQueryVariable("member"),
+                getQueryVariable("merchant"),
+                getQueryVariable("item")
+            );
+            // console.log(obFilter);
+            updateAllListByTimeLineWithAccount($('#list-place'), global.dataJson.bills, obFilter);
+            //筛选器账户列表
+            updateElementListIn($("#account-container"), global.dataJson.accounts.map(x => {
+                return x.name
+            }), optionInput);
             //筛选器一级类别列表
             updateElementListIn($("#maincat-container"), global.dataJson.mainCategories.map(x => {
                 return x.name
@@ -61,6 +77,7 @@
                 return a.concat(b)
             }), optionInput);
             //筛选器member列表
+            var member1 = getQueryVariable("member");
             updateElementListIn($("#member-container"), Array.from(new Set(global.dataJson.bills.map(x => {
                 if (x.member != "") return x.member
             }))).filter(function (e) {
@@ -73,7 +90,7 @@
                         return x.merchant;
                     }))).filter(function (e) {
                 return e !== "";
-            }), optionInput);
+            }), optionselect);
             //筛选器item列表
             updateElementListIn($("#item-container"), Array.from(
                 new Set(
@@ -82,7 +99,7 @@
                             return x.item;
                         }))).filter(function (e) {
                 return e !== "";
-            }), optionInput);
+            }), optionselect);
         });
     </script>
 </head>
@@ -137,8 +154,8 @@
         aria-hidden="true">
         <div class=" modal-dialog modal-fullscreen h-75">
             <div class=" modal-content ">
-                <div class="modal-header">
-                    <p class="modal-title" id="exampleModalLabel">选择</p>
+                <div class="modal-header pt-2 pb-2">
+                    <h2 class="modal-title" id="exampleModalLabel">筛选</h2>
                     <a data-dismiss="modal" aria-label="Close">
                         <svg class="bi bi-x" width="2em" height="2em" viewBox="0 0 16 16" fill="currentColor"
                             xmlns="http://www.w3.org/2000/svg">
@@ -152,7 +169,7 @@
                 <div class=" modal-body p-0">
                     <form name="filter-object" onreset="$('.btn.zebra').removeClass('active')">
                         <!-- 类型 -->
-                        <div class=" p-3">
+                        <div class=" p-3 pt-1">
                             <div class="form-group">
                                 <div>
                                     <h5>类型</h5>
@@ -166,7 +183,7 @@
                                         </div>
                                         <div class=" col-3">
                                             <input class="form-check-input " type="radio" name="type" id="expense"
-                                                value="1">
+                                                value="2">
                                             <label class="form-check-label" for="expense">
                                                 支出
                                             </label>
@@ -180,14 +197,21 @@
                                         </div>
                                         <div class=" col-3">
                                             <input class="form-check-input  " type="radio" name="type" id="income"
-                                                value="2">
+                                                value="1">
                                             <label class="form-check-label " for="income">
                                                 收入
                                             </label>
                                         </div>
                                     </div>
                                 </div>
+                                <!-- account -->
+                                <div>
+                                    <h5>账户</h5>
+                                    <div class="row row-cols-4 zebra-select-section" id='account-container'
+                                        name="account">
 
+                                    </div>
+                                </div>
                                 <!-- mainCat -->
                                 <div>
                                     <h5>一级类别</h5>
@@ -247,24 +271,24 @@
                                 <!-- member -->
                                 <div>
                                     <h5>成员</h5>
-                                    <div class="row row-cols-4 zebra-select-section" id='member-container'
-                                        name="member">
+                                    <div class="row row-cols-4 zebra-select-section" id='member-container' name="member">
                                     </div>
                                 </div>
                                 <!-- merchant -->
                                 <div>
                                     <h5>商家</h5>
-                                    <div class="row row-cols-4 zebra-select-section" id='merchant-container'
-                                        name="merchant">
-                                    </div>
+                                    <select class="form-select" id='merchant-container' name="merchant">
+                                        <option value="null">所有</option>
+                                    </select>
                                 </div>
                                 <!-- item -->
                                 <div>
                                     <h5>项目</h5>
-                                    <div class="row row-cols-4 zebra-select-section" id='item-container' name="item">
-                                    </div>
+                                    <select class="form-select" id='item-container' name="item">
+                                        <option value="null">所有</option>
+                                    </select>
                                 </div>
-
+                                <br>
                             </div>
                         </div>
                         <div class="row m-0 w-100 fixed-bottom" style="bottom: 25%;">
