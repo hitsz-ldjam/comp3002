@@ -1,15 +1,15 @@
 <!DOCTYPE html>
 <html>
 
-<>
+<head>
     <meta charset="utf-8">
 
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="stylesheet" href="./css/libs/mdb.min.css">
     <link rel="stylesheet" href="./css/libs/jquery.mCustomScrollbar.min.css">
     <link rel="stylesheet" href="./css/bill_waters.css">
-    <script type="application/javascript" src="./js/libs/bootstrap.bundle.min.js"></script>
     <script type="application/javascript" src="./js/libs/jquery-3.5.1.min.js"></script>
+    <script type="application/javascript" src="./js/libs/bootstrap.bundle.min.js"></script>
     <script type="application/javascript" src="./js/libs/mdb.min.js"></script>
     <script src="./js/libs/jquery.mCustomScrollbar.concat.min.js"></script>
     <script src="./js/mainpage.js"></script>
@@ -21,6 +21,7 @@
     <script src='./js/bill_list.js'></script>
     <script src="./js/utils.js"></script>
     <script src="./js/datajson_read.js"></script>
+    <script src="./js/datajson_write.js"></script>
     <script src="./js/bill_waters.js"></script>
     <script src='./js/data_producer.js'></script>
 
@@ -31,162 +32,252 @@
     </style>
     <script>
         $(function () {
+            //流水更新
             var obWithAccount = new ob();
-            var account=getQueryVariable("account");
-            if(account){
-                obWithAccount.account=[account];
-            }
-            else{
+            var account = getQueryVariable("account");
+            if (account) {
+                obWithAccount.account = [account];
+            } else {
                 obWithAccount.account = null;
             }
             updateAllListByTimeLineWithAccount($('#list-place'), global.dataJson.bills, obWithAccount);
+            //筛选器一级类别列表
+            updateElementListIn($("#maincat-container"), global.dataJson.mainCategories.map(x => {
+                return x.name
+            }), optionInput);
+            //筛选器二级列表
+            var subcat = global.dataJson.mainCategories.map(x => {
+                return x.subCategories.map(y => {
+                    return y
+                })
+            }).reduce(function (a, b) {
+                return a.concat(b)
+            });
+            updateElementListIn($("#subcat-container"), global.dataJson.mainCategories.map(x => {
+                return x.subCategories.map(y => {
+                    return y
+                })
+            }).reduce(function (a, b) {
+                return a.concat(b)
+            }), optionInput);
+            //筛选器member列表
+            updateElementListIn($("#member-container"), Array.from(new Set(global.dataJson.bills.map(x => {
+                if (x.member != "") return x.member
+            }))).filter(function (e) {
+                return e !== "";
+            }), optionInput);
+            //筛选器merchant列表
+            updateElementListIn($("#merchant-container"), Array.from(
+                new Set(global.dataJson.bills.map(
+                    x => {
+                        return x.merchant;
+                    }))).filter(function (e) {
+                return e !== "";
+            }), optionInput);
+            //筛选器item列表
+            updateElementListIn($("#item-container"), Array.from(
+                new Set(
+                    global.dataJson.bills.map(
+                        x => {
+                            return x.item;
+                        }))).filter(function (e) {
+                return e !== "";
+            }), optionInput);
         });
-        
     </script>
-    </head>
+</head>
 
-    <body>
-        <!-- Wrapper -->
-        <div class="wrapper">
-            <!--S Sidebar -->
-            <div class="fixed-top text-left bg-light">
-                <nav class="navbar navbar-expand-lg navbar-light bg-light">
-                    <a class="pl-2" href="bill_list.html">
-                        <svg class="bi bi-chevron-left" width="32" height="32" viewBox="0 0 16 16" fill="currentColor"
+<body>
+    <!-- Wrapper -->
+    <div class="wrapper">
+        <!--S Sidebar -->
+        <div class="fixed-top text-left bg-light">
+            <nav class="navbar navbar-expand-lg navbar-light bg-light">
+                <a class="pl-2" href="bill_list.html">
+                    <svg class="bi bi-chevron-left" width="32" height="32" viewBox="0 0 16 16" fill="currentColor"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd"
+                            d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z" />
+                    </svg>
+                </a>
+                <div class=" text-center pr-3"><span class=" text-black" style="font-size: large;">流水</span></div>
+        </div>
+    </div>
+    <!-- S filterdButton -->
+    <a id="filter" class="fixed-button rounded-circle " data-toggle="modal" data-target="#filter-modal">
+        <svg t="1603884428503" class="icon" viewBox="-256 -300 1492 1536" version="1.1"
+            xmlns="http://www.w3.org/2000/svg" p-id="21224" width="64" height="64">
+            <path
+                d="M128 85.333333h768v85.333334h-3.413333L597.333333 465.92v511.573333l-170.666666-170.666666v-341.333334L131.84 170.666667H128V85.333333z"
+                fill="#ffffff" p-id="21225"></path>
+        </svg>
+    </a>
+    <!-- S main content -->
+    <!-- <hr class=" hide"> -->
+    <div class="container mt-5">
+        <div class="d-block bg-image" style="color: white;background-image: url(./images/timg.jpg);">
+            <div id='account-type' class=" position-relative">账户:nodata</div>
+            <div id='account-total' class="row zebra text-center align-items-end mb-1">
+                <div id='account-income' class=" col-3 p-0" style="height: fit-content;"><span>nodata<br></span>收入
+                </div>
+                <div id='account-remain' class=" col-6 p-0" style="font-size: 1.5em;"><span>nodata<br></span>结余
+                </div>
+                <div id='account-expense' class=" col-3 p-0" style="height: fit-content;"><span>nodata<br></span>支出
+                </div>
+            </div>
+        </div>
+        <div class="container" id='list-place'>
+            <!-- Year 0 -->
+
+        </div>
+    </div>
+
+    <!-- E main content -->
+    <div id="filter-modal" class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class=" modal-dialog modal-fullscreen h-75">
+            <div class=" modal-content ">
+                <div class="modal-header">
+                    <p class="modal-title" id="exampleModalLabel">选择</p>
+                    <a data-dismiss="modal" aria-label="Close">
+                        <svg class="bi bi-x" width="2em" height="2em" viewBox="0 0 16 16" fill="currentColor"
                             xmlns="http://www.w3.org/2000/svg">
                             <path fill-rule="evenodd"
-                                d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z" />
+                                d="M11.854 4.146a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708-.708l7-7a.5.5 0 0 1 .708 0z" />
+                            <path fill-rule="evenodd"
+                                d="M4.146 4.146a.5.5 0 0 0 0 .708l7 7a.5.5 0 0 0 .708-.708l-7-7a.5.5 0 0 0-.708 0z" />
                         </svg>
                     </a>
-                    <div class=" text-center pr-3"><span class=" text-black" style="font-size: large;">流水</span></div>
-            </div>
-        </div>
-        <!-- S filterdButton -->
-        <!-- <a id="filter" class="fixed-button rounded-circle " data-toggle="modal" data-target="#filter-modal">
-            <svg t="1603884428503" class="icon" viewBox="-256 -300 1492 1536" version="1.1"
-                xmlns="http://www.w3.org/2000/svg" p-id="21224" width="64" height="64">
-                <path
-                    d="M128 85.333333h768v85.333334h-3.413333L597.333333 465.92v511.573333l-170.666666-170.666666v-341.333334L131.84 170.666667H128V85.333333z"
-                    fill="#ffffff" p-id="21225"></path>
-            </svg>
-        </a> -->
-        <!-- S main content -->
-        <!-- <hr class=" hide"> -->
-        <div class="container mt-5">
-            <div class="d-block bg-image" style="color: white;background-image: url(./images/timg.jpg);">
-                <div id='account-type' class=" position-relative">账户:nodata</div>
-                <div id='account-total' class="row zebra text-center align-items-end mb-1">
-                    <div id='account-income' class=" col-3 p-0" style="height: fit-content;"><span>nodata<br></span>收入
-                    </div>
-                    <div id='account-remain' class=" col-6 p-0" style="font-size: 1.5em;"><span>nodata<br></span>结余
-                    </div>
-                    <div id='account-expense' class=" col-3 p-0" style="height: fit-content;"><span>nodata<br></span>支出
-                    </div>
                 </div>
-            </div>
-            <div class="container" id='list-place'>
-                <!-- Year 0 -->
-
-            </div>
-        </div>
-
-        <!-- E main content -->
-        <div id="filter-modal" class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
-            aria-hidden="true">
-            <div class=" modal-dialog modal-sm">
-                <div class=" modal-content ">
-                    <div class="modal-header">
-                        <p class="modal-title" id="exampleModalLabel">选择</p>
-                        <a data-dismiss="modal" aria-label="Close">
-                            <svg class="bi bi-x" width="2em" height="2em" viewBox="0 0 16 16" fill="currentColor"
-                                xmlns="http://www.w3.org/2000/svg">
-                                <path fill-rule="evenodd"
-                                    d="M11.854 4.146a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708-.708l7-7a.5.5 0 0 1 .708 0z" />
-                                <path fill-rule="evenodd"
-                                    d="M4.146 4.146a.5.5 0 0 0 0 .708l7 7a.5.5 0 0 0 .708-.708l-7-7a.5.5 0 0 0-.708 0z" />
-                            </svg>
-                        </a>
-                    </div>
-                    <div class=" modal-body">
+                <div class=" modal-body p-0">
+                    <form name="filter-object" onreset="$('.btn.zebra').removeClass('active')">
                         <!-- 类型 -->
-                        <div class="form-group">
-                            <!-- type -->
-                            <div class="row zebra">
-                                <div class=" col-3">
-                                    <input class="form-check-input " type="radio" name="gridRadios" id="gridRadios1"
-                                        checked>
-                                    <label class="form-check-label" for="gridRadios1">
-                                        所有
-                                    </label>
-                                </div>
-                                <div class=" col-3">
-                                    <input class="form-check-input " type="radio" name="gridRadios" id="gridRadios2">
-                                    <label class="form-check-label" for="gridRadios2">
-                                        支出
-                                    </label>
-                                </div>
-                                <div class=" col-3">
-                                    <input class="form-check-input " type="radio" name="gridRadios" id="gridRadios3">
-                                    <label class="form-check-label" for="gridRadios3">
-                                        转账
-                                    </label>
-                                </div>
-                                <div class=" col-3">
-                                    <input class="form-check-input  " type="radio" name="gridRadios" id="gridRadios4">
-                                    <label class="form-check-label " for="gridRadios4">
-                                        收入
-                                    </label>
-                                </div>
-                            </div>
-                            <!-- amount -->
-                            <div>
-                                <div class="input-group mb-3">
-                                    <div class="input-group-prepend">
-                                        <span class="input-group-text" id="basic-addon1">从</span>
+                        <div class=" p-3">
+                            <div class="form-group">
+                                <div>
+                                    <h5>类型</h5>
+                                    <div class="row">
+                                        <div class=" col-3">
+                                            <input id="type-all" class="form-check-input" type="radio" name="type"
+                                                value="null" checked>
+                                            <label class="form-check-label" for="type-all">
+                                                所有
+                                            </label>
+                                        </div>
+                                        <div class=" col-3">
+                                            <input class="form-check-input " type="radio" name="type" id="expense"
+                                                value="1">
+                                            <label class="form-check-label" for="expense">
+                                                支出
+                                            </label>
+                                        </div>
+                                        <div class=" col-3">
+                                            <input class="form-check-input " type="radio" name="type" id="transfer"
+                                                value="3">
+                                            <label class="form-check-label" for="transfer">
+                                                转账
+                                            </label>
+                                        </div>
+                                        <div class=" col-3">
+                                            <input class="form-check-input  " type="radio" name="type" id="income"
+                                                value="2">
+                                            <label class="form-check-label " for="income">
+                                                收入
+                                            </label>
+                                        </div>
                                     </div>
-                                    <input type="number" class="form-control" placeholder="Username">
-                                    <label class="form-check-label " for="gridRadios4">
-                                        收入
-                                    </label>
                                 </div>
-                                <div class="input-group mb-3">
-                                    <div class="input-group-prepend">
-                                        <span class="input-group-text" id="basic-addon2">到</span>
-                                    </div>
-                                    <input type="number" class="form-control" placeholder="Username">
-                                </div>
-                            </div>
-                            <!-- mainCat -->
-                            <!-- subCat -->
-                            <!-- time -->
-                            <div>
-                                <div class="input-group mb-3">
-                                    <div class="input-group-prepend">
-                                        <span class="input-group-text" id="basic-addon3">从</span>
-                                    </div>
-                                    <input type=" number" class="form-control" placeholder="Username">
-                                </div>
-                                <div class="input-group mb-3">
-                                    <div class="input-group-prepend">
-                                        <span class="input-group-text" id="basic-addon4">到</span>
-                                    </div>
-                                    <input type="number" class="form-control" placeholder="Username">
-                                </div>
-                            </div>
-                            <!-- member -->
-                            <!-- merchant -->
-                            <!-- item -->
 
+                                <!-- mainCat -->
+                                <div>
+                                    <h5>一级类别</h5>
+                                    <div class="row row-cols-4 zebra-select-section" id='maincat-container'
+                                        name="mainCategory">
+
+                                    </div>
+                                </div>
+                                <!-- subCat -->
+                                <div>
+                                    <h5>二级类别</h5>
+                                    <div class="row row-cols-4 zebra-select-section" id='subcat-container'
+                                        name="subCategory">
+                                    </div>
+                                </div>
+                                <!-- amount -->
+                                <div>
+                                    <h5>金额</h5>
+                                    <div class=" d-flex">
+                                        <div class="input-group mb-3 pr-2">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text pl-1 pr-1">￥</span>
+                                            </div>
+                                            <input name="start-amount" type="number" class="form-control"
+                                                placeholder="最低金额">
+                                        </div>
+                                        —
+                                        <div class="input-group mb-3 pl-2">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text pl-1 pr-1">￥</span>
+                                            </div>
+                                            <input name="end-amount" type="number" class="form-control"
+                                                placeholder="最高金额">
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- time -->
+                                <div>
+                                    <h5>时间</h5>
+                                    <div class=" d-inline-block">
+                                        <div class="input-group mb-3">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text">开始</span>
+                                            </div>
+                                            <input name="start-time" type="datetime-local" class="form-control"
+                                                placeholder="起始时间">
+                                        </div>
+                                        <div class="input-group mb-3">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text">结束</span>
+                                            </div>
+                                            <input name="end-time" type="datetime-local" class="form-control"
+                                                placeholder="截止时间">
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- member -->
+                                <div>
+                                    <h5>成员</h5>
+                                    <div class="row row-cols-4 zebra-select-section" id='member-container'
+                                        name="member">
+                                    </div>
+                                </div>
+                                <!-- merchant -->
+                                <div>
+                                    <h5>商家</h5>
+                                    <div class="row row-cols-4 zebra-select-section" id='merchant-container'
+                                        name="merchant">
+                                    </div>
+                                </div>
+                                <!-- item -->
+                                <div>
+                                    <h5>项目</h5>
+                                    <div class="row row-cols-4 zebra-select-section" id='item-container' name="item">
+                                    </div>
+                                </div>
+
+                            </div>
                         </div>
-                        <!--  -->
-                        <!-- zhanghu -->
-
-                    </div>
+                        <div class="row m-0 w-100 fixed-bottom" style="bottom: 25%;">
+                            <button class="btn btn-light col " type="reset">重置</button>
+                            <button class="btn btn-primary col " type="submit">确定</button>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
+    </div>
 
 
-    </body>
+</body>
 
 </html>

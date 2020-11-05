@@ -14,7 +14,7 @@
 
 
 class year {
-    constructor(data, tagID) {
+    constructor(data, tagID) {//父元素ID
         this.year = data.token;
         this.income = data.income;
         this.expense = data.expense;
@@ -22,7 +22,7 @@ class year {
         this.dataList = data.list;
         this.tagID = tagID;
     }
-    create() {
+    create(faContainer) {
 
         var year_card = $("<div class='card mt-3 ml-1 zebra'></div>");
 
@@ -40,12 +40,14 @@ class year {
         card_body.append(body_button);
 
         // collapse content
-        var tempmonth = new billList(this.dataList, this.tagID);
-        card_collapse.append(tempmonth.create(month));
+        // var tempmonth = new billList(this.dataList, this.tagID);
+        // card_collapse.append(tempmonth.create(month));
+        updateElementListIn(card_collapse,this.dataList,month);
 
         year_card.append(card_body, card_collapse);
 
-        return year_card;
+        faContainer.append(year_card);
+        // return year_card;
     }
 }
 class month {
@@ -57,7 +59,7 @@ class month {
         this.dataList = data.list;
         this.tagID = tagID;
     }
-    create() {
+    create(faContainer) {
         // alert("month");
         var month_card = $("<div class='card zebra mt-1 ml-1'></div>");
 
@@ -85,15 +87,19 @@ class month {
             );
         });
 
-        var last_layer_bills = new billList(bills, this.tagID);
-        card_collapse.append(last_layer_bills.create(card));
+        // var last_layer_bills = new billList(bills, this.tagID);
+        // card_collapse.append(last_layer_bills.create(card));
+        updateElementListIn(card_collapse,bills,card);
+
 
         month_card.append(card_body, card_collapse);
-        return month_card;
+
+        faContainer.append(month_card);
+        // return month_card;
     }
 }
 
-function updateAllListByTimeLineWithAccount(jqueryContainer, bills, ob) {
+function updateAllListByTimeLineWithAccount(jqueryContainer, bills=global.dataJson.bills, ob) {
     // alert("update", typeof(data));
     var after_filter = viewByTimeLine(billFilter(bills, ob));
     var account = ob.account;
@@ -110,8 +116,7 @@ function updateAllListByTimeLineWithAccount(jqueryContainer, bills, ob) {
     // console.log("data");
     // console.log(data);
 
-    var listContainer = new billList(after_filter.list, "Bill");
-    jqueryContainer.append(listContainer.create(year));
+    updateElementListIn(jqueryContainer,after_filter.list,year);
 }
 /**
  * 
@@ -135,3 +140,39 @@ function getQueryVariable(variable) {
     }
     return (false);
 }
+//复选框加全选逻辑
+// $(function(){
+//     $('.zebra-select-section>.zebra-select-all').on("click",function(){
+//         // console.log($(this).children().prop("checked"));
+
+//         if($(this).children().prop("checked")){
+//             console.log($(this).siblings().children());
+//             $(this).siblings().children().each(function(){
+//                 // alert();
+//                 $(this).prop("checked",false);
+//             });   
+//         }
+//         else{
+//             // console.log($(this).siblings().children().prop("checked"));
+//             $(this).siblings().children().each(function(){
+//                 // alert();
+//                 $(this).prop("checked",true);
+//             });   
+//         }
+//         // console.log($(this).siblings().children().prop("checked"));
+//     })
+//     $('.zebra-select-section>.zebra-select-option').on("click",function(){
+//         var checked_num=$(this).parent().children('.zebra-select-option').children(':checked').length;
+//         // console.log(checked_num);
+//         var option_num=$(this).parent().children('.zebra-select-option').length;
+
+//         // console.log(option_num);
+//         if(checked_num==option_num){
+//             $('.zebra-select-all').children().prop("checked",true);
+//         }
+//         else{
+//             $('.zebra-select-all').children().prop("checked",false);
+//         }
+//         // console.log($('.zebra-select-all').children());
+//     });
+// })

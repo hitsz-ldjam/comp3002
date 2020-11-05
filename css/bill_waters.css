@@ -11,6 +11,7 @@ body {
 	height: 0px;
 	display: none;
 }
+
 .page {
 	margin: 0em;
 }
@@ -24,7 +25,7 @@ body {
 }
 
 
-.card.zebra{
+.card.zebra {
 	padding: 0em;
 }
 
@@ -38,20 +39,22 @@ body {
 	background-color: dodgerblue;
 	box-shadow: 2px 5px 8px rgb(126, 126, 126);
 }
-.row.zebra{
+
+.row.zebra {
 	margin: 0em;
 }
 
 
-.card-text.zebra{
-    justify-content: space-between;
+.card-text.zebra {
+	justify-content: space-between;
 	height: 4.5em;
 }
 
-.card-body.zebra{
-    padding: 0px;
+.card-body.zebra {
+	padding: 0px;
 }
-.bill-link{
+
+.bill-link {
 	padding: 0em 1em;
 }
 
@@ -61,54 +64,114 @@ body {
 
 .bill-catandtime {
 	text-align: left;
-    padding: 1em 0em;
+	padding: 1em 0em;
 }
-.bill-icon{
+
+.bill-icon {
 	margin-right: 0.5em;
 }
-.bill-date{
+
+.bill-date {
 	margin-left: 1em;
 	min-width: 3em;
 
 }
+
 .bill-amount {
-	padding: 0.5em 0.5em 0.5em 0em!important;
+	padding: 0.5em 0.5em 0.5em 0em !important;
 	font-size: 22px;
 	font-family: sans-serif;
-    padding: 0px;
+	padding: 0px;
 	color: black;
 }
-.fixed-top{
-    z-index: 997;width: 100%;
-    border-color: black;
-    border-width: 2px;
-    color: whitesmoke;
+
+.fixed-top {
+	z-index: 997;
+	width: 100%;
+	border-color: black;
+	border-width: 2px;
+	color: whitesmoke;
 }
-.container{
+
+.container {
 	padding: 0em;
 }
-strong.more{
+
+strong.more {
 	font-size: 1.5em;
 }
+
 .btn-link.zebra:focus {
 	background-color: white;
 	color: black;
 }
-.btn-link.zebra{
+
+.btn-link.zebra {
 	color: black;
 }
-.list-year{
-	font-size:x-large ;
+
+.list-year {
+	font-size: x-large;
 }
-.list-year-total{
+
+.list-year-total {
 	font-size: 1.2em;
 }
-.list-month{
+
+.list-month {
 	font-size: large;
 }
-.list-month-total{
+
+.list-month-total {
 	font-size: 1.2em;
 }
+
+input[type='checkbox'] {
+	display:none;
+	/* right: 1.5em; */
+
+}
+
+.zebra.btn-primary {
+	font-size: 1em;
+	height: 2em;
+	padding: 0.3em 0px;
+}
+
+.zebra.btn-primary.active:focus,
+.zebra.btn-primary.active:hover {
+	background-color: #093d94;
+}
+
+.zebra.btn-primary:focus,
+.zebra.btn-primary:hover {
+	background-color: #1266f1;
+	box-shadow: none;
+}
+
+.zebra.btn-primary {
+	box-shadow: none;
+	margin-bottom:1em;
+}
+
+label {
+	left:10px;
+	/* width: 2em; */
+	vertical-align: middle;
+}
+/* .zebra-select-option{
+	width: 5em;
+} */
+
+/* .zebra-checkbox.btn-light{
+	width: 15%;
+	height: 20px;
+}
+.zebra-select-option{
+	margin: 5px;
+	height: 1.2em;
+	background-color: gray;
+} */
 /* <div class="card">
                                     <div class="card-body">
                                         <div class="card-text row justify-content-between">
@@ -132,4 +195,3 @@ strong.more{
                                             </div>
                                         </div>
  <div class=" card-container" id="CardContainer2"> */
-           

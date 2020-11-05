@@ -21,6 +21,8 @@
     <script src='./js/bill_list.js'></script>
     <script src="./js/utils.js"></script>
     <script src="./js/datajson_read.js"></script>
+    <script src="./js/datajson_write.js"></script>
+
     <script src='./js/data_producer.js'></script>
     <title>
         content
@@ -41,7 +43,7 @@
             });
             var tb = new ob();
 
-            updateCard($('#page1'), produce());
+            updateElementListIn($('#page1'),produce(),card);
             updateAccountList($('#otherSections'));
         });
     </script>
