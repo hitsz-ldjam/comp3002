@@ -33,12 +33,13 @@
     <script>
         $(function () {
             //流水更新
-            var starttime=getQueryVariable("start-time");
-            var endtime=getQueryVariable("endt-ime");
-            var startamount=getQueryVariable("start-amount");
-            var endtamount=getQueryVariable("end-amount");
-            var time=rangeWrapper(starttime,endtime);
-            var amount=rangeWrapper(startamount,endtamount);
+            var starttime = getQueryVariable("start-time");
+            var endtime = getQueryVariable("end-time");
+            var time = (rangeWrapper(starttime, endtime) == null) ? null : rangeWrapper(starttime, endtime).map(
+                DateUtils.parse);
+            var startamount = getQueryVariable("start-amount");
+            var endtamount = getQueryVariable("end-amount");
+            var amount = rangeWrapper(startamount, endtamount);
             var obFilter = new ob(
                 getQueryVariable("account"),
                 amount,
@@ -78,9 +79,11 @@
             }), optionInput);
             //筛选器member列表
             var member1 = getQueryVariable("member");
-            updateElementListIn($("#member-container"), Array.from(new Set(global.dataJson.bills.map(x => {
-                if (x.member != "") return x.member
-            }))).filter(function (e) {
+            updateElementListIn($("#member-container"), Array.from(
+                new Set(global.dataJson.bills.map(
+                    x => {
+                        return x.member
+                    }))).filter(function (e) {
                 return e !== "";
             }), optionInput);
             //筛选器merchant列表
@@ -207,24 +210,21 @@
                                 <!-- account -->
                                 <div>
                                     <h5>账户</h5>
-                                    <div class="row row-cols-4 " id='account-container'
-                                        name="account">
+                                    <div class="row row-cols-4 " id='account-container' name="account">
 
                                     </div>
                                 </div>
                                 <!-- mainCat -->
                                 <div>
                                     <h5>一级类别</h5>
-                                    <div class="row row-cols-4 " id='maincat-container'
-                                        name="mainCategory">
+                                    <div class="row row-cols-4 " id='maincat-container' name="mainCategory">
 
                                     </div>
                                 </div>
                                 <!-- subCat -->
                                 <div>
                                     <h5>二级类别</h5>
-                                    <div class="row row-cols-4 " id='subcat-container'
-                                        name="subCategory">
+                                    <div class="row row-cols-4 " id='subcat-container' name="subCategory">
                                     </div>
                                 </div>
                                 <!-- amount -->
