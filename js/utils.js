@@ -64,7 +64,7 @@ class ob {
         this.item = this.judge(item);
     };
     judge(params) {
-        if(params==null||params.length==0){
+        if(params==null||params.length==0||params[0]=="null"){
             return null;
         }else{
             return params;

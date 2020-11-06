@@ -136,7 +136,7 @@ function getQueryVariable(variable) {
         var pair = vars[i].split("=");
         if (pair[0] == variable) {
 
-            var gbk = decodeURI(pair[1]);
+            var gbk = decodeURI(pair[1].replace("\+","%20"));//在提交表单时，浏览器url会将空格转为"+"，故解码时将其转换回来
             ans.push(gbk);
         }
     }
