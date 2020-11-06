@@ -340,7 +340,7 @@ function billFilter(bills, object) {
                 } else {
                     f[key] = false;
                 }
-            } else if (key == "time" || key == "amount") {
+            } else if (key == "amount") {
                 // 如果是日期或者金额范围
                 if (
                     bill[key] >= tempOb[key][0] &&
@@ -350,6 +350,18 @@ function billFilter(bills, object) {
                 } else {
                     f[key] = false;
                 }
+                
+            } else if (key == "time") {
+                // 如果是日期或者金额范围
+                if (
+                    DateUtils.parse(bill[key]) >= tempOb[key][0] &&
+                    DateUtils.parse(bill[key]) <= tempOb[key][1]
+                ) {
+                    f[key] = true;
+                } else {
+                    f[key] = false;
+                }
+                
             } else {
                 // 其余的数组类型
                 for (var i of tempOb[key]) {

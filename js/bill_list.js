@@ -90,10 +90,10 @@ class card {
         card_body.append(body_text);
         bill_card.append(card_body);
         //卡片响应事件
-        bill_card.data("id", this.tagID);
-        bill_card.on("click", function () {
-            alert(bill_card.data("id"));
-        });
+        // bill_card.data("id", this.tagID);
+        // bill_card.on("click", function () {
+        //     alert(bill_card.data("id"));
+        // });
 
         faContainer.append(bill_card);
         // return bill_card;
