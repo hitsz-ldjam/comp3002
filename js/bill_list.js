@@ -77,7 +77,7 @@ class card {
         var catandtime_icon = $("<div class='bill-icon'></div>").html(iconSelector(this.mainCategory));
         // alert(catandtime_icon);
         var catandtime_data = $("<div class='cat-time-data'></div>").html(this.mainCategory + ">" + this.subCategory + "<br>" + "<small class='text-muted font-weight-light'>" + DateUtils.parse(this.time).getHours() + ":" +
-            Math.round(DateUtils.parse(this.time).getMinutes() / 10) + Math.round(DateUtils.parse(this.time).getMinutes() % 10) + "</small>");
+            checkTime(DateUtils.parse(this.time).getMinutes()) + "</small>");
         var text_amount = $("<div class='bill-amount col-3  text-right'></div>").html("<b class='" + (this.type == BillType.income ? "text-success" : "text-danger") + "'>" + (this.type == BillType.income ? "+" : "-") + this.amount + "</b>");
         var text_catandtime = $("<div class='bill-catandtime col-6 d-flex align-items-center'></div>");
         var text_date = $("<div class='bill-date text-center'></div>").html("<strong class='more'>" + DateUtils.parse(this.time).getDate() + "</strong>" + "<small>日</small><br>" + "<small class='text-muted' hidden>" + (DateUtils.parse(this.time).getMonth() + 1) + "月</small>");
@@ -155,4 +155,10 @@ function updateAccountList(faContainer) {
             faContainer.append(li);
         });
     }
+}
+function checkTime(i){
+	if (i<10){
+		i="0" + i;
+	}
+	return i;
 }
