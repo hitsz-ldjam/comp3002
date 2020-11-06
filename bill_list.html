@@ -31,7 +31,18 @@
     </style>
     <script>
         $(function () {
-
+            var obFilter = new ob(
+            );
+            var start_time=new Date();
+            start_time.setHours(0);
+            start_time.setMinutes(0);
+            start_time.setSeconds(0);
+            start_time.setMilliseconds(0);
+            var end_time=new Date();
+            end_time.setMinutes(59)
+            end_time.setSeconds(59);
+            end_time.setMilliseconds(999);
+            obFilter.time=[start_time,end_time];
             $('a#add-bill').click(_ => {
                 window.location.href = 'bill_add.html';
             });
@@ -42,7 +53,7 @@
                 window.location.href = 'file_export.html';
             });
 
-            updateElementListIn($('#page1'),produce(),card);
+            updateElementListIn($('#page1'),billFilter(produce(),obFilter),card);
             updateAccountList($('#otherSections'));
         });
     </script>
@@ -148,7 +159,7 @@
                                 d="M14 0H2a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2zM1 3.857C1 3.384 1.448 3 2 3h12c.552 0 1 .384 1 .857v10.286c0 .473-.448.857-1 .857H2c-.552 0-1-.384-1-.857V3.857z" />
                             <path fill-rule="evenodd"
                                 d="M6.5 7a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm-9 3a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm-9 3a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2z" />
-                        </svg>所有</a>
+                        </svg>今日账单</a>
                 </div>
                 <!-- <div class="nav-item">
                         <a class="nav-link" href="#">page2</a>
