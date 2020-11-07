@@ -1,11 +1,18 @@
 "use strict";
 
 class BillType {
+    static get none() {
+        return 0;
+    }
     static get income() {
         return 1;
     }
     static get expense() {
         return 2;
+    }
+    /** @summary DO NOT use this now */
+    static get transfer() {
+        return 3;
     }
 }
 

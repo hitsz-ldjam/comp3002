@@ -79,17 +79,16 @@ $(function () {
         }
 
         let typeStr = $('select#type').val();
-        let type = 0;
+        let type = BillType.none;
         let flag = '';
-        // bug prone: hard coded string & int
+        // bug prone: hard coded string
         if (typeStr === 'income')
-            type = 1;
+            type = BillType.income;
         else if (typeStr === 'expense')
-            type = 2;
+            type = BillType.expense;
         else {
-            type = 2;
+            type = BillType.transfer;
             flag = $('select#flag').val();
-            // todo: add copy to another account
         }
 
         let timeStr = $('input#time').val();
@@ -108,6 +107,12 @@ $(function () {
         if (!mainCategoryExists(mainCat))
             addMainCategory(mainCat);
         addSubCategory(mainCat, subCat);
+        if (type === BillType.transfer) {
+            type = BillType.expense;
+            addBill(account, amount, type, flag, mainCat, subCat, time, member, merchant, item);
+            [account, flag] = [flag, account];
+            type = BillType.income;
+        }
         addBill(account, amount, type, flag, mainCat, subCat, time, member, merchant, item);
 
         window.location.href = 'bill_list.html';
